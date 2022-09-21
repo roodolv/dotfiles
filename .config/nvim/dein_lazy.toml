@@ -1,0 +1,305 @@
+# --------------------- Fuzzy Finder plugins --------------------
+[[plugins]]
+repo = 'junegunn/fzf'
+merged = 0
+on_source = ['fzf.vim', 'denite.nvim']
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_source = ['denite.nvim']
+hook_source = 'source ~/.config/nvim/plugins/fzf-vim.rc.vim'
+
+[[plugins]]
+repo = 'airblade/vim-rooter'
+on_event = 'VimEnter'
+hook_source = 'source ~/.config/nvim/plugins/rooter.rc.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_event = 'VimEnter'
+hook_add = '''
+  nnoremap <silent> <Leader>/ :<C-u>Denite line -buffer-name=search -auto-resize -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>? :<C-u>Denite -resume -buffer-name=search -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>da :<C-u>DeniteBufferDir buffer file_mru file -buffer-name=files -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>du :<C-u>DeniteBufferDir file_mru -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>dg :<C-u>DeniteBufferDir grep -buffer-name=grep-buffer-denite -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>dw :<C-u>DeniteCursorWord grep -buffer-name=grep-buffer-denite -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>dr :<C-u>DeniteBufferDir -resume -buffer-name=grep-buffer-denite -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>df :<C-u>DeniteBufferDir file/rec -buffer-name=files -split=floating -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>dd :<C-u>DeniteBufferDir directory_rec -split=floating -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>db :<C-u>Denite buffer -split=floating -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>dt :<C-u>Denite tag -split=floating -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+  nnoremap <silent> <Leader>dh :<C-u>Denite help -split=floating -highlight-matched-char=None -highlight-matched-range=Search -match-highlight<CR>
+'''
+hook_post_source = 'source ~/.config/nvim/plugins/denite.rc.vim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['denite.nvim']
+
+
+# ------------------------ Filer plugins ------------------------
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_add = '''
+  nnoremap <silent> <Leader>ff :<C-u>Fern <C-r>=<SID>smart_path()<CR> -drawer -keep<CR>
+  nnoremap <silent> <Leader>ft :<C-u>Fern <C-r>=<SID>smart_path()<CR> -drawer -keep -stay -toggle<CR>
+  nnoremap <silent> <Leader>fb :<C-u>Fern bookmark:///<CR>
+  nnoremap <Leader>fo :<C-u>e fern:///files:///
+  function! s:smart_path() abort
+  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
+      return fnamemodify('.', ':p')
+  endif
+  return fnamemodify(expand('%'), ':p:h')
+  endfunction
+'''
+hook_post_source = 'source ~/.config/nvim/plugins/fern.rc.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-bookmark.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-ssh'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+on_source = ['fern-renderer-nerdfont.vim']
+
+[[plugins]]
+repo = 'lambdalisue/glyph-palette.vim'
+on_source = ['nerdfont.vim']
+
+
+# ------------------------- LSP plugins -------------------------
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merged = 0
+on_source = ['coc-snippets', 'coc-fzf']
+hook_add = 'source ~/.config/nvim/plugins/coc-nvim.rc.vim'
+
+[[plugins]]
+repo = 'neoclide/coc-snippets'
+on_event = 'BufRead'
+
+[[plugins]]
+repo = 'antoinemadec/coc-fzf'
+on_event = 'BufRead'
+
+# [[plugins]]
+# repo = 'dense-analysis/ale'
+# on_event = 'BufRead'
+
+# [[plugins]]
+# repo = 'prabirshrestha/vim-lsp'
+# on_event = 'BufRead'
+# on_source = ['vim-lsp-settings']
+
+# [[plugins]]
+# repo = 'mattn/vim-lsp-settings'
+# on_event = 'BufRead'
+
+
+# ------------------ Syntax Highlight plugins -------------------
+# This plugin needs Neovim nightly(0.5.0+)
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+on_if = 'has("nvim-0.5.0")'
+on_event = 'BufRead'
+merged = 0
+hook_post_source = 'source ~/.config/nvim/plugins/treesitter.rc.vim'
+
+
+# ------------------------- Tag plugins -------------------------
+[[plugins]]
+repo = 'preservim/tagbar'
+on_event = 'BufRead'
+hook_add = 'source ~/.config/nvim/plugins/tagbar.rc.vim'
+
+
+# ---------------------- Appearance plugins ---------------------
+[[plugins]]
+repo = 'simeji/winresizer'
+on_event = 'VimEnter'
+hook_add = '''
+  let g:winresizer_start_key = "<Leader>R"
+  let g:winresizer_vert_resize = 5
+  let g:winresizer_horiz_resize = 3
+  let g:winresizer_finish_with_escape = 0
+  let g:winresizer_keycode_cancel = 27
+'''
+
+[[plugins]]
+repo = 'norcalli/nvim-colorizer.lua'
+on_if = 'has("nvim")'
+on_event = 'BufRead'
+hook_source = 'lua require"colorizer".setup()'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+on_event = 'BufRead'
+hook_source = '''
+  let g:indentLine_enabled = 0
+  autocmd BufRead,BufNewFile *.html let g:indentLine_enabled = 1
+'''
+
+
+# ----------------------- Editing plugins -----------------------
+[[plugins]]
+repo = 'mbbill/undotree'
+on_cmd = 'UndotreeToggle'
+hook_add = '''
+  nnoremap <silent> <Leader>gu :<C-u>UndotreeToggle<CR>
+'''
+hook_source = 'source ~/.config/nvim/plugins/undotree.rc.vim'
+
+[[plugins]]
+repo = 'kshenoy/vim-signature'
+on_event = 'BufRead'
+hook_source = 'source ~/.config/nvim/plugins/signature.rc.vim'
+
+[[plugins]]
+repo = 'mg979/vim-visual-multi'
+on_event = 'VimEnter'
+
+# [[plugins]]
+# repo = 'rhysd/accelerated-jk'
+# on_event = 'VimEnter'
+# hook_add = '''
+#   nmap j <Plug>(accelerated_jk_gj)
+#   nmap k <Plug>(accelerated_jk_gk)
+#   let g:accelerated_jk_enable_deceleration = 1
+#   let g:accelerated_jk_acceleration_limit = 100
+#   let g:accelerated_jk_acceleration_table = [10,14,19,23,27,30,32,35]
+# '''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+on_event = 'VimEnter'
+hook_post_source = 'source ~/.config/nvim/plugins/easymotion.rc.vim'
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+on_event = 'VimEnter'
+hook_add = '''
+  vmap v <Plug>(expand_region_expand)
+  vmap <C-v> <Plug>(expand_region_shrink)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'tpope/vim-speeddating'
+on_source = ['vim-repeat']
+hook_post_source = 'source ~/.config/nvim/plugins/speeddating.rc.vim'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+on_source = ['vim-repeat']
+hook_source = 'source ~/.config/nvim/plugins/tcomment.rc.vim'
+
+[[plugins]]
+repo = 'machakann/vim-sandwich'
+on_source = ['vim-repeat']
+hook_add = '''
+  nnoremap s <Nop>
+  xnoremap s <Nop>
+'''
+hook_post_source = 'source ~/.config/nvim/plugins/sandwich.rc.vim'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+on_source = ['vim-repeat']
+
+[[plugins]]
+repo = 'kana/vim-operator-replace'
+on_event = 'VimEnter'
+hook_post_source = '''
+  map ' <Plug>(operator-replace)
+'''
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+on_source = ['vim-operator-replace']
+
+[[plugins]]
+repo = 'tpope/vim-unimpaired'
+on_source = ['vim-repeat']
+
+[[plugins]]
+repo = 'glts/vim-radical'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'glts/vim-magnum'
+on_source = ['vim-radical']
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+on_event = 'VimEnter'
+hook_add = 'noremap <silent> <Leader>S :FixWhitespace<CR>'
+
+[[plugins]]
+repo = 't9md/vim-quickhl'
+on_event = 'BufRead'
+hook_source = 'source ~/.config/nvim/plugins/quickhl.rc.vim'
+
+
+# ------------------------- Git plugins -------------------------
+# [[plugins]]
+# repo = 'tpope/vim-fugitive'
+# on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+on_event = 'VimEnter'
+hook_add = '''
+  nnoremap <silent> [h <Plug>GitGutterNextHunk<CR>
+  nnoremap <silent> ]h <Plug>GitGutterPrevHunk<CR>
+'''
+
+[[plugins]]
+repo = 'rhysd/git-messenger.vim'
+on_cmd = 'GitMessenger'
+on_map = '<Plug>(git-messenger'
+hook_add = '''
+  nnoremap <silent> <Leader>gm :<C-u>GitMessenger<CR>
+'''
+hook_source = 'source ~/.config/nvim/plugins/git-messenger.rc.vim'
+
+
+# ------------------------ Other plugins ------------------------
+# When this plugin ON, ':' mode comes with delays
+[[plugins]]
+repo = 'kassio/neoterm'
+on_event = 'BufRead'
+hook_add = '''
+  nnoremap <silent> <Leader>tn :<C-u>Tnew<CR>
+  nnoremap <silent> <Leader>tt :<C-u>TtoggleAll<CR>
+  nnoremap <silent> <Leader>to :<C-u>exec v:count.'Topen'<CR>
+  nnoremap <silent> <Leader>tc :<C-u>exec v:count.'Tclose'<CR>
+  nnoremap <silent> <Leader>tl :<C-u>exec v:count.'Tclear'<CR>
+  nnoremap <silent> <Leader>tk :<C-u>exec v:count.'Tkill'<CR>
+  tnoremap <silent> <C-w> <C-\><C-n><C-w>
+'''
+hook_source = 'source ~/.config/nvim/plugins/neoterm.rc.vim'
+
+[[plugins]]
+repo = 'bogado/file-line'
+on_event = 'BufRead'
+

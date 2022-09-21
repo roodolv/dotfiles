@@ -1,0 +1,44 @@
+[user]
+    name = roodolv
+    email = 113752412+roodolv@users.noreply.github.com
+[core]
+    editor = vim
+    pager = LESSCHARSET=utf-8 less
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+    insteadOf = g:
+[alias]
+    myname = config --global user.name
+    mymail = config --global user.email
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    ups = config --get-regexp branch
+    rdiff = diff master..origin/master
+    fdiff = diff HEAD FETCH_HEAD
+    fmerge = merge --no-ff FETCH_HEAD
+    vsdiff = difftool -y -d -t vscode
+    windiff = difftool -y -d -t winmerge
+    winmerge = mergetool -y -t winmerge
+[init]
+    defaultBranch = main
+[pull]
+    ff = only
+[push]
+    default = simple
+[diff]
+    tool = vscode
+[merge]
+    tool = winmerge
+    ff = false
+[difftool "vscode"]
+    cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
+[mergetool "vscode"]
+    cmd = code --wait \"$LOCAL\" \"$REMOTE\" --ancestor \"$BASE\" -merge \"$MERGED\"
+[difftool "winmerge"]
+    cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" -f \"*.*\" -e -u -r \"$LOCAL\" \"$REMOTE\"
+[mergetool "winmerge"]
+    cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" -e -u \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process

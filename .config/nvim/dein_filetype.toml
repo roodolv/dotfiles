@@ -1,0 +1,9 @@
+# ---------------------- Language plugins -----------------------
+#### Rust ####
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+
+#### Python ####
+[[plugins]]
+repo = 'fannheyward/coc-pyright'
+

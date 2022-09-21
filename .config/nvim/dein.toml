@@ -1,0 +1,17 @@
+# ------------------------ Plugin Manager -----------------------
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+
+# ---------------------- Appearance plugins ---------------------
+[[plugins]]
+repo = 'ayu-theme/ayu-vim'
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
+hook_add = 'source ~/.config/nvim/plugins/startify.rc.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = 'source ~/.config/nvim/plugins/lightline.rc.vim'
+
