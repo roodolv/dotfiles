@@ -5,7 +5,7 @@
 " Python
 let g:python3_host_prog = expand($PYTHON)
 autocmd FileType python setl cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setl expandtab tabstop=4 shiftwidth=2 softtabstop=2
+autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " Kotlin
 autocmd FileType kotlin setl expandtab tabstop=4 shiftwidth=4 softtabstop=4

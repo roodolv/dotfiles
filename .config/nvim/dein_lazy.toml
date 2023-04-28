@@ -81,19 +81,19 @@ on_source = ['nerdfont.vim']
 
 
 # ------------------------- LSP plugins -------------------------
-[[plugins]]
-repo = 'neoclide/coc.nvim'
-merged = 0
-on_source = ['coc-snippets', 'coc-fzf']
-hook_add = 'source ~/.config/nvim/plugins/coc-nvim.rc.vim'
+# [[plugins]]
+# repo = 'neoclide/coc.nvim'
+# merged = 0
+# on_source = ['coc-snippets', 'coc-fzf']
+# hook_add = 'source ~/.config/nvim/plugins/coc-nvim.rc.vim'
 
-[[plugins]]
-repo = 'neoclide/coc-snippets'
-on_event = 'BufRead'
+# [[plugins]]
+# repo = 'neoclide/coc-snippets'
+# on_event = 'BufRead'
 
-[[plugins]]
-repo = 'antoinemadec/coc-fzf'
-on_event = 'BufRead'
+# [[plugins]]
+# repo = 'antoinemadec/coc-fzf'
+# on_event = 'BufRead'
 
 # [[plugins]]
 # repo = 'dense-analysis/ale'
