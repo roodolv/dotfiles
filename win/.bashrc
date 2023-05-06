@@ -36,3 +36,11 @@ alias gl='git log --graph --decorate --pretty=oneline --abbrev-commit -n 15'
 alias gll='git log --graph --pretty=format:"%C(cyan)%h %C(yellow)%s %C(magenta)%ae %C(blue)%cd" --date=format:"%Y-%m-%d %H:%M:%S" --abbrev-commit -n 15'
 alias gmyl='git log --author=$(git config --global user.name) --pretty=tformat: --numstat -n 15'
 alias gmyll='git log --author=$(git config --global user.name) -n 15'
+
+# git search
+alias gg='git grep'
+alias ggl='git grep -l'
+alias gbl='git blame'
+alias grl='git reflog --date=local -n 15'
+alias grp='git rev-parse'
+alias gnr='git name-rev --all | head -n 15'
