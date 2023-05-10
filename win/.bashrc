@@ -27,9 +27,11 @@ alias gcl='git clone'
 alias gb='git branch'
 alias gba='git branch -a'
 alias glsf='git ls-files'
+alias glsfg='git ls-files | grep'
 alias glsr='git ls-remote'
 alias grv='git remote -v'
 alias gup='git config --get-regexp branch'
+alias gsh='git show'
 
 # git log
 alias gl='git log --graph --decorate --pretty=oneline --abbrev-commit -n 15'
