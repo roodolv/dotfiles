@@ -25,7 +25,7 @@ nnoremap <silent> <Leader><Leader><Space> :Startify<CR> " Call back Startify
 nnoremap <silent> <Leader><Space>s :SSave!<CR> " Save session
 nnoremap <silent> <Leader><Space>l :SLoad!<CR> " Load session
 nnoremap <silent> <Leader><Space>c :SClose<CR> " Close session
-nnoremap <silent> <Leader><Space>dd :SDelete<CR> " Delete session
+nnoremap <silent> <Leader><Space>dd :SDelete!<CR> " Delete session
 
 " Show welcome-message centered
 function! s:filter_header(lines) abort
