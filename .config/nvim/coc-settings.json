@@ -2,6 +2,80 @@
     "diagnostic.enable": true,
     "suggest.noselect": true,
     "suggest.preferCompleteThanJumpPlaceholder": true,
+
+    // workspace settings
+    "workspace.bottomUpFiletypes": ["rust"],
+    "workspace.rootPatterns": [
+        "package.json", // npm project
+        "CMakeLists.txt", // cmake project
+        "Cargo.toml", // rust
+        ".git",
+        ".hg",
+        ".projections.json"
+    ],
+
+    // rust-analyzer
+    "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+    // rustfmt(Nightly-build)
+    "rust-analyzer.rustfmt.overrideCommand": ["rustup", "run", "nightly", "rustfmt", "--unstable-features"],
+    // rust-analyzer(linter)
+    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.check.extraArgs": ["--", "-A", "clippy::needless_return"],
+
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.lens.run.enable": false,
+    "rust-analyzer.lens.debug.enable": false,
+    "rust-analyzer.lens.references.trait.enable": false,
+    "rust-analyzer.lens.forceCustomCommands": false,
+    "rust-analyzer.lens.references.adt.enable": false,
+    "rust-analyzer.lens.implementations.enable": false,
+    "rust-analyzer.lens.references.method.enable": false,
+    "rust-analyzer.lens.references.enumVariant.enable": false,
+    "rust-analyzer.diagnostics.experimental.enable": true,
+    "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+
+    // cSpell
+    "cSpell.status-bar-text": "🅲 🆂",
+    "cSpell.fixSpellingWithRenameProvider": true,
+    "cSpell.enabledLanguageIds": [
+        "asciidoc",
+        "c",
+        "cpp",
+        "csharp",
+        "css",
+        "git-commit",
+        "gitcommit",
+        "go",
+        "handlebars",
+        "haskell",
+        "html",
+        "jade",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "latex",
+        "less",
+        "markdown",
+        "php",
+        "plaintext",
+        "python",
+        "pug",
+        "restructuredtext",
+        "rust",
+        "scala",
+        "scss",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yaml",
+        "yml",
+        "vim"
+    ],
+
+    // Language Server
     "languageserver": {
         "clangd": {
             "command": "clangd",
@@ -23,6 +97,19 @@
                     "hlintOn": true
                 }
             }
+        },
+        "sh": {
+            "command": "bash-language-server",
+            "args": ["start", "--stdio"],
+            "filetypes": ["sh"],
+            "initializationOptions": {},
+            "ignoredRootPaths": ["~"],
+            "settings": {}
+        },
+        "golang": {
+            "command": "bingo",
+            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["go"]
         }
     }
 }
