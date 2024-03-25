@@ -11,8 +11,6 @@ alias rm='rm -i'
 alias mv='mv -i'
 
 # git config
-alias gname='git config --global user.name'
-alias gemail='git config --global user.email'
 alias gcng='git config --global -e'
 alias gcnl='git config --local -e'
 
