@@ -14,7 +14,6 @@ let g:startify_lists = [
 
 " Bookmark setting
 let g:startify_bookmarks = [
-      \ "C:/Apps/fenrir075c/data/instant.ini",
       \ "~/.config/nvim/init.vim",
       \ "~/.config/nvim/dein.toml",
       \ "~/.config/nvim/dein_lazy.toml",
