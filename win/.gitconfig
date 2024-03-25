@@ -9,6 +9,8 @@
 [alias]
     myname = config --global user.name
     mymail = config --global user.email
+    gconf = config --global -e
+    lconf = config --local -e
     lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
     ups = config --get-regexp branch
     rdiff = diff master..origin/master
