@@ -2,11 +2,10 @@
     name = roodolv
     email = 113752412+roodolv@users.noreply.github.com
 [core]
-    editor = vim
+    editor = \"C:\\Users\\USERNAME\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
     pager = LESSCHARSET=utf-8 less
 [url "git@github.com:"]
     insteadOf = https://github.com/
-    insteadOf = g:
 [alias]
     myname = config --global user.name
     mymail = config --global user.email
@@ -17,6 +16,7 @@
     fmerge = merge --no-ff FETCH_HEAD
     vsdiff = difftool -y -d -t vscode
     windiff = difftool -y -d -t winmerge
+    vsmerge = mergetool -y -t vsmerge
     winmerge = mergetool -y -t winmerge
 [init]
     defaultBranch = main
@@ -42,3 +42,7 @@
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
+[credential "https://huggingface.co"]
+	provider = generic
+[safe]
+	directory = C:/Users/USERNAME/scoop/apps/scoop/current
