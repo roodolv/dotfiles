@@ -6,7 +6,6 @@
     pager = LESSCHARSET=utf-8 less
 [url "git@github.com:"]
     insteadOf = https://github.com/
-    insteadOf = g:
 [alias]
     myname = config --global user.name
     mymail = config --global user.email
