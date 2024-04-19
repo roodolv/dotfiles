@@ -1,6 +1,6 @@
 " Mappings
-inoremap <silent><buffer> <M-z> <cmd>call tuskk#toggle()<CR>
-cnoremap <silent><buffer> <M-z> <cmd>call tuskk#cmd_buf()<CR>
+inoremap <C-j> <cmd>call tuskk#toggle()<CR>
+cnoremap <C-j> <cmd>call tuskk#cmd_buf()<CR>
 
 call tuskk#initialize({
     \ 'jisyo_list':  [
