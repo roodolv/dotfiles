@@ -303,3 +303,8 @@ hook_source = 'source ~/.config/nvim/plugins/neoterm.rc.vim'
 repo = 'bogado/file-line'
 on_event = 'BufRead'
 
+[[plugins]]
+# tuskk (tˈʌsk): ripgrep を利用して SKK ライクな日本語入力を行うプラグイン
+repo = 'kawarimidoll/tuskk.vim'
+on_event = 'BufRead'
+hook_source = 'source ~/.config/nvim/plugins/tuskk.rc.vim'
