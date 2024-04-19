@@ -3,7 +3,7 @@ filetype plugin indent on
 syntax enable
 
 set enc=utf-8
-set fenc=utf-8
+set fencs=utf-8,sjis
 scriptencoding utf-8
 
 set nobackup
