@@ -1,9 +1,6 @@
 -- <leader> mapping
 vim.g.mapleader = ','
 
--- calling lazy_nvim
-require("lazy_nvim")
-
 -- encoding
 vim.o.encoding = 'utf-8'
 vim.scriptencoding = 'utf-8'
@@ -111,3 +108,5 @@ vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true, silent = tru
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true, silent = true })
 
+-- calling lazy_nvim
+require("lazy_nvim")
