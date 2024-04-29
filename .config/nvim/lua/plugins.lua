@@ -12,25 +12,13 @@ return {
   {
     "mhinz/vim-startify",
     lazy = false,
-    priority = 1000,
     config = function()
       require("config/vim-startify")
     end
   },
   -- editing
   {
-    "machakann/vim-sandwich",
-    lazy = true,
-    priority = 1000,
-    event = "BufEnter",
-    config = function()
-      require("config/vim-sandwich")
-    end
-  },
-  {
     "easymotion/vim-easymotion",
-    lazy = true,
-    priority = 1000,
     event = "BufEnter",
     config = function()
       require("config/vim-easymotion")
@@ -44,6 +32,49 @@ return {
     end,
     config = function()
       require("config/undotree")
+    end,
+  },
+  {
+    "machakann/vim-sandwich",
+    event = "BufEnter",
+    config = function()
+      require("config/vim-sandwich")
+    end,
+  },
+  {
+    "tpope/vim-repeat",
+    event = "BufEnter",
+    dependencies = {
+      "tpope/vim-surround",
+      "tpope/vim-unimpaired",
+    },
+  },
+  {
+    "kana/vim-operator-replace",
+    event = "BufEnter",
+    dependencies = {
+      "kana/vim-operator-user",
+    },
+    config = function()
+      vim.api.nvim_set_keymap('n', "'", '<Plug>(operator-replace)', { noremap = true })
+    end,
+  },
+  {
+    "jiangmiao/auto-pairs",
+    event = "BufEnter",
+  },
+  {
+    "bronson/vim-trailing-whitespace",
+    event = "BufEnter",
+    config = function()
+      vim.api.nvim_set_keymap('n', '<Leader>T', ':<C-u>FixWhitespace<CR>', { noremap = true, silent = true })
+    end,
+  },
+  {
+    "tomtom/tcomment_vim",
+    event = "BufEnter",
+    config = function()
+      require("config/tcomment_vim")
     end,
   },
 }

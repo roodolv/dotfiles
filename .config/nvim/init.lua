@@ -105,6 +105,8 @@ vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true })
 
 
 -- Disabled mapping-----------------------------------------------------
+-- vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
+-- vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
 
