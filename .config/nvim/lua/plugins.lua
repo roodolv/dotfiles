@@ -27,4 +27,13 @@ return {
       require("config/vim-sandwich")
     end
   },
+  {
+    "easymotion/vim-easymotion",
+    lazy = true,
+    priority = 1000,
+    event = "BufEnter",
+    config = function()
+      require("config/vim-easymotion")
+    end
+  },
 }
