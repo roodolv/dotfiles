@@ -1,6 +1,6 @@
 return {
+  -- theme
   {
-    -- colorscheme
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
@@ -8,12 +8,23 @@ return {
       vim.cmd([[colorscheme tokyonight]])
     end
   },
+  -- startup
   {
     "mhinz/vim-startify",
     lazy = false,
     priority = 1000,
     config = function()
-      require('config/vim-startify')
+      require("config/vim-startify")
+    end
+  },
+  -- editing
+  {
+    "machakann/vim-sandwich",
+    lazy = true,
+    priority = 1000,
+    event = "BufEnter",
+    config = function()
+      require("config/vim-sandwich")
     end
   },
 }
