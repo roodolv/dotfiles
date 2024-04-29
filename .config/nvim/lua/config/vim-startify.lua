@@ -26,15 +26,17 @@ vim.g.startify_bookmarks = {
 }
 
 -- Welcome page's message
-vim.cmd([[
-function! s:filter_header(lines) abort
-  let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
-  let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+local function filter_header(lines)
+  local longest_line = 0
+  for _, line in ipairs(lines) do
+    longest_line = math.max(longest_line, #line)
+  end
+  local centered_lines = {}
+  for _, line in ipairs(lines) do
+    local padding = string.rep(" ", (vim.api.nvim_get_option("columns") / 2) - (longest_line / 2))
+    table.insert(centered_lines, padding .. line)
+  end
   return centered_lines
-endfunction
+end
 
-let g:startify_custom_header = s:filter_header([
-      \ '<<Neovim>>',
-      \ ])
-]])
+vim.g.startify_custom_header = filter_header({"<<Neovim>>"})
