@@ -13,15 +13,37 @@ return {
     "mhinz/vim-startify",
     lazy = false,
     config = function()
-      require("config/vim-startify")
+      require("config/startify")
     end
+  },
+  -- view
+  {
+    "simeji/winresizer",
+    event = "VimEnter",
+    config = function()
+      require("config/winresizer")
+    end,
+  },
+  {
+    "Yggdroot/indentLine",
+    event = "BufRead",
+    config = function()
+      require("config/indentline")
+    end,
+  },
+  {
+    "preservim/tagbar",
+    event = "BufRead",
+    config = function()
+      require("config/tagbar")
+    end,
   },
   -- editing
   {
     "easymotion/vim-easymotion",
-    event = "BufEnter",
+    event = "BufRead",
     config = function()
-      require("config/vim-easymotion")
+      require("config/easymotion")
     end
   },
   {
@@ -36,9 +58,9 @@ return {
   },
   {
     "machakann/vim-sandwich",
-    event = "BufEnter",
+    event = "BufRead",
     config = function()
-      require("config/vim-sandwich")
+      require("config/sandwich")
     end,
   },
   {
@@ -46,7 +68,6 @@ return {
     event = "BufEnter",
     dependencies = {
       "tpope/vim-surround",
-      "tpope/vim-unimpaired",
     },
   },
   {
@@ -61,20 +82,20 @@ return {
   },
   {
     "jiangmiao/auto-pairs",
-    event = "BufEnter",
+    event = "BufRead",
   },
   {
     "bronson/vim-trailing-whitespace",
-    event = "BufEnter",
+    event = "BufRead",
     config = function()
       vim.api.nvim_set_keymap('n', '<Leader>T', ':<C-u>FixWhitespace<CR>', { noremap = true, silent = true })
     end,
   },
   {
     "tomtom/tcomment_vim",
-    event = "BufEnter",
+    event = "BufRead",
     config = function()
-      require("config/tcomment_vim")
+      require("config/tcomment")
     end,
   },
 }
