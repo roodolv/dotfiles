@@ -1,34 +1,29 @@
--- Option settings
+-- Options
 vim.g.startify_files_number = 5
 vim.g.startify_session_number = 15
 vim.g.startify_change_to_dir = 1
 vim.g.startify_change_to_vcs_root = 1
 
 -- Mappings
-vim.api.nvim_set_keymap('n', '<Leader><Leader>', ':Startify<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader><Leader><Space>', ':Startify<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>s', ':SSave<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>l', ':SLoad<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>c', ':SClose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>dd', ':SDelete<CR>', { noremap = true, silent = true })
 
 -- Lists on startup
-vim.cmd([[
-let g:startify_lists = [
-      \ {'type': 'files', 'header': ['Recently Used:']},
-      \ {'type': 'dir', 'header': ['Recently Used (CurrentDir):']},
-      \ {'type': 'sessions', 'header': ['Sessions:']},
-      \ {'type': 'bookmarks', 'header': ['Bookmarks:']},
-      \ ]
-]])
+vim.g.startify_lists = {
+  {['type'] = 'files', ['header'] = {'Recently Used:'}},
+  {['type'] = 'dir', ['header'] = {'Recently Used (CurrentDir):'}},
+  {['type'] = 'sessions', ['header'] = {'Sessions:'}},
+  {['type'] = 'bookmarks', ['header'] = {'Bookmarks:'}},
+}
 
 -- Bookmark setting
-vim.cmd([[
-let g:startify_bookmarks = [
-      \ "~/.config/nvim/init.vim",
-      \ "~/.config/nvim/dein.toml",
-      \ "~/.config/nvim/dein_lazy.toml",
-      \ ]
-]])
+vim.g.startify_bookmarks = {
+  "~/.config/nvim/init.lua",
+  "~/.config/nvim/lua/plugins.lua",
+}
 
 -- Welcome page's message
 vim.cmd([[
