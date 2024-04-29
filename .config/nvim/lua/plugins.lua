@@ -36,4 +36,14 @@ return {
       require("config/vim-easymotion")
     end
   },
+  {
+    "mbbill/undotree",
+    cmd = "UndotreeToggle",
+    init = function()
+      vim.api.nvim_set_keymap('n', '<Leader>gu', ':<C-u>UndotreeToggle<CR>', { noremap = true, silent = true })
+    end,
+    config = function()
+      require("config/undotree")
+    end,
+  },
 }

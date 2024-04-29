@@ -30,8 +30,8 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silen
 -- vim.api.nvim_set_keymap('n', '<Leader>wq', ':<C-u>wq<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
 -- manipulation
@@ -92,21 +92,21 @@ vim.api.nvim_set_keymap('v',  '*', '"zy:let @/ = @z<CR>n', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-t>', 'gt', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-T>', 'gT', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-t>', 'gt', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-T>', 'gT', { noremap = true })
 
-vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true })
 
 
 -- Disabled mapping-----------------------------------------------------
-vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
 
 -- calling lazy_nvim
 require("lazy_nvim")
