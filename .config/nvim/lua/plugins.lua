@@ -16,7 +16,7 @@ return {
       require("config/startify")
     end
   },
-  -- view (pane/tab/window)
+  -- pane/tab/window
   {
     "simeji/winresizer",
     cmd = "WinResizerStartResize",
@@ -47,7 +47,7 @@ return {
       require("config/undotree")
     end,
   },
-  -- search/filer
+  -- search/navigation
   {
     "ibhagwan/fzf-lua",
     event = "VimEnter",
@@ -59,6 +59,7 @@ return {
       require("config/fzf-lua")
     end
   },
+  -- filer/browser
   -- {
   --   "nvim-tree/nvim-tree.lua",
   --   event = "VimEnter",
@@ -70,8 +71,26 @@ return {
   --     require("config/nvim-tree")
   --   end
   -- },
-
-  -- syntax/indentation
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    lazy = true,
+    cmd = "Neotree",
+    dependencies = {
+      "https://github.com/nvim-lua/plenary.nvim",
+      "https://github.com/nvim-tree/nvim-web-devicons",
+      "https://github.com/MunifTanjim/nui.nvim",
+      -- { 'https://github.com/miversen33/netman.nvim',
+      --   opts = true,
+      -- },
+    },
+    init = function()
+      vim.api.nvim_set_keymap('n', '-', ':<C-u>Neotree focus filesystem right reveal_force_cwd<CR>', { noremap = true, silent = true })
+    end,
+    opts = function()
+      require("opts/neo-tree")
+    end,
+  },
+  -- colorization
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VimEnter",
@@ -79,6 +98,7 @@ return {
       require("config/nvim-treesitter")
     end,
   },
+  -- indentation
   {
     "Yggdroot/indentLine",
     event = "BufRead",
