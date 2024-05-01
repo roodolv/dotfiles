@@ -7,8 +7,8 @@ vim.keymap.set("n", "<Leader>ff", ":<C-u>FzfLua files<CR>", { noremap = true, si
 vim.keymap.set("n", "<Leader>fh", ":<C-u>FzfLua oldfiles<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>fb", ":<C-u>FzfLua buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>ft", ":<C-u>FzfLua tabs<CR>", { noremap = true, silent = true })
--- vim.keymap.set("n", "<Leader>fr", ":<C-u>FzfLua files resume=true<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>fr", ":<C-u>FzfLua resume<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>fr", ":<C-u>FzfLua files resume=true<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<Leader>fr", ":<C-u>FzfLua resume<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<Leader>fl", ":<C-u>FzfLua lines<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>fbl", ":<C-u>FzfLua blines<CR>", { noremap = true, silent = true })

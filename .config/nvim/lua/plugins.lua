@@ -45,34 +45,49 @@ return {
     end,
   },
   -- search/navigation
-  {
-    "ibhagwan/fzf-lua",
-    event = "VimEnter",
-    dependencies = {
-      "junegunn/fzf",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("config/fzf-lua")
-    end
-  },
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   event = "VimEnter",
+  --   dependencies = {
+  --     "junegunn/fzf",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   opts = {},
+  --   config = function()
+  --     require("config/fzf-lua")
+  --   end
+  -- },
   -- filer/browser
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   cmd = "Neotree",
+  --   keys = {
+  --     { '-', ':<C-u>Neotree focus filesystem right reveal_force_cwd<CR>', mode = 'n', silent = true },
+  --   },
+  --   dependencies = {
+  --     "nvim-tree/nvim-web-devicons",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     -- { 'miversen33/netman.nvim',
+  --     --   opts = true,
+  --     -- },
+  --   },
+  --   opts = function()
+  --     require("opts/neo-tree")
+  --   end,
+  -- },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    cmd = "Neotree",
-    keys = {
-      { '-', ':<C-u>Neotree focus filesystem right reveal_force_cwd<CR>', mode = 'n', silent = true },
-    },
+    "stevearc/oil.nvim",
+    cmd = "Oil",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      -- { 'miversen33/netman.nvim',
-      --   opts = true,
-      -- },
     },
+    init = function()
+      local escaped_path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+      vim.keymap.set("n", "=", ":<C-u>Oil --float " .. escaped_path .. "<CR>", { silent = true })
+    end,
     opts = function()
-      require("opts/neo-tree")
+      require("opts/oil")
     end,
   },
   -- colorizer

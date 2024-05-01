@@ -6,7 +6,7 @@ vim.g.startify_change_to_vcs_root = 1
 
 -- Mappings
 vim.api.nvim_set_keymap('n', '<Leader><Leader><Space>', ':Startify<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader><Space>s', ':SSave<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader><Space>s', ':SSave!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>l', ':SLoad<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>c', ':SClose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Space>dd', ':SDelete<CR>', { noremap = true, silent = true })
