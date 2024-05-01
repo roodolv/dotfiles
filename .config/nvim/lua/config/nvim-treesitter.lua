@@ -1,4 +1,3 @@
-require 'nvim-treesitter.install'.compilers = { "clang" }
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'bash',

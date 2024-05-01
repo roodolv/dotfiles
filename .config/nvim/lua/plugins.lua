@@ -64,10 +64,10 @@ return {
       { '-', ':<C-u>Neotree focus filesystem right reveal_force_cwd<CR>', mode = 'n', silent = true },
     },
     dependencies = {
-      "https://github.com/nvim-tree/nvim-web-devicons",
-      "https://github.com/nvim-lua/plenary.nvim",
-      "https://github.com/MunifTanjim/nui.nvim",
-      -- { 'https://github.com/miversen33/netman.nvim',
+      "nvim-tree/nvim-web-devicons",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      -- { 'miversen33/netman.nvim',
       --   opts = true,
       -- },
     },
@@ -80,15 +80,20 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-      "https://github.com/RRethy/nvim-treesitter-endwise",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "RRethy/nvim-treesitter-endwise",
       { "andymass/vim-matchup",
-        keys = { '%' },
+        keys = { "%" },
       },
-      "https://github.com/windwp/nvim-ts-autotag",
-      "https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
+      "JoosepAlviste/nvim-ts-context-commentstring",
     },
     build = ":TSUpdate",
+    install = function()
+      require("nvim-treesitter.install").setup({
+        compilers = { "clang" }
+      })
+    end,
     config = function()
       require("config/nvim-treesitter")
     end,
@@ -110,14 +115,16 @@ return {
   -- # hook_add = 'source ~/.config/nvim/plugins/codeium-vim.rc.vim'
 
   -- Git
-  -- repo = 'rhysd/git-messenger.vim'
-  -- on_cmd = 'GitMessenger'
-  -- on_map = '<Plug>(git-messenger'
-  -- hook_add = '''
-  --   nnoremap <silent> <Leader>gm :<C-u>GitMessenger<CR>
-  -- '''
-  -- hook_source = 'source ~/.config/nvim/plugins/git-messenger.rc.vim'
-
+  {
+    "rhysd/git-messenger.vim",
+    cmd = "GitMessenger",
+    keys = {
+      { '<Leader>gm', ':<C-u>GitMessenger<CR>', mode = 'n', silent = true },
+    },
+    config = function()
+      require("config/git-messenger")
+    end,
+  },
   -- editing
   {
     "easymotion/vim-easymotion",
