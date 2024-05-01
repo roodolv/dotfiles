@@ -19,30 +19,27 @@ return {
   -- pane/tab/window
   {
     "simeji/winresizer",
-    cmd = "WinResizerStartResize",
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>R', ':<C-u>WinResizerStartResize<CR>', { noremap = true, silent = true })
-    end,
+    keys = {
+      { "<Leader>R", ':<C-u>WinResizerStartResize<CR>', mode = 'n', silent = true },
+    },
     config = function()
       require("config/winresizer")
     end,
   },
   {
     "preservim/tagbar",
-    cmd = "TagbarToggle",
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>gt', ':<C-u>TagbarToggle<CR>', { noremap = true, silent = true })
-    end,
+    keys = {
+      { "<Leader>gt", ':<C-u>TagbarToggle<CR>', mode = 'n', silent = true },
+    },
     config = function()
       require("config/tagbar")
     end,
   },
   {
     "mbbill/undotree",
-    cmd = "UndotreeToggle",
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>gu', ':<C-u>UndotreeToggle<CR>', { noremap = true, silent = true })
-    end,
+    keys = {
+      { "<Leader>gu", ':<C-u>UndotreeToggle<CR>', mode = 'n', silent = true },
+    },
     config = function()
       require("config/undotree")
     end,
@@ -60,40 +57,38 @@ return {
     end
   },
   -- filer/browser
-  -- {
-  --   "nvim-tree/nvim-tree.lua",
-  --   event = "VimEnter",
-  --   dependencies = {
-  --     "junegunn/fzf",
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  --   config = function()
-  --     require("config/nvim-tree")
-  --   end
-  -- },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    lazy = true,
     cmd = "Neotree",
+    keys = {
+      { '-', ':<C-u>Neotree focus filesystem right reveal_force_cwd<CR>', mode = 'n', silent = true },
+    },
     dependencies = {
-      "https://github.com/nvim-lua/plenary.nvim",
       "https://github.com/nvim-tree/nvim-web-devicons",
+      "https://github.com/nvim-lua/plenary.nvim",
       "https://github.com/MunifTanjim/nui.nvim",
       -- { 'https://github.com/miversen33/netman.nvim',
       --   opts = true,
       -- },
     },
-    init = function()
-      vim.api.nvim_set_keymap('n', '-', ':<C-u>Neotree focus filesystem right reveal_force_cwd<CR>', { noremap = true, silent = true })
-    end,
     opts = function()
       require("opts/neo-tree")
     end,
   },
-  -- colorization
+  -- colorizer
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "VimEnter",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+      "https://github.com/RRethy/nvim-treesitter-endwise",
+      { "andymass/vim-matchup",
+        keys = { '%' },
+      },
+      "https://github.com/windwp/nvim-ts-autotag",
+      "https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    build = ":TSUpdate",
     config = function()
       require("config/nvim-treesitter")
     end,
@@ -101,7 +96,7 @@ return {
   -- indentation
   {
     "Yggdroot/indentLine",
-    event = "BufRead",
+    event = "BufEnter",
     config = function()
       require("config/indentline")
     end,
@@ -111,7 +106,7 @@ return {
 
   -- AGI
   -- repo = 'Exafunction/codeium.vim'
-  -- on_event = 'BufRead'
+  -- on_event = 'BufEnter'
   -- # hook_add = 'source ~/.config/nvim/plugins/codeium-vim.rc.vim'
 
   -- Git
@@ -126,14 +121,14 @@ return {
   -- editing
   {
     "easymotion/vim-easymotion",
-    event = "BufRead",
+    event = "BufEnter",
     config = function()
       require("config/easymotion")
     end
   },
   {
     "machakann/vim-sandwich",
-    event = "BufRead",
+    event = "BufEnter",
     config = function()
       require("config/sandwich")
     end,
@@ -143,34 +138,41 @@ return {
     event = "BufEnter",
     dependencies = {
       "tpope/vim-surround",
+      "tpope/vim-commentary",
+      { "glts/vim-radical",
+        dependencies = { "glts/vim-magnum" },
+      },
     },
+  },
+  {
+    "tommcdo/vim-exchange",
+    event = "BufEnter",
   },
   {
     "kana/vim-operator-replace",
-    event = "BufEnter",
     dependencies = {
       "kana/vim-operator-user",
     },
-    config = function()
-      vim.api.nvim_set_keymap('n', "'", '<Plug>(operator-replace)', { noremap = true })
-    end,
+    keys = {
+      { "'", '<Plug>(operator-replace)', silent = true },
+    },
+  },
+  { "haya14busa/vim-asterisk",
+    keys = {
+      { '*', '<Plug>(asterisk-z*)<Plug>(is-nohl-1)' },
+      { '#', '<Plug>(asterisk-z#)<Plug>(is-nohl-1)' },
+      { 'g*', '<Plug>(asterisk-gz*)<Plug>(is-nohl-1)' },
+      { 'g#', '<Plug>(asterisk-gz#)<Plug>(is-nohl-1)' },
+    },
   },
   {
     "jiangmiao/auto-pairs",
-    event = "BufRead",
+    event = "BufEnter",
   },
   {
     "bronson/vim-trailing-whitespace",
-    event = "BufRead",
-    config = function()
-      vim.api.nvim_set_keymap('n', '<Leader>T', ':<C-u>FixWhitespace<CR>', { noremap = true, silent = true })
-    end,
-  },
-  {
-    "tomtom/tcomment_vim",
-    event = "BufRead",
-    config = function()
-      require("config/tcomment")
-    end,
+    keys = {
+      { '<Leader>T', ':<C-u>FixWhitespace<CR>', mode= 'n', silent = true },
+    },
   },
 }
