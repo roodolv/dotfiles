@@ -6,7 +6,7 @@ vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
 vim.scriptencoding = 'utf-8'
 
--- visual
+-- tabs/indent
 vim.o.ambiwidth = 'double'
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
@@ -16,35 +16,10 @@ vim.o.smarttab = true
 vim.o.shiftround = true
 vim.o.autoindent = true
 vim.o.smartindent = true
--- TODO
 vim.cmd([[
 retab 2
 retab!
 ]])
-
--- search
-vim.o.hlsearch = true
-vim.o.incsearch = true
-vim.o.wrapscan = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.cmd([[set noinfercase]])
-vim.o.showmatch = true
-vim.o.matchtime = 1
-
--- file I/O
--- TODO
-vim.cmd([[set nobackup]])
-vim.cmd([[set nowritebackup]])
-vim.cmd([[set noswapfile]])
-vim.o.updatetime = 100
-vim.o.autoread = true
--- set autowrite
-vim.o.undofile = true
-vim.o.undolevels = 1000
-vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
-vim.o.hidden = true
-vim.o.bufhidden = 'wipe'
 
 -- lines/cursors
 vim.o.number = true
@@ -57,8 +32,30 @@ vim.o.display = 'lastline'
 vim.o.virtualedit = 'onemore'
 vim.o.backspace = 'indent,eol,start'
 
+-- search
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.wrapscan = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.infercase = false
+vim.o.showmatch = true
+vim.o.matchtime = 1
+
+-- file I/O
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.swapfile = false
+vim.o.updatetime = 100
+vim.o.autoread = true
+-- vim.o.autowrite = true
+vim.o.undofile = true
+vim.o.undolevels = 1000
+vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
+vim.o.hidden = true
+vim.o.bufhidden = 'wipe'
+
 -- etc
--- vim.o.clipboard = 'unnamed,unnamedplus'
 vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
 -- vim.o.shellslash = true
 vim.o.showcmd = true
@@ -71,7 +68,6 @@ vim.o.ttimeoutlen = 50
 vim.o.visualbell = true
 vim.o.mouse = 'a'
 
--- TODO
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
 set listchars^=trail:_
