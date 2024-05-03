@@ -1,8 +1,9 @@
--- <leader> mapping
-vim.g.mapleader = ','
-
+-----------------------------------------------------------------
+-- options
+-----------------------------------------------------------------
 -- encoding
-vim.o.encoding = 'utf-8'
+vim.o.enc = 'utf-8'
+vim.o.fencs = 'utf-8,sjis'
 vim.scriptencoding = 'utf-8'
 
 -- visual
@@ -11,21 +12,80 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
+vim.o.smarttab = true
+vim.o.shiftround = true
 vim.o.autoindent = true
 vim.o.smartindent = true
+-- TODO
+vim.cmd([[
+retab 2
+retab!
+]])
 
-vim.o.visualbell = true
-vim.o.number = true
+-- search
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.wrapscan = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.cmd([[set noinfercase]])
 vim.o.showmatch = true
 vim.o.matchtime = 1
 
--- search
-vim.o.incsearch = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.hlsearch = true
+-- file I/O
+-- TODO
+vim.cmd([[set nobackup]])
+vim.cmd([[set nowritebackup]])
+vim.cmd([[set noswapfile]])
+vim.o.updatetime = 100
+vim.o.autoread = true
+-- set autowrite
+vim.o.undofile = true
+vim.o.undolevels = 1000
+vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
+vim.o.hidden = true
+vim.o.bufhidden = 'wipe'
 
--- file-operation
+-- lines/cursors
+vim.o.number = true
+vim.o.linebreak = true
+vim.o.showbreak = '+++'
+vim.o.cursorline = true
+-- vim.o.cursorcolumn = true
+-- vim.o.nowrap = true
+vim.o.display = 'lastline'
+vim.o.virtualedit = 'onemore'
+vim.o.backspace = 'indent,eol,start'
+
+-- etc
+-- vim.o.clipboard = 'unnamed,unnamedplus'
+vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
+-- vim.o.shellslash = true
+vim.o.showcmd = true
+vim.o.inccommand = 'split'
+vim.o.wildmode = 'list:longest'
+vim.o.wildmenu = true
+vim.o.laststatus = 2
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 50
+vim.o.visualbell = true
+vim.o.mouse = 'a'
+
+-- TODO
+vim.cmd([[
+set list listchars=extends:>,precedes:<,nbsp:%
+set listchars^=trail:_
+set listchars^=eol:↲
+set listchars^=tab:>.
+set matchpairs& matchpairs+=<:>
+set tags=./tags;
+]])
+
+-----------------------------------------------------------------
+-- mappings
+-----------------------------------------------------------------
+vim.g.mapleader = ','
+
 vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>wq', ':<C-u>wq<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
@@ -33,14 +93,6 @@ vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = tr
 vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
-
--- manipulation
-vim.opt.clipboard:append{'unnamedplus'}
-vim.o.ttimeout = true
-vim.o.ttimeoutlen = 50
-
-vim.o.undofile = true
-vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true })
@@ -103,12 +155,11 @@ vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true })
 
-
--- Disabled mapping-----------------------------------------------------
+-- disabled mapping-----------------------------------------------------
 vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
 vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
 
 -- calling lazy_nvim
-require("lazy_nvim")
+require('lazy_nvim')
