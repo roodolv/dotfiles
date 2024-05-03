@@ -7,8 +7,8 @@ require("oil").setup({
   columns = {
     "icon",
     -- "permissions",
-    "size",
-    "mtime",
+    -- "size",
+    -- "mtime",
   },
   -- Buffer-local options to use for oil buffers
   buf_options = {
@@ -18,7 +18,7 @@ require("oil").setup({
   -- Window-local options to use for oil buffers
   win_options = {
     wrap = false,
-    signcolumn = "no",
+    signcolumn = "yes:2", -- modified from 'no' to 'yes:2' for oil-git-status
     cursorcolumn = false,
     foldcolumn = "0",
     spell = false,
@@ -81,7 +81,7 @@ require("oil").setup({
   use_default_keymaps = true,
   view_options = {
     -- Show files and directories that start with "."
-    show_hidden = false,
+    show_hidden = true,
     -- This function defines what is considered a "hidden" file
     is_hidden_file = function(name, bufnr)
       return vim.startswith(name, ".")

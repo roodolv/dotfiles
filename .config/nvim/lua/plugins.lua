@@ -78,16 +78,25 @@ return {
   -- },
   {
     "stevearc/oil.nvim",
-    cmd = "Oil",
+    lazy = true,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
     init = function()
-      local escaped_path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-      vim.keymap.set("n", "=", ":<C-u>Oil --float " .. escaped_path .. "<CR>", { silent = true })
+      vim.keymap.set("n", "-", ":<C-u>Oil --float .<CR>", { silent = true })
     end,
-    opts = function()
-      require("opts/oil")
+    config = function()
+      require("config/oil")
+    end,
+  },
+  {
+    "refractalize/oil-git-status.nvim",
+    cmd = "Oil",
+    dependencies = {
+      "stevearc/oil.nvim",
+    },
+    config = function()
+      require("config/oil-git-status")
     end,
   },
   -- colorizer
