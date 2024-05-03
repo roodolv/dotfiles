@@ -3,4 +3,3 @@
 --   pattern = {"*.html"},
 --   callback = function() vim.g.indentLine_enabled = 0 end
 -- })
-

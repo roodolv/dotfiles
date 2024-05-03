@@ -1,6 +1,3 @@
--- Mappings
-vim.api.nvim_set_keymap('n', '<Leader>R', ':<C-u>WinResizerStartResize<CR>', { noremap = true, silent = true })
-
 -- Options
 vim.g.winresizer_start_key = '<Leader>R'
 vim.g.winresizer_vert_resize = 5
