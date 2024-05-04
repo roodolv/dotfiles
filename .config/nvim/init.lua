@@ -55,11 +55,18 @@ vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
 vim.o.hidden = true
 vim.o.bufhidden = 'wipe'
 
+-- cmdline
+vim.o.cmdheight = 0
+vim.o.showcmd = true
+vim.o.inccommand = 'split'
+
+-- netrw off
+vim.api.nvim_set_var('loaded_netrw', 1)
+vim.api.nvim_set_var('loaded_netrwPlugin', 1)
+
 -- etc
 vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
 -- vim.o.shellslash = true
-vim.o.showcmd = true
-vim.o.inccommand = 'split'
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
 vim.o.laststatus = 2
