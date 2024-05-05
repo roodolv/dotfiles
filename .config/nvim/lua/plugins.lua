@@ -75,7 +75,6 @@ return {
       "nvim-tree/nvim-web-devicons",
       {
         "refractalize/oil-git-status.nvim",
-        lazy = true,
         config = function()
           require("oil").setup({
             win_options = { signcolumn = "yes:2", }
@@ -85,7 +84,6 @@ return {
       },
       -- {
       --   "SirZenith/oil-vcs-status",
-      --   lazy = true,
       --   config = function()
       --     require("oil").setup({
       --       win_options = { signcolumn = "number", }
