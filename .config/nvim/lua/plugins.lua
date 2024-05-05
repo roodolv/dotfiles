@@ -231,9 +231,6 @@ return {
     "airblade/vim-gitgutter",
     event = "BufEnter",
     config = function()
-      if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-        vim.g.gitgutter_git_executable = "C:/Program Files/Git/bin/git.exe"
-      end
       vim.keymap.set("n", "[h", "<Plug>(GitGutterNextHunk)")
       vim.keymap.set("n", "]h", "<Plug>(GitGutterPrevHunk)")
     end,
