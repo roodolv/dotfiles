@@ -18,7 +18,8 @@ require("oil").setup({
   -- Window-local options to use for oil buffers
   win_options = {
     wrap = false,
-    signcolumn = "yes:2", -- modified from 'no' to 'yes:2' for oil-git-status
+    signcolumn = "yes:2", -- for oil-git-status
+    -- signcolumn = "number", -- for oil-vcs-status
     cursorcolumn = false,
     foldcolumn = "0",
     spell = false,

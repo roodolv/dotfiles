@@ -6,7 +6,7 @@ vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
 vim.scriptencoding = 'utf-8'
 
--- visual
+-- tabs/indent/width
 vim.o.ambiwidth = 'double'
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
@@ -16,35 +16,10 @@ vim.o.smarttab = true
 vim.o.shiftround = true
 vim.o.autoindent = true
 vim.o.smartindent = true
--- TODO
 vim.cmd([[
 retab 2
 retab!
 ]])
-
--- search
-vim.o.hlsearch = true
-vim.o.incsearch = true
-vim.o.wrapscan = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.cmd([[set noinfercase]])
-vim.o.showmatch = true
-vim.o.matchtime = 1
-
--- file I/O
--- TODO
-vim.cmd([[set nobackup]])
-vim.cmd([[set nowritebackup]])
-vim.cmd([[set noswapfile]])
-vim.o.updatetime = 100
-vim.o.autoread = true
--- set autowrite
-vim.o.undofile = true
-vim.o.undolevels = 1000
-vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
-vim.o.hidden = true
-vim.o.bufhidden = 'wipe'
 
 -- lines/cursors
 vim.o.number = true
@@ -52,17 +27,46 @@ vim.o.linebreak = true
 vim.o.showbreak = '+++'
 vim.o.cursorline = true
 -- vim.o.cursorcolumn = true
--- vim.o.nowrap = true
+-- vim.o.wrap = false
 vim.o.display = 'lastline'
 vim.o.virtualedit = 'onemore'
 vim.o.backspace = 'indent,eol,start'
 
+-- search
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.wrapscan = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.infercase = false
+vim.o.showmatch = true
+vim.o.matchtime = 1
+
+-- file I/O
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.swapfile = false
+vim.o.updatetime = 100
+vim.o.autoread = true
+-- vim.o.autowrite = true
+vim.o.undofile = true
+vim.o.undolevels = 1000
+vim.o.undodir = vim.fn.stdpath('cache') .. '/undo'
+vim.o.hidden = true
+vim.o.bufhidden = 'wipe'
+
+-- cmdline
+vim.o.showcmd = true
+-- vim.o.cmdheight = 0
+vim.o.inccommand = 'split'
+
+-- netrw off
+vim.api.nvim_set_var('loaded_netrw', 1)
+vim.api.nvim_set_var('loaded_netrwPlugin', 1)
+
 -- etc
--- vim.o.clipboard = 'unnamed,unnamedplus'
 vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
 -- vim.o.shellslash = true
-vim.o.showcmd = true
-vim.o.inccommand = 'split'
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
 vim.o.laststatus = 2
@@ -71,7 +75,6 @@ vim.o.ttimeoutlen = 50
 vim.o.visualbell = true
 vim.o.mouse = 'a'
 
--- TODO
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
 set listchars^=trail:_
@@ -160,6 +163,51 @@ vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for vim-sandwi
 vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
+
+
+-----------------------------------------------------------------
+-- filetypes
+-----------------------------------------------------------------
+-- C/C++/Java
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = {"*.c", "*.cpp", "*.java"},
+  -- jumping between ';' and '='
+  command = "set matchpairs+==:;",
+})
+
+-- Rust
+vim.g.rustfmt_autosave = 1
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "rust",
+  command = "setl cinwords=for,if,else,while,loop,impl,mod,unsafe,trait,struct,enum,fn,extern,macro expandtab tabstop=4 shiftwidth=4 softtabstop=4",
+})
+
+-- Python
+vim.g.python3_host_prog = vim.fn.expand("PYTHON")
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "python",
+  command = "setl cinwords=if,elif,else,for,while,try,except,finally,def,class expandtab tabstop=4 shiftwidth=4 softtabstop=4",
+})
+
+-- JSON
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "json",
+  callback = function()
+    vim.cmd([[
+    command! Jq %!jq .
+    command! -range Jql :<line1>,<line2>!jq .
+    ]])
+    vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ':<C-u>Jq<CR>', { noremap = true })
+    vim.api.nvim_set_keymap('v', '<Leader><Leader>j', ':<C-u>Jql<CR>', { noremap = true })
+  end,
+})
+
+-- Markdown
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "markdown",
+  command = "setl expandtab tabstop=4 shiftwidth=4 softtabstop=4",
+})
+
 
 -- calling lazy_nvim
 require('lazy_nvim')
