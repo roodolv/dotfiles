@@ -65,6 +65,7 @@ return {
   --     require("config/fzf-lua")
   --   end
   -- },
+  -- TODO: Add telescope.nvim, flash.nvim here
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
@@ -73,15 +74,15 @@ return {
     cmd = "Oil",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      {
-        "refractalize/oil-git-status.nvim",
-        config = function()
-          require("oil").setup({
-            win_options = { signcolumn = "yes:2", }
-          })
-          require("config/oil-git-status")
-        end,
-      },
+      -- {
+      --   "refractalize/oil-git-status.nvim",
+      --   config = function()
+      --     require("oil").setup({
+      --       win_options = { signcolumn = "yes:2", }
+      --     })
+      --     require("config/oil-git-status")
+      --   end,
+      -- },
       -- {
       --   "SirZenith/oil-vcs-status",
       --   config = function()
@@ -149,58 +150,47 @@ return {
   --     })
   --   end
   -- },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    event = "BufEnter",
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        config = function() require("mason").setup() end,
+      },
+    },
+    config = function()
+      require("mason-lspconfig").setup()
+      -- require("mason-lspconfig").setup_handlers {
+      --     function (server_name) -- default handler (optional)
+      --         require("lspconfig")[server_name].setup {}
+      --     end,
+      --     ["rust_analyzer"] = function ()
+      --         require("rust-tools").setup {}
+      --     end
+      -- }
+    end,
+  },
+
   -----------------------------------------------------------------
   -- completion
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     dependencies = {
+      "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      -- For ultisnips user
+      "SirVer/ultisnips",
+      "quangnguyen30192/cmp-nvim-ultisnips",
     },
     config = function()
-      -- require("lsp-zero.cmp").extend({
-      --   use_luasnip = true,
-      --   set_format = true,
-      --   set_sources = "recommended"
-      -- })
-      local cmp = require("cmp")
-      -- local cmp_action = require("lsp-zero.cmp").action()
-      -- cmp.setup({
-      --   -- formatting = {
-      --   --   format = function(entry, item)
-      --   --     require("lspkind").cmp_format({
-      --   --       mode = "symbol",
-      --   --       symbol_map = { Copilot = "" },
-      --   --     })(entry, item)
-      --   --     return require("tailwindcss-colorizer-cmp").formatter(entry, item)
-      --   --   end,
-      --   -- },
-      --   sources = {
-      --     -- { name = "copilot" },
-      --     { name = "orgmode" },
-      --     { name = "path" },
-      --     { name = "nvim_lsp" },
-      --     { name = "luasnip" },
-      --     { name = "nvim_lua" },
-      --     { name = "buffer" },
-      --   },
-      --   mapping = {
-      --     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      --     ["<C-o>"] = cmp.mapping.complete(),
-      --     ["<C-e>"] = cmp.mapping.close(),
-      --     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-      --     -- ["<Tab>"] = cmp_action.luasnip_supertab(),
-      --     -- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-      --     -- ["<C-Space>"] = cmp.mapping.complete(),
-      --     -- ["<C-y>"] = cmp_action.luasnip_jump_forward(),
-      --     -- ["<C-n>"] = cmp_action.luasnip_jump_backward(),
-      --   }
-      -- })
+      require("config/nvim-cmp")
     end
   },
   -- {
@@ -231,8 +221,8 @@ return {
     "airblade/vim-gitgutter",
     event = "BufEnter",
     config = function()
-      vim.keymap.set("n", "[h", "<Plug>(GitGutterNextHunk)")
-      vim.keymap.set("n", "]h", "<Plug>(GitGutterPrevHunk)")
+      vim.keymap.set("n", "]h", "<Plug>(GitGutterNextHunk)")
+      vim.keymap.set("n", "[h", "<Plug>(GitGutterPrevHunk)")
     end,
   },
   -----------------------------------------------------------------
