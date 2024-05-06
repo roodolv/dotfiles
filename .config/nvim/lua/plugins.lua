@@ -135,6 +135,17 @@ return {
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
+  {
+    "williamboman/mason-lspconfig.nvim",
+    event = "BufEnter",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    config = function()
+      require("config/mason-lspconfig")
+    end,
+  },
   -- {
   --   "VonHeikemen/lsp-zero.nvim",
   --   branch = "v2.x",
@@ -150,42 +161,30 @@ return {
   --     })
   --   end
   -- },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = "BufEnter",
-    dependencies = {
-      {
-        "williamboman/mason.nvim",
-        config = function() require("mason").setup() end,
-      },
-    },
-    config = function()
-      require("mason-lspconfig").setup()
-      -- require("mason-lspconfig").setup_handlers {
-      --     function (server_name) -- default handler (optional)
-      --         require("lspconfig")[server_name].setup {}
-      --     end,
-      --     ["rust_analyzer"] = function ()
-      --         require("rust-tools").setup {}
-      --     end
-      -- }
-    end,
-  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   event = "BufEnter",
+  --   config = function()
+  --     require("fidget").setup()
+  --   end,
+  -- },
 
   -----------------------------------------------------------------
   -- completion
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
-    -- event = "InsertEnter",
+    lazy = true,
+    event = "BufEnter",
     dependencies = {
+      "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      -- For ultisnips user
+      -- For ultisnips
       "SirVer/ultisnips",
       "quangnguyen30192/cmp-nvim-ultisnips",
     },

@@ -62,9 +62,17 @@ cmp.setup.cmdline(':', {
   matching = { disallow_symbol_nonprefix_matching = false }
 })
 
--- Set up lspconfig.
+-- Set up lspconfig
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-  capabilities = capabilities
+local lspconfig = require('lspconfig')
+local servers = {
+  'rust_analyzer',
+  'tsserver',
+  'lua_ls',
 }
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    capabilities = capabilities,
+  }
+end
