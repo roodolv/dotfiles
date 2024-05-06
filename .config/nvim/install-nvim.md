@@ -1,5 +1,3 @@
-#! /bin/sh
-
 # Preparation for Neovim install
 
 ## NOTICE
