@@ -168,7 +168,6 @@ return {
   --     require("fidget").setup()
   --   end,
   -- },
-
   -----------------------------------------------------------------
   -- completion
   -----------------------------------------------------------------
@@ -187,16 +186,13 @@ return {
       -- For ultisnips
       "SirVer/ultisnips",
       "quangnguyen30192/cmp-nvim-ultisnips",
+      -- For Neovim Lua API
+      "folke/neodev.nvim",
     },
     config = function()
       require("config/nvim-cmp")
     end
   },
-  -- {
-  --   "folke/neodev.nvim",
-  --   ft = "lua",
-  --   config = true,
-  -- },
   -----------------------------------------------------------------
   -- AGI
   -----------------------------------------------------------------
