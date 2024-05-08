@@ -127,7 +127,7 @@ return {
   },
   {
     "Yggdroot/indentLine",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/indentline")
     end,
@@ -137,7 +137,7 @@ return {
   -----------------------------------------------------------------
   {
     "williamboman/mason-lspconfig.nvim",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
@@ -145,6 +145,11 @@ return {
     config = function()
       require("config/mason-lspconfig")
     end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {}
   },
   -- {
   --   "VonHeikemen/lsp-zero.nvim",
@@ -161,20 +166,13 @@ return {
   --     })
   --   end
   -- },
-  -- {
-  --   "j-hui/fidget.nvim",
-  --   event = "BufEnter",
-  --   config = function()
-  --     require("fidget").setup()
-  --   end,
-  -- },
   -----------------------------------------------------------------
   -- completion
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
@@ -214,7 +212,7 @@ return {
   },
   {
     "airblade/vim-gitgutter",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       vim.keymap.set("n", "]h", "<Plug>(GitGutterNextHunk)")
       vim.keymap.set("n", "[h", "<Plug>(GitGutterPrevHunk)")
@@ -225,21 +223,21 @@ return {
   -----------------------------------------------------------------
   {
     "easymotion/vim-easymotion",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/easymotion")
     end
   },
   {
     "machakann/vim-sandwich",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/sandwich")
     end,
   },
   {
     "tpope/vim-repeat",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "tpope/vim-surround",
       "tpope/vim-commentary",
@@ -250,7 +248,7 @@ return {
   },
   {
     "tommcdo/vim-exchange",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "kana/vim-operator-replace",
@@ -271,7 +269,7 @@ return {
   },
   {
     "jiangmiao/auto-pairs",
-    event = "BufEnter",
+    -- event = { "BufReadPre", "BufNewFile", "BufEnter" },
   },
   {
     "bronson/vim-trailing-whitespace",
