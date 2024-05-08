@@ -147,29 +147,6 @@ return {
     end,
   },
   {
-    "j-hui/fidget.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {}
-  },
-  -- {
-  --   "VonHeikemen/lsp-zero.nvim",
-  --   branch = "v2.x",
-  --   lazy = true,
-  --   config = function()
-  --     -- This is where you modify the settings for lsp-zero
-  --     -- Note: autocompletion settings will not take effect
-  --     require("lsp-zero.settings").preset({
-  --       name = "minimal",
-  --       set_lsp_keymaps = false,
-  --       manage_nvim_cmp = true,
-  --       suggest_lsp_servers = true,
-  --     })
-  --   end
-  -- },
-  -----------------------------------------------------------------
-  -- completion
-  -----------------------------------------------------------------
-  {
     "neovim/nvim-lspconfig",
     lazy = true,
     config = function ()
@@ -197,6 +174,29 @@ return {
     end,
   },
   {
+    "j-hui/fidget.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {}
+  },
+  -- {
+  --   "VonHeikemen/lsp-zero.nvim",
+  --   branch = "v2.x",
+  --   lazy = true,
+  --   config = function()
+  --     -- This is where you modify the settings for lsp-zero
+  --     -- Note: autocompletion settings will not take effect
+  --     require("lsp-zero.settings").preset({
+  --       name = "minimal",
+  --       set_lsp_keymaps = false,
+  --       manage_nvim_cmp = true,
+  --       suggest_lsp_servers = true,
+  --     })
+  --   end
+  -- },
+  -----------------------------------------------------------------
+  -- snippets/completion
+  -----------------------------------------------------------------
+  {
     "hrsh7th/nvim-cmp",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
@@ -209,13 +209,7 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       -- For LuaSnip
-      { "L3MON4D3/LuaSnip",
-        dependencies = { "rafamadriz/friendly-snippets" },
-        build = "make install_jsregexp",
-        config = function ()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end
-      },
+      "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       -- For Neovim Lua API
       "folke/neodev.nvim",
@@ -224,6 +218,15 @@ return {
       require("config/nvim-cmp")
     end
   },
+  { "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = { "rafamadriz/friendly-snippets" },
+    build = "make install_jsregexp",
+    config = function ()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end
+  },
+
   -----------------------------------------------------------------
   -- AGI
   -----------------------------------------------------------------
