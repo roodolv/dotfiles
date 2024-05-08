@@ -74,15 +74,15 @@ return {
     cmd = "Oil",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      -- {
-      --   "refractalize/oil-git-status.nvim",
-      --   config = function()
-      --     require("oil").setup({
-      --       win_options = { signcolumn = "yes:2", }
-      --     })
-      --     require("config/oil-git-status")
-      --   end,
-      -- },
+      {
+        "refractalize/oil-git-status.nvim",
+        config = function()
+          require("oil").setup({
+            win_options = { signcolumn = "yes:2", }
+          })
+          require("config/oil-git-status")
+        end,
+      },
       -- {
       --   "SirZenith/oil-vcs-status",
       --   config = function()
