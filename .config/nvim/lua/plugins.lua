@@ -127,7 +127,7 @@ return {
   },
   {
     "Yggdroot/indentLine",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/indentline")
     end,
@@ -137,7 +137,7 @@ return {
   -----------------------------------------------------------------
   {
     "williamboman/mason-lspconfig.nvim",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
@@ -145,6 +145,38 @@ return {
     config = function()
       require("config/mason-lspconfig")
     end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    config = function ()
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+        callback = function(ev)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+          local opts = { buffer = ev.buf }
+          -- TODO: fix here
+          vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', '<M-s>', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', '<C-j>i', vim.lsp.buf.implementation, opts)
+          vim.keymap.set({'n', 'i'}, '<C-p>', vim.lsp.buf.signature_help, opts)
+          vim.keymap.set({'n', 'i'}, '<S-M-r>', vim.lsp.buf.rename, opts)
+          vim.keymap.set({'n', 'i'}, '<M-CR>', vim.lsp.buf.code_action, opts)
+          vim.keymap.set('n', '<C-j>h', vim.lsp.buf.references, opts)
+          vim.keymap.set('n', '<M-j>', vim.diagnostic.goto_next, opts)
+          vim.keymap.set('n', '<M-k>', vim.diagnostic.goto_prev, opts)
+          vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+          end, opts)
+        end,
+      })
+    end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {}
   },
   -- {
   --   "VonHeikemen/lsp-zero.nvim",
@@ -161,21 +193,13 @@ return {
   --     })
   --   end
   -- },
-  -- {
-  --   "j-hui/fidget.nvim",
-  --   event = "BufEnter",
-  --   config = function()
-  --     require("fidget").setup()
-  --   end,
-  -- },
-
   -----------------------------------------------------------------
-  -- completion
+  -- snippets/completion
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
@@ -184,22 +208,36 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      -- For ultisnips
-      "SirVer/ultisnips",
-      "quangnguyen30192/cmp-nvim-ultisnips",
+      -- For LuaSnip
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      -- For Neovim Lua API
+      "folke/neodev.nvim",
     },
     config = function()
       require("config/nvim-cmp")
     end
   },
-  -- {
-  --   "folke/neodev.nvim",
-  --   ft = "lua",
-  --   config = true,
-  -- },
-  -----------------------------------------------------------------
-  -- AGI
-  -----------------------------------------------------------------
+  { "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = { "rafamadriz/friendly-snippets" },
+    build = "make install_jsregexp",
+    config = function ()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      -- LuaSnip official settings
+      local ls = require("luasnip")
+      -- TODO: fix & understand these
+      vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+      vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
+      vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
+      vim.keymap.set({"i", "s"}, "<C-E>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end, {silent = true})
+    end
+  },
+
   -- repo = "Exafunction/codeium.vim"
   -- on_event = "BufEnter"
   -- # hook_add = "source ~/.config/nvim/plugins/codeium-vim.rc.vim"
@@ -218,7 +256,7 @@ return {
   },
   {
     "airblade/vim-gitgutter",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       vim.keymap.set("n", "]h", "<Plug>(GitGutterNextHunk)")
       vim.keymap.set("n", "[h", "<Plug>(GitGutterPrevHunk)")
@@ -229,21 +267,21 @@ return {
   -----------------------------------------------------------------
   {
     "easymotion/vim-easymotion",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/easymotion")
     end
   },
   {
     "machakann/vim-sandwich",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/sandwich")
     end,
   },
   {
     "tpope/vim-repeat",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "tpope/vim-surround",
       "tpope/vim-commentary",
@@ -254,7 +292,7 @@ return {
   },
   {
     "tommcdo/vim-exchange",
-    event = "BufEnter",
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "kana/vim-operator-replace",
@@ -275,7 +313,7 @@ return {
   },
   {
     "jiangmiao/auto-pairs",
-    event = "BufEnter",
+    -- event = { "BufReadPre", "BufNewFile", "BufEnter" },
   },
   {
     "bronson/vim-trailing-whitespace",
