@@ -2,7 +2,7 @@
     name = roodolv
     email = 113752412+roodolv@users.noreply.github.com
 [core]
-    editor = \"C:\\Users\\USERNAME\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+    editor = nvim
     pager = LESSCHARSET=utf-8 less
 [url "git@github.com:"]
     insteadOf = https://github.com/
