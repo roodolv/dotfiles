@@ -105,7 +105,7 @@ return {
       -- },
     },
     init = function()
-      vim.keymap.set("n", "-", ":<C-u>Oil --float .<CR>", { silent = true })
+      vim.keymap.set("n", "-", ":<C-u>Oil .<CR>", { silent = true })
     end,
     config = function()
       require("config/oil")
@@ -156,6 +156,7 @@ return {
   -----------------------------------------------------------------
   {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
@@ -276,13 +277,6 @@ return {
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
-  {
-    "machakann/vim-sandwich",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/sandwich")
-    end,
-  },
   {
     "tpope/vim-repeat",
     event = { "BufReadPre", "BufNewFile" },
