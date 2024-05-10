@@ -53,39 +53,15 @@ return {
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
-  -- {
-  --   "ibhagwan/fzf-lua",
-  --   event = "VimEnter",
-  --   dependencies = {
-  --     "junegunn/fzf",
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  --   opts = {},
-  --   config = function()
-  --     require("config/fzf-lua")
-  --   end
-  -- },
   -- TODO: Add telescope.nvim here
   {
-    "easymotion/vim-easymotion",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/easymotion")
-    end
-  },
-  {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     ---@type Flash.Config
     opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
+    config = function ()
+      require("config/flash")
+    end
   },
   {
     "ThePrimeagen/harpoon",
@@ -96,6 +72,7 @@ return {
       local harpoon = require("harpoon")
       harpoon:setup()
 
+      -- TODO: fix later
       vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
       vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
@@ -135,7 +112,7 @@ return {
     end,
   },
   -----------------------------------------------------------------
-  -- syntax/indentation
+  -- visual(syntax/indent/etc)
   -----------------------------------------------------------------
   {
     "nvim-treesitter/nvim-treesitter",
@@ -164,6 +141,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/indentline")
+    end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function ()
+      require("config/todo-comments")
     end,
   },
   -----------------------------------------------------------------
@@ -212,21 +197,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
   },
-  -- {
-  --   "VonHeikemen/lsp-zero.nvim",
-  --   branch = "v2.x",
-  --   lazy = true,
-  --   config = function()
-  --     -- This is where you modify the settings for lsp-zero
-  --     -- Note: autocompletion settings will not take effect
-  --     require("lsp-zero.settings").preset({
-  --       name = "minimal",
-  --       set_lsp_keymaps = false,
-  --       manage_nvim_cmp = true,
-  --       suggest_lsp_servers = true,
-  --     })
-  --   end
-  -- },
   -----------------------------------------------------------------
   -- snippets/completion
   -----------------------------------------------------------------
@@ -271,10 +241,17 @@ return {
       end, {silent = true})
     end
   },
-
-  -- repo = "Exafunction/codeium.vim"
-  -- on_event = "BufEnter"
-  -- # hook_add = "source ~/.config/nvim/plugins/codeium-vim.rc.vim"
+  -- {
+  --   "Exafunction/codeium.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup({})
+  --   end
+  -- },
   -----------------------------------------------------------------
   -- Git
   -----------------------------------------------------------------
@@ -347,13 +324,5 @@ return {
     keys = {
       { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode= "n", silent = true },
     },
-  },
-  {
-    "folke/todo-comments.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function ()
-      require("config/todo-comments")
-    end,
   },
 }
