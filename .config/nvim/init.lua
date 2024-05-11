@@ -64,6 +64,9 @@ vim.o.inccommand = 'split'
 vim.api.nvim_set_var('loaded_netrw', 1)
 vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 
+-- grep/vimgrep
+vim.o.grepprg = 'rg --vimgrep'
+
 -- etc
 vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
 -- vim.o.shellslash = true
@@ -93,8 +96,16 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silen
 -- vim.api.nvim_set_keymap('n', '<Leader>wq', ':<C-u>wq<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = true, silent = true })
+
+-- grep/vimgrep/quickfix
+vim.api.nvim_set_keymap('n', '<Leader>G', ':<C-u>grep<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
+
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true })

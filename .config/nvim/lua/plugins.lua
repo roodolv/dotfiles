@@ -67,11 +67,11 @@ return {
       { "<Leader>ff", function() require("telescope.builtin").find_files() end, desc = "List project files", mode = "n", silent = true },
       { "<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep", mode = "n", silent = true },
       { "<Leader>fb", function() require("telescope.builtin").buffers() end, desc = "List buffers", mode = "n", silent = true },
+      { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
       { "<Leader>fh", function() require("telescope.builtin").help_tags() end, desc = "List help-tags", mode = "n", silent = true },
       { "<Leader>fc", function() require("telescope.builtin").commands() end, desc = "List commands", mode = "n", silent = true },
-      { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
       { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
-      -- { "<leader>crr", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
+      -- { "<leader>fR", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
     },
     config = function ()
       require("telescope").setup({
