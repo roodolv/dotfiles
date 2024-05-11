@@ -7,7 +7,7 @@ vim.o.fencs = 'utf-8,sjis'
 vim.scriptencoding = 'utf-8'
 
 -- tabs/indent/width
-vim.o.ambiwidth = 'double'
+-- vim.o.ambiwidth = 'double' -- comment out to use telescope.nvim
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
@@ -122,7 +122,7 @@ vim.api.nvim_set_keymap('x', 'zl', '10l', { noremap = true })
 -- vim.api.nvim_set_keymap('v', '<C-n>', '20j', { noremap = true })
 -- vim.api.nvim_set_keymap('v', '<C-p>', '20k', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true }) -- comment out for quickfix-list jump
 -- vim.api.nvim_set_keymap('n', '<Space>', 'i<Space><Esc>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'yib', 'yi(', { noremap = true })
@@ -159,8 +159,8 @@ vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true })
 
 -- disabled mapping----------------------------------------------
-vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
-vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
+vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for flash.nvim
+vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
 

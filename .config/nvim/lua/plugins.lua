@@ -53,7 +53,53 @@ return {
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
-  -- TODO: Add telescope.nvim here
+  {
+    "nvim-telescope/telescope.nvim", tag = "0.1.6",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      -- "nvim-telescope/telescope-frecency.nvim",
+      -- "joaomsa/telescope-orgmode.nvim",
+      -- "ThePrimeagen/refactoring.nvim",
+    },
+    cmd = { "Telescope" },
+    -- TODO: Fix & move these keymaps
+    keys = {
+      { "<Leader>ff", function() require("telescope.builtin").find_files() end, desc = "List project files", mode = "n", silent = true },
+      { "<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep", mode = "n", silent = true },
+      { "<Leader>fb", function() require("telescope.builtin").buffers() end, desc = "List buffers", mode = "n", silent = true },
+      { "<Leader>fh", function() require("telescope.builtin").help_tags() end, desc = "List help-tags", mode = "n", silent = true },
+      { "<Leader>fc", function() require("telescope.builtin").commands() end, desc = "List commands", mode = "n", silent = true },
+      { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
+      { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
+      -- { "<leader>crr", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
+    },
+    config = function ()
+      require("telescope").setup({
+        defaults = {
+          vimgrep_arguments = { "rg", "-L", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+          prompt_prefix = "   ",
+          selection_caret = " ",
+          file_ignore_patterns = { "node_modules" },
+          path_display = { "truncate" },
+        },
+      })
+    end,
+  },
+  -- {
+  --   "danielfalk/smart-open.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   branch = "0.2.x",
+  --   dependencies = {
+  --     "kkharji/sqlite.lua",
+  --     -- Only required if using match_algorithm fzf
+  --     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  --     -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+  --     { "nvim-telescope/telescope-fzy-native.nvim" },
+  --   },
+  --   config = function()
+  --     require("telescope").load_extension("smart_open")
+  --   end,
+  -- },
   {
     "folke/flash.nvim",
     event = { "BufReadPre", "BufNewFile" },
