@@ -41,7 +41,7 @@ cp ./HackGenNerd_v2.4.0/*.ttf ~/.fonts
 fc-cache -f -v
 ```
 
-## Install CLI binaries(fzf/rg/jq/fd/delta/bat/exa/gitui/lazygit)
+## Install CLI binaries(fzf/rg/jq/fd/sqlite3/delta/bat/exa/gitui/lazygit)
 ```bash
 sudo apt install -y fzf
 sudo apt install -y jq
