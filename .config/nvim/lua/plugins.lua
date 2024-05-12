@@ -58,8 +58,8 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
+      "ThePrimeagen/refactoring.nvim",
       -- "danielfalk/smart-open.nvim",
-      -- "ThePrimeagen/refactoring.nvim",
     },
     cmd = "Telescope",
     keys = {
@@ -73,12 +73,20 @@ return {
       { "<Leader>f:", function() require("telescope.builtin").command_history() end, desc = "List command history", mode = "n", silent = true },
       { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
       { "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      { "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, desc = "List refactoring methods" , mode = {"n", "x"}, silent = true }
       -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
-      -- { "<leader>fR", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
     },
     config = function ()
       require("config/telescope")
     end,
+  },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    lazy = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
   -- {
   --   "danielfalk/smart-open.nvim",
