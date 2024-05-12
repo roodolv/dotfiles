@@ -58,7 +58,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
-      -- "joaomsa/telescope-orgmode.nvim",
+      -- "danielfalk/smart-open.nvim",
       -- "ThePrimeagen/refactoring.nvim",
     },
     cmd = "Telescope",
@@ -73,7 +73,7 @@ return {
       { "<Leader>f:", function() require("telescope.builtin").command_history() end, desc = "List command history", mode = "n", silent = true },
       { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
       { "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
-      -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open()  end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
       -- { "<leader>fR", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
     },
     config = function ()
@@ -83,18 +83,10 @@ return {
   -- {
   --   "danielfalk/smart-open.nvim",
   --   lazy = true,
-  --   cmd = { "Telescope" },
   --   branch = "0.2.x",
   --   dependencies = {
   --     "kkharji/sqlite.lua",
-  --     -- Only required if using match_algorithm fzf
-  --     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  --     -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-  --     { "nvim-telescope/telescope-fzy-native.nvim" },
   --   },
-  --   config = function()
-  --     require("telescope").load_extension("smart_open")
-  --   end,
   -- },
   {
     "folke/flash.nvim",
