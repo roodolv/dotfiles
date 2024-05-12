@@ -181,6 +181,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function ()
       require("config/todo-comments")
+      vim.api.nvim_set_keymap('n', '<Leader>tt', ':<C-u>TodoTelescope<CR>', { noremap = true })
+      vim.api.nvim_set_keymap('n', '<Leader>tf', ':<C-u>TodoQuickFix<CR>', { noremap = true })
     end,
   },
   -----------------------------------------------------------------
