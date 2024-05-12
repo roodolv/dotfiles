@@ -105,6 +105,8 @@ vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
@@ -115,7 +117,7 @@ vim.api.nvim_set_keymap('n', '<Up>', 'gk', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gj', 'j', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gk', 'k', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohl<CR><Esc>', { noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohl<CR><Esc>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<C-c><C-c>', ':nohl<CR><Esc>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true })

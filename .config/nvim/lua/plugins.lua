@@ -54,12 +54,13 @@ return {
   -- search/navigation
   -----------------------------------------------------------------
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.6",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
+      "ThePrimeagen/refactoring.nvim",
       -- "danielfalk/smart-open.nvim",
-      -- "ThePrimeagen/refactoring.nvim",
     },
     cmd = "Telescope",
     keys = {
@@ -73,12 +74,20 @@ return {
       { "<Leader>f:", function() require("telescope.builtin").command_history() end, desc = "List command history", mode = "n", silent = true },
       { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
       { "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      { "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, desc = "List refactoring methods" , mode = {"n", "x"}, silent = true }
       -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
-      -- { "<leader>fR", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
     },
     config = function ()
       require("config/telescope")
     end,
+  },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    lazy = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
   -- {
   --   "danielfalk/smart-open.nvim",
@@ -101,23 +110,12 @@ return {
     "ThePrimeagen/harpoon",
     event = { "BufReadPre", "BufNewFile" },
     branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
     config = function ()
-      local harpoon = require("harpoon")
-      harpoon:setup()
-
-      -- TODO: fix later
-      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-      vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-      vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
-      vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
-      vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
-
-      -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+      require("config/harpoon")
     end
   },
   -----------------------------------------------------------------
@@ -220,7 +218,7 @@ return {
           vim.keymap.set('n', '<C-j>h', vim.lsp.buf.references, opts)
           vim.keymap.set('n', '<M-j>', vim.diagnostic.goto_next, opts)
           vim.keymap.set('n', '<M-k>', vim.diagnostic.goto_prev, opts)
-          vim.keymap.set('n', '<space>f', function()
+          vim.keymap.set('n', '<Leader>zf', function()
             vim.lsp.buf.format { async = true }
           end, opts)
         end,
