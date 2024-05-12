@@ -28,7 +28,7 @@ return {
     keys = {
       { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true },
     },
-    config = function()
+    init = function()
       require("config/winresizer")
     end,
   },
@@ -53,19 +53,73 @@ return {
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
+  {
+    "nvim-telescope/telescope.nvim", tag = "0.1.6",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-frecency.nvim",
+      -- "danielfalk/smart-open.nvim",
+      -- "ThePrimeagen/refactoring.nvim",
+    },
+    cmd = "Telescope",
+    keys = {
+      { "<Leader>ff", function() require("telescope.builtin").find_files() end, desc = "List project files", mode = "n", silent = true },
+      { "<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep", mode = "n", silent = true },
+      { "<Leader>fl", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current buffer fuzzy find", mode = "n", silent = true },
+      { "<Leader>fb", function() require("telescope.builtin").buffers() end, desc = "List buffers", mode = "n", silent = true },
+      { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
+      { "<Leader>fh", function() require("telescope.builtin").help_tags() end, desc = "List help-tags", mode = "n", silent = true },
+      { "<Leader>fc", function() require("telescope.builtin").commands() end, desc = "List commands", mode = "n", silent = true },
+      { "<Leader>f:", function() require("telescope.builtin").command_history() end, desc = "List command history", mode = "n", silent = true },
+      { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
+      { "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      -- { "<leader>fR", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
+    },
+    config = function ()
+      require("config/telescope")
+    end,
+  },
   -- {
-  --   "ibhagwan/fzf-lua",
-  --   event = "VimEnter",
+  --   "danielfalk/smart-open.nvim",
+  --   lazy = true,
+  --   branch = "0.2.x",
   --   dependencies = {
-  --     "junegunn/fzf",
-  --     "nvim-tree/nvim-web-devicons",
+  --     "kkharji/sqlite.lua",
   --   },
-  --   opts = {},
-  --   config = function()
-  --     require("config/fzf-lua")
-  --   end
   -- },
-  -- TODO: Add telescope.nvim, flash.nvim here
+  {
+    "folke/flash.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    ---@type Flash.Config
+    opts = {},
+    config = function ()
+      require("config/flash")
+    end
+  },
+  {
+    "ThePrimeagen/harpoon",
+    event = { "BufReadPre", "BufNewFile" },
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function ()
+      local harpoon = require("harpoon")
+      harpoon:setup()
+
+      -- TODO: fix later
+      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+      vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+      vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+      vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+      vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+    end
+  },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
@@ -83,25 +137,16 @@ return {
           require("config/oil-git-status")
         end,
       },
-      -- {
-      --   "SirZenith/oil-vcs-status",
-      --   config = function()
-      --     require("oil").setup({
-      --       win_options = { signcolumn = "number", }
-      --     })
-      --     require("config/oil-vcs-status")
-      --   end,
-      -- },
     },
     init = function()
-      vim.keymap.set("n", "-", ":<C-u>Oil --float .<CR>", { silent = true })
+      vim.keymap.set("n", "-", ":<C-u>Oil .<CR>", { silent = true })
     end,
     config = function()
       require("config/oil")
     end,
   },
   -----------------------------------------------------------------
-  -- syntax/indentation
+  -- visual(syntax/indent/etc)
   -----------------------------------------------------------------
   {
     "nvim-treesitter/nvim-treesitter",
@@ -132,11 +177,20 @@ return {
       require("config/indentline")
     end,
   },
+  {
+    "folke/todo-comments.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function ()
+      require("config/todo-comments")
+    end,
+  },
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
   {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
@@ -178,21 +232,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
   },
-  -- {
-  --   "VonHeikemen/lsp-zero.nvim",
-  --   branch = "v2.x",
-  --   lazy = true,
-  --   config = function()
-  --     -- This is where you modify the settings for lsp-zero
-  --     -- Note: autocompletion settings will not take effect
-  --     require("lsp-zero.settings").preset({
-  --       name = "minimal",
-  --       set_lsp_keymaps = false,
-  --       manage_nvim_cmp = true,
-  --       suggest_lsp_servers = true,
-  --     })
-  --   end
-  -- },
   -----------------------------------------------------------------
   -- snippets/completion
   -----------------------------------------------------------------
@@ -237,10 +276,17 @@ return {
       end, {silent = true})
     end
   },
-
-  -- repo = "Exafunction/codeium.vim"
-  -- on_event = "BufEnter"
-  -- # hook_add = "source ~/.config/nvim/plugins/codeium-vim.rc.vim"
+  -- {
+  --   "Exafunction/codeium.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup({})
+  --   end
+  -- },
   -----------------------------------------------------------------
   -- Git
   -----------------------------------------------------------------
@@ -265,20 +311,6 @@ return {
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
-  {
-    "easymotion/vim-easymotion",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/easymotion")
-    end
-  },
-  {
-    "machakann/vim-sandwich",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/sandwich")
-    end,
-  },
   {
     "tpope/vim-repeat",
     event = { "BufReadPre", "BufNewFile" },

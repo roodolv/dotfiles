@@ -20,7 +20,12 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-o>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-p>'] = cmp.mapping.abort(),
+    ['<F5>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
