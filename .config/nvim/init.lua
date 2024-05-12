@@ -1,13 +1,15 @@
 -----------------------------------------------------------------
 -- options
 -----------------------------------------------------------------
+local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+
 -- encoding
 vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
 vim.scriptencoding = 'utf-8'
 
 -- tabs/indent/width
-vim.o.ambiwidth = 'double'
+-- vim.o.ambiwidth = 'double' -- comment out to use telescope.nvim
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
@@ -64,9 +66,14 @@ vim.o.inccommand = 'split'
 vim.api.nvim_set_var('loaded_netrw', 1)
 vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 
+-- grep/vimgrep
+vim.o.grepprg = 'rg --vimgrep'
+
 -- etc
+if not is_windows then
+  vim.o.shellslash = true
+end
 vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
--- vim.o.shellslash = true
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
 vim.o.laststatus = 2
@@ -93,8 +100,16 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silen
 -- vim.api.nvim_set_keymap('n', '<Leader>wq', ':<C-u>wq<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = true, silent = true })
+
+-- grep/vimgrep/quickfix
+vim.api.nvim_set_keymap('n', '<Leader>G', ':<C-u>grep<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
+
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true })
@@ -122,7 +137,7 @@ vim.api.nvim_set_keymap('x', 'zl', '10l', { noremap = true })
 -- vim.api.nvim_set_keymap('v', '<C-n>', '20j', { noremap = true })
 -- vim.api.nvim_set_keymap('v', '<C-p>', '20k', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true }) -- comment out for quickfix-list jump
 -- vim.api.nvim_set_keymap('n', '<Space>', 'i<Space><Esc>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'yib', 'yi(', { noremap = true })
@@ -159,8 +174,8 @@ vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-d>', '<Delete>', { noremap = true })
 
 -- disabled mapping----------------------------------------------
-vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
-vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for vim-sandwich
+vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for flash.nvim
+vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
 

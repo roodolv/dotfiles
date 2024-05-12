@@ -53,7 +53,41 @@ return {
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
-  -- TODO: Add telescope.nvim here
+  {
+    "nvim-telescope/telescope.nvim", tag = "0.1.6",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-frecency.nvim",
+      -- "danielfalk/smart-open.nvim",
+      -- "ThePrimeagen/refactoring.nvim",
+    },
+    cmd = "Telescope",
+    keys = {
+      { "<Leader>ff", function() require("telescope.builtin").find_files() end, desc = "List project files", mode = "n", silent = true },
+      { "<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep", mode = "n", silent = true },
+      { "<Leader>fl", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current buffer fuzzy find", mode = "n", silent = true },
+      { "<Leader>fb", function() require("telescope.builtin").buffers() end, desc = "List buffers", mode = "n", silent = true },
+      { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
+      { "<Leader>fh", function() require("telescope.builtin").help_tags() end, desc = "List help-tags", mode = "n", silent = true },
+      { "<Leader>fc", function() require("telescope.builtin").commands() end, desc = "List commands", mode = "n", silent = true },
+      { "<Leader>f:", function() require("telescope.builtin").command_history() end, desc = "List command history", mode = "n", silent = true },
+      { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
+      { "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      -- { "<leader>fR", "<Esc><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>", desc = "List refactoring methods" , mode = "v", silent = true }
+    },
+    config = function ()
+      require("config/telescope")
+    end,
+  },
+  -- {
+  --   "danielfalk/smart-open.nvim",
+  --   lazy = true,
+  --   branch = "0.2.x",
+  --   dependencies = {
+  --     "kkharji/sqlite.lua",
+  --   },
+  -- },
   {
     "folke/flash.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -105,7 +139,7 @@ return {
       -- },
     },
     init = function()
-      vim.keymap.set("n", "-", ":<C-u>Oil --float .<CR>", { silent = true })
+      vim.keymap.set("n", "-", ":<C-u>Oil .<CR>", { silent = true })
     end,
     config = function()
       require("config/oil")
@@ -156,6 +190,7 @@ return {
   -----------------------------------------------------------------
   {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
@@ -276,13 +311,6 @@ return {
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
-  {
-    "machakann/vim-sandwich",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/sandwich")
-    end,
-  },
   {
     "tpope/vim-repeat",
     event = { "BufReadPre", "BufNewFile" },
