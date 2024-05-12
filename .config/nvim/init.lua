@@ -1,8 +1,6 @@
 -----------------------------------------------------------------
 -- options
 -----------------------------------------------------------------
-local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
-
 -- encoding
 vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
@@ -70,9 +68,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
-if not is_windows then
-  vim.o.shellslash = true
-end
+-- vim.o.shellslash = true -- make it false for Git status
 vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
