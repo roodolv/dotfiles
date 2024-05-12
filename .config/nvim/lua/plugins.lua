@@ -54,7 +54,8 @@ return {
   -- search/navigation
   -----------------------------------------------------------------
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.6",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
@@ -217,7 +218,7 @@ return {
           vim.keymap.set('n', '<C-j>h', vim.lsp.buf.references, opts)
           vim.keymap.set('n', '<M-j>', vim.diagnostic.goto_next, opts)
           vim.keymap.set('n', '<M-k>', vim.diagnostic.goto_prev, opts)
-          vim.keymap.set('n', '<space>f', function()
+          vim.keymap.set('n', '<Leader>zf', function()
             vim.lsp.buf.format { async = true }
           end, opts)
         end,
