@@ -22,4 +22,5 @@ Telescope.setup({
 
 -- load extensions
 Telescope.load_extension("frecency")
+Telescope.load_extension("refactoring")
 -- Telescope.load_extension("smart_open")
