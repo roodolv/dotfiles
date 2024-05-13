@@ -46,7 +46,7 @@ vim.o.matchtime = 1
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
-vim.o.updatetime = 100
+vim.o.updatetime = 300
 vim.o.autoread = true
 -- vim.o.autowrite = true
 vim.o.undofile = true
@@ -220,6 +220,22 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "markdown",
   command = "setl expandtab tabstop=4 shiftwidth=4 softtabstop=4",
 })
+
+
+-----------------------------------------------------------------
+-- highlight
+-----------------------------------------------------------------
+-- LSP reference highlight
+vim.cmd([[
+highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
+highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
+highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
+augroup lsp_document_highlight
+  autocmd!
+  autocmd CursorHold,CursorHoldI * lua vim.lsp.buf.document_highlight()
+  autocmd CursorMoved,CursorMovedI * lua vim.lsp.buf.clear_references()
+augroup END
+]])
 
 
 -- calling lazy_nvim

@@ -211,18 +211,20 @@ return {
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
           local opts = { buffer = ev.buf }
           -- TODO: fix here
-          vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
-          vim.keymap.set('n', '<M-s>', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', '<C-j>i', vim.lsp.buf.implementation, opts)
-          vim.keymap.set({'n', 'i'}, '<C-p>', vim.lsp.buf.signature_help, opts)
-          vim.keymap.set({'n', 'i'}, '<S-M-r>', vim.lsp.buf.rename, opts)
-          vim.keymap.set({'n', 'i'}, '<M-CR>', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('n', '<C-j>h', vim.lsp.buf.references, opts)
-          vim.keymap.set('n', '<M-j>', vim.diagnostic.goto_next, opts)
-          vim.keymap.set('n', '<M-k>', vim.diagnostic.goto_prev, opts)
-          vim.keymap.set('n', '<Leader>zf', function()
+          vim.keymap.set('n', 'gf', function()
             vim.lsp.buf.format { async = true }
           end, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+          vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
+          vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
+          vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, opts)
+          vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, opts)
+          vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
+          vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
         end,
       })
     end,
