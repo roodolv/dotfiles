@@ -6,6 +6,8 @@ local packages = {
   "typescript-language-server",
   "lua-language-server",
   "stylua",
+  "prettier",
+  "biome",
 }
 -- https://github.com/williamboman/mason.nvim/issues/1133#issuecomment-1527888695
 registry.refresh(function ()

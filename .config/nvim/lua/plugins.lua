@@ -213,7 +213,7 @@ return {
     opts = {}
   },
   -----------------------------------------------------------------
-  -- snippets/completion
+  -- format/snippets/completion
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
@@ -254,6 +254,14 @@ return {
           ls.change_choice(1)
         end
       end, {silent = true})
+    end
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/none-ls")
     end
   },
   -- {
