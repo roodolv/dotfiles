@@ -26,7 +26,7 @@ return {
   {
     "simeji/winresizer",
     keys = {
-      { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true },
+      { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true, desc = "WinResizerStartResize" },
     },
     init = function()
       require("config/winresizer")
@@ -35,7 +35,7 @@ return {
   {
     "preservim/tagbar",
     keys = {
-      { "<Leader>gt", ":<C-u>TagbarToggle<CR>", mode = "n", silent = true },
+      { "<Leader>gt", ":<C-u>TagbarToggle<CR>", mode = "n", silent = true, desc = "TagbarToggle" },
     },
     config = function()
       require("config/tagbar")
@@ -44,7 +44,7 @@ return {
   {
     "mbbill/undotree",
     keys = {
-      { "<Leader>gu", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true },
+      { "<Leader>gu", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
     },
     config = function()
       require("config/undotree")
@@ -98,15 +98,6 @@ return {
   --   },
   -- },
   {
-    "folke/flash.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    ---@type Flash.Config
-    opts = {},
-    config = function ()
-      require("config/flash")
-    end
-  },
-  {
     "ThePrimeagen/harpoon",
     event = { "BufReadPre", "BufNewFile" },
     branch = "harpoon2",
@@ -116,6 +107,15 @@ return {
     },
     config = function ()
       require("config/harpoon")
+    end
+  },
+  {
+    "folke/flash.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    ---@type Flash.Config
+    opts = {},
+    config = function ()
+      require("config/flash")
     end
   },
   -----------------------------------------------------------------
@@ -181,6 +181,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function ()
       require("config/todo-comments")
+      vim.api.nvim_set_keymap('n', '<Leader>tt', ':<C-u>TodoTelescope<CR>', { noremap = true })
+      vim.api.nvim_set_keymap('n', '<Leader>tf', ':<C-u>TodoQuickFix<CR>', { noremap = true })
     end,
   },
   -----------------------------------------------------------------
@@ -202,27 +204,7 @@ return {
     "neovim/nvim-lspconfig",
     lazy = true,
     config = function ()
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-        callback = function(ev)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-          local opts = { buffer = ev.buf }
-          -- TODO: fix here
-          vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
-          vim.keymap.set('n', '<M-s>', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', '<C-j>i', vim.lsp.buf.implementation, opts)
-          vim.keymap.set({'n', 'i'}, '<C-p>', vim.lsp.buf.signature_help, opts)
-          vim.keymap.set({'n', 'i'}, '<S-M-r>', vim.lsp.buf.rename, opts)
-          vim.keymap.set({'n', 'i'}, '<M-CR>', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('n', '<C-j>h', vim.lsp.buf.references, opts)
-          vim.keymap.set('n', '<M-j>', vim.diagnostic.goto_next, opts)
-          vim.keymap.set('n', '<M-k>', vim.diagnostic.goto_prev, opts)
-          vim.keymap.set('n', '<Leader>zf', function()
-            vim.lsp.buf.format { async = true }
-          end, opts)
-        end,
-      })
+      require("config/lspconfig")
     end,
   },
   {
@@ -292,7 +274,7 @@ return {
     "rhysd/git-messenger.vim",
     cmd = "GitMessenger",
     keys = {
-      { "<Leader>gm", ":<C-u>GitMessenger<CR>", mode = "n", silent = true },
+      { "<Leader>gm", ":<C-u>GitMessenger<CR>", mode = "n", silent = true, desc = "GitMessenger" },
     },
     config = function()
       require("config/git-messenger")
@@ -348,7 +330,7 @@ return {
   {
     "bronson/vim-trailing-whitespace",
     keys = {
-      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode= "n", silent = true },
+      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode= "n", silent = true, desc = "FixWhitespace" },
     },
   },
 }
