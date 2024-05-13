@@ -26,7 +26,7 @@ return {
   {
     "simeji/winresizer",
     keys = {
-      { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true },
+      { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true, desc = "WinResizerStartResize" },
     },
     init = function()
       require("config/winresizer")
@@ -35,7 +35,7 @@ return {
   {
     "preservim/tagbar",
     keys = {
-      { "<Leader>gt", ":<C-u>TagbarToggle<CR>", mode = "n", silent = true },
+      { "<Leader>gt", ":<C-u>TagbarToggle<CR>", mode = "n", silent = true, desc = "TagbarToggle" },
     },
     config = function()
       require("config/tagbar")
@@ -44,7 +44,7 @@ return {
   {
     "mbbill/undotree",
     keys = {
-      { "<Leader>gu", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true },
+      { "<Leader>gu", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
     },
     config = function()
       require("config/undotree")
@@ -98,15 +98,6 @@ return {
   --   },
   -- },
   {
-    "folke/flash.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    ---@type Flash.Config
-    opts = {},
-    config = function ()
-      require("config/flash")
-    end
-  },
-  {
     "ThePrimeagen/harpoon",
     event = { "BufReadPre", "BufNewFile" },
     branch = "harpoon2",
@@ -116,6 +107,15 @@ return {
     },
     config = function ()
       require("config/harpoon")
+    end
+  },
+  {
+    "folke/flash.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    ---@type Flash.Config
+    opts = {},
+    config = function ()
+      require("config/flash")
     end
   },
   -----------------------------------------------------------------
@@ -294,7 +294,7 @@ return {
     "rhysd/git-messenger.vim",
     cmd = "GitMessenger",
     keys = {
-      { "<Leader>gm", ":<C-u>GitMessenger<CR>", mode = "n", silent = true },
+      { "<Leader>gm", ":<C-u>GitMessenger<CR>", mode = "n", silent = true, desc = "GitMessenger" },
     },
     config = function()
       require("config/git-messenger")
@@ -350,7 +350,7 @@ return {
   {
     "bronson/vim-trailing-whitespace",
     keys = {
-      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode= "n", silent = true },
+      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode= "n", silent = true, desc = "FixWhitespace" },
     },
   },
 }
