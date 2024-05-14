@@ -13,19 +13,21 @@ cmp.setup({
     -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-o>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<C-p>'] = cmp.mapping.abort(),
+    ['<C-l>'] = cmp.mapping.complete(),
     ['<F5>'] = cmp.mapping.complete(),
+    ['<C-q>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    -- disable keymap
+    -- ['<C-e>'] = cmp.mapping.abort(),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -75,6 +77,7 @@ local servers = {
   'rust_analyzer',
   'tsserver',
   'lua_ls',
+  'biome',
 }
 
 for _, lsp in ipairs(servers) do

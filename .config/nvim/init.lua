@@ -46,7 +46,7 @@ vim.o.matchtime = 1
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
-vim.o.updatetime = 100
+vim.o.updatetime = 300
 vim.o.autoread = true
 -- vim.o.autowrite = true
 vim.o.undofile = true
@@ -210,8 +210,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     command! Jq %!jq .
     command! -range Jql :<line1>,<line2>!jq .
     ]])
-    vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ':<C-u>Jq<CR>', { noremap = true })
-    vim.api.nvim_set_keymap('v', '<Leader><Leader>j', ':<C-u>Jql<CR>', { noremap = true })
+    vim.api.nvim_set_keymap("n", "<Leader><Leader>j", ":<C-u>Jq<CR>", { noremap = true })
+    vim.api.nvim_set_keymap("v", "<Leader><Leader>j", ":<C-u>Jql<CR>", { noremap = true })
   end,
 })
 
