@@ -210,8 +210,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     command! Jq %!jq .
     command! -range Jql :<line1>,<line2>!jq .
     ]])
-    vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ':<C-u>Jq<CR>', { noremap = true })
-    vim.api.nvim_set_keymap('v', '<Leader><Leader>j', ':<C-u>Jql<CR>', { noremap = true })
+    vim.api.nvim_set_keymap("n", "<Leader><Leader>j", ":<C-u>Jq<CR>", { noremap = true })
+    vim.api.nvim_set_keymap("v", "<Leader><Leader>j", ":<C-u>Jql<CR>", { noremap = true })
   end,
 })
 
@@ -220,22 +220,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "markdown",
   command = "setl expandtab tabstop=4 shiftwidth=4 softtabstop=4",
 })
-
-
------------------------------------------------------------------
--- highlight
------------------------------------------------------------------
--- LSP reference highlight
-vim.cmd([[
-highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
-highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
-highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
-augroup lsp_document_highlight
-  autocmd!
-  autocmd CursorHold,CursorHoldI * lua vim.lsp.buf.document_highlight()
-  autocmd CursorMoved,CursorMovedI * lua vim.lsp.buf.clear_references()
-augroup END
-]])
 
 
 -- calling lazy_nvim

@@ -55,6 +55,7 @@ return {
   -----------------------------------------------------------------
   {
     "nvim-telescope/telescope.nvim",
+    lazy = true,
     tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -62,20 +63,10 @@ return {
       "ThePrimeagen/refactoring.nvim",
       -- "danielfalk/smart-open.nvim",
     },
-    cmd = "Telescope",
     keys = {
-      { "<Leader>ff", function() require("telescope.builtin").find_files() end, desc = "List project files", mode = "n", silent = true },
-      { "<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep", mode = "n", silent = true },
-      { "<Leader>fl", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current buffer fuzzy find", mode = "n", silent = true },
-      { "<Leader>fb", function() require("telescope.builtin").buffers() end, desc = "List buffers", mode = "n", silent = true },
-      { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
-      { "<Leader>fh", function() require("telescope.builtin").help_tags() end, desc = "List help-tags", mode = "n", silent = true },
-      { "<Leader>fc", function() require("telescope.builtin").commands() end, desc = "List commands", mode = "n", silent = true },
-      { "<Leader>f:", function() require("telescope.builtin").command_history() end, desc = "List command history", mode = "n", silent = true },
-      { "<Leader>fm", function() require("telescope.builtin").keymaps() end, desc = "List keymaps", mode = "n", silent = true },
-      { "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
-      { "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, desc = "List refactoring methods" , mode = {"n", "x"}, silent = true }
-      -- { "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, desc = "List prioritized by frecency algorithm", mode = "n", silent = true },
+      "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
+      "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
+      "<Leader>fm", "<Leader>fp", "<Leader>rr",
     },
     config = function ()
       require("config/telescope")
@@ -99,11 +90,13 @@ return {
   -- },
   {
     "ThePrimeagen/harpoon",
-    event = { "BufReadPre", "BufNewFile" },
     branch = "harpoon2",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
+    },
+    keys = {
+      "<Leader>ht", "<Leader>hx",
     },
     config = function ()
       require("config/harpoon")
@@ -171,9 +164,6 @@ return {
   {
     "Yggdroot/indentLine",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/indentline")
-    end,
   },
   {
     "folke/todo-comments.nvim",
@@ -213,7 +203,7 @@ return {
     opts = {}
   },
   -----------------------------------------------------------------
-  -- snippets/completion
+  -- format/snippets/completion
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
@@ -254,6 +244,14 @@ return {
           ls.change_choice(1)
         end
       end, {silent = true})
+    end
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/none-ls")
     end
   },
   -- {
