@@ -1,5 +1,6 @@
 -- setup telescope
 local Telescope = require("telescope")
+local actions = require("telescope.actions")
 
 Telescope.setup({
   defaults = {
@@ -8,6 +9,25 @@ Telescope.setup({
     selection_caret = " ",
     file_ignore_patterns = { "node_modules" },
     path_display = { "truncate" },
+    -- custom layout
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = {
+        height = function (_, _, max_lines) return max_lines end,
+        preview_cutoff = 0,
+        preview_height = 10,
+      }
+    },
+    -- custom keymaps
+    mappings = {
+        i = { ["<Esc>"] = actions.close },
+        n = { ["q"] = actions.close },
+    },
+  },
+  pickers = {
+    git_files = {
+      git_command = {"git", "ls-files", "--exclude-standard", "--cached", "--others"},
+    },
   },
 })
 

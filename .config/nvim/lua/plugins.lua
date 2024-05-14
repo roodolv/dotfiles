@@ -66,7 +66,22 @@ return {
     keys = {
       { "<Leader>ff", function() require("telescope.builtin").find_files() end, desc = "List project files", mode = "n", silent = true },
       { "<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep", mode = "n", silent = true },
+      { "<Leader>fG", function() require("telescope.builtin").git_files() end, desc = "List git_files", mode = "n", silent = true },
       { "<Leader>fl", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current buffer fuzzy find", mode = "n", silent = true },
+      { "<Leader>fj", function()
+        local jumplist = vim.fn.getjumplist()
+        require("telescope.builtin").jumplist({
+          on_complete = {
+            function(self)
+              -- select current
+              local n = #jumplist[1]
+              if n ~= jumplist[2] then
+                self:move_selection(jumplist[2] - #jumplist[1] + 1)
+              end
+            end,
+          },
+        })
+      end, desc = "List jump-list", mode = "n", silent = true },
       { "<Leader>fb", function() require("telescope.builtin").buffers() end, desc = "List buffers", mode = "n", silent = true },
       { "<Leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "List recent files", mode = "n", silent = true },
       { "<Leader>fh", function() require("telescope.builtin").help_tags() end, desc = "List help-tags", mode = "n", silent = true },
