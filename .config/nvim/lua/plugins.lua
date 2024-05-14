@@ -55,6 +55,7 @@ return {
   -----------------------------------------------------------------
   {
     "nvim-telescope/telescope.nvim",
+    lazy = true,
     tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -163,9 +164,6 @@ return {
   {
     "Yggdroot/indentLine",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("config/indentline")
-    end,
   },
   {
     "folke/todo-comments.nvim",
