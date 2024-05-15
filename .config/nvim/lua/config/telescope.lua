@@ -30,7 +30,7 @@ Telescope.setup({
   },
 })
 
-vim.keymap.set("n", "<Leader>ff", ":<C-u>Telescope find_files<CR>", { silent = true, desc = "List project files" })
+vim.keymap.set("n", "<Leader>ff", ":<C-u>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git <CR>", { silent = true, desc = "List project files" })
 vim.keymap.set("n", "<Leader>fg", ":<C-u>Telescope live_grep<CR>", { silent = true, desc = "Live Grep" })
 vim.keymap.set("n", "<Leader>fG", ":<C-u>Telescope git_files<CR>", { silent = true, desc = "List git_files" })
 vim.keymap.set("n", "<Leader>fl", ":<C-u>Telescope current_buffer_fuzzy_find<CR>", { silent = true, desc = "Current buffer fuzzy find" })
@@ -54,7 +54,9 @@ vim.keymap.set("n", "<Leader>fr", ":<C-u>Telescope oldfiles<CR>", { silent = tru
 vim.keymap.set("n", "<Leader>fh", ":<C-u>Telescope help_tags<CR>", { silent = true, desc = "List help-tags" })
 vim.keymap.set("n", "<Leader>fc", ":<C-u>Telescope commands<CR>", { silent = true, desc = "List commands" })
 vim.keymap.set("n", "<Leader>f:", ":<C-u>Telescope command_history<CR>", { silent = true, desc = "List command history" })
-vim.keymap.set("n", "<Leader>fm", ":<C-u>Telescope keymaps<CR>", { silent = true, desc = "List keymaps" })
+vim.keymap.set("n", "<Leader>fq", ":<C-u>Telescope quickfix<CR>", { silent = true, desc = "List QuickFix" })
+vim.keymap.set("n", "<Leader>fm", ":<C-u>Telescope marks<CR>", { silent = true, desc = "List Marks" })
+vim.keymap.set("n", "<Leader>fk", ":<C-u>Telescope keymaps<CR>", { silent = true, desc = "List keymaps" })
 vim.keymap.set("n", "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, { silent = true, desc = "List prioritized by frecency" })
 vim.keymap.set("n", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, { silent = true, desc = "List refactoring methods" })
 vim.keymap.set("x", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, { silent = true, desc = "List refactoring methods" })
