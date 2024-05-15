@@ -1,5 +1,6 @@
 -- Set up nvim-cmp.
-local cmp = require'cmp'
+local cmp = require("cmp")
+local ls = require("luasnip")
 
 cmp.setup({
   snippet = {
@@ -9,8 +10,8 @@ cmp.setup({
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -26,12 +27,27 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    -- LuaSnip keymaps
+    ['<C-k><C-e>'] = cmp.mapping(function(fallback)
+      if ls.expand_or_jumpable() then
+        ls.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<C-k><C-c>'] = cmp.mapping(function(fallback)
+      if ls.choice_active() then
+        ls.change_choice(1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
     -- disable keymap
     -- ['<C-e>'] = cmp.mapping.abort(),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- For luasnip users.
+    { name = 'luasnip' },
     { name = 'buffer' },
     { name = 'path' },
     { name = 'cmdline' },
