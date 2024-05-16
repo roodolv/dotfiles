@@ -33,18 +33,9 @@ return {
     end,
   },
   {
-    "preservim/tagbar",
-    keys = {
-      { "<Leader>gt", ":<C-u>TagbarToggle<CR>", mode = "n", silent = true, desc = "TagbarToggle" },
-    },
-    config = function()
-      require("config/tagbar")
-    end,
-  },
-  {
     "mbbill/undotree",
     keys = {
-      { "<Leader>gu", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
+      { "<Leader>U", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
     },
     config = function()
       require("config/undotree")
@@ -56,7 +47,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     lazy = true,
-    tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
@@ -141,6 +131,7 @@ return {
   -----------------------------------------------------------------
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -243,6 +234,10 @@ return {
     "nvimtools/none-ls.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "jay-babu/mason-null-ls.nvim",
+      { "CKolkey/ts-node-action", dependencies = "nvim-treesitter" },
+    },
     config = function()
       require("config/none-ls")
     end
@@ -262,21 +257,18 @@ return {
   -- Git
   -----------------------------------------------------------------
   {
-    "rhysd/git-messenger.vim",
-    cmd = "GitMessenger",
-    keys = {
-      { "<Leader>gm", ":<C-u>GitMessenger<CR>", mode = "n", silent = true, desc = "GitMessenger" },
-    },
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("config/git-messenger")
+      require("config/gitsigns")
     end,
   },
   {
-    "airblade/vim-gitgutter",
+    "sindrets/diffview.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      vim.keymap.set("n", "]h", "<Plug>(GitGutterNextHunk)")
-      vim.keymap.set("n", "[h", "<Plug>(GitGutterPrevHunk)")
+      -- require("config/diffview")
+      require("diffview").setup()
     end,
   },
   -----------------------------------------------------------------
