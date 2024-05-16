@@ -130,10 +130,6 @@ vim.api.nvim_set_keymap('x', 'zj', '10j', { noremap = true })
 vim.api.nvim_set_keymap('x', 'zk', '10k', { noremap = true })
 vim.api.nvim_set_keymap('x', 'zh', '10h', { noremap = true })
 vim.api.nvim_set_keymap('x', 'zl', '10l', { noremap = true })
--- vim.api.nvim_set_keymap('n', '<C-n>', '20j', { noremap = true })
--- vim.api.nvim_set_keymap('n', '<C-p>', '20k', { noremap = true })
--- vim.api.nvim_set_keymap('v', '<C-n>', '20j', { noremap = true })
--- vim.api.nvim_set_keymap('v', '<C-p>', '20k', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true }) -- comment out for quickfix-list jump
 -- vim.api.nvim_set_keymap('n', '<Space>', 'i<Space><Esc>', { noremap = true })

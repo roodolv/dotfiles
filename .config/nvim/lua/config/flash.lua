@@ -1,4 +1,9 @@
 local Flash = require("flash")
+Flash.setup({
+  modes = {
+    search = { enabled = true },
+  }
+})
 
 -- Flash.jump
 vim.keymap.set({"n", "x", "o"}, "s", function()
