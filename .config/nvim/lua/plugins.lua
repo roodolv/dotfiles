@@ -243,6 +243,10 @@ return {
     "nvimtools/none-ls.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "jay-babu/mason-null-ls.nvim",
+      { "CKolkey/ts-node-action", dependencies = "nvim-treesitter" },
+    },
     config = function()
       require("config/none-ls")
     end

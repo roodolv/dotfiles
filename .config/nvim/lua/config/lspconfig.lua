@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = opts.buffer, desc = "LSP implementation" })
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = opts.buffer, desc = "LSP type_definition" })
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = opts.buffer, desc = "LSP rename" })
-    vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { buffer = opts.buffer, desc = "LSP code_action" })
+    -- vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { buffer = opts.buffer, desc = "LSP code_action" })
     vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, { buffer = opts.buffer, desc = "LSP signature_help" })
     vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, { buffer = opts.buffer, desc = "LSP goto_next" })
     vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, { buffer = opts.buffer, desc = "LSP goto_prev" })
