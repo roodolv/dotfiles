@@ -56,7 +56,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     lazy = true,
-    tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
@@ -141,6 +140,7 @@ return {
   -----------------------------------------------------------------
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
