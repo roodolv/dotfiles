@@ -37,6 +37,7 @@ vim.keymap.set("n", "ga", require("ts-node-action").node_action, { desc = "Trigg
 
 null_ls.setup({
   sources = {
+    -- REVIEW: check this
     -- null_ls.builtins.code_actions.gitsigns,
     null_ls.builtins.code_actions.ts_node_action,
     null_ls.builtins.formatting.biome.with({
@@ -62,10 +63,10 @@ null_ls.setup({
           vim.lsp.buf.format({
             async = false,
             -- prevent double-formatting
-            filter = function(c)
-              local disabled_format_clients = { "lua_ls", "tsserver" }
-              return not vim.tbl_contains(disabled_format_clients, c.name)
-            end,
+            -- filter = function(c)
+            --   local disabled_format_clients = { "lua_ls", "tsserver" }
+            --   return not vim.tbl_contains(disabled_format_clients, c.name)
+            -- end,
           })
         end,
       })

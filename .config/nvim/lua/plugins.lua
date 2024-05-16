@@ -33,18 +33,9 @@ return {
     end,
   },
   {
-    "preservim/tagbar",
-    keys = {
-      { "<Leader>gt", ":<C-u>TagbarToggle<CR>", mode = "n", silent = true, desc = "TagbarToggle" },
-    },
-    config = function()
-      require("config/tagbar")
-    end,
-  },
-  {
     "mbbill/undotree",
     keys = {
-      { "<Leader>gu", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
+      { "<Leader>U", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
     },
     config = function()
       require("config/undotree")
@@ -266,21 +257,10 @@ return {
   -- Git
   -----------------------------------------------------------------
   {
-    "rhysd/git-messenger.vim",
-    cmd = "GitMessenger",
-    keys = {
-      { "<Leader>gm", ":<C-u>GitMessenger<CR>", mode = "n", silent = true, desc = "GitMessenger" },
-    },
-    config = function()
-      require("config/git-messenger")
-    end,
-  },
-  {
-    "airblade/vim-gitgutter",
+    "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      vim.keymap.set("n", "]h", "<Plug>(GitGutterNextHunk)")
-      vim.keymap.set("n", "[h", "<Plug>(GitGutterPrevHunk)")
+      require("config/gitsigns")
     end,
   },
   -----------------------------------------------------------------
