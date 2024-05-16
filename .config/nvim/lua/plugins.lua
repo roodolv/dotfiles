@@ -263,6 +263,14 @@ return {
       require("config/gitsigns")
     end,
   },
+  {
+    "sindrets/diffview.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      -- require("config/diffview")
+      require("diffview").setup()
+    end,
+  },
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
