@@ -52,7 +52,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
       "ThePrimeagen/refactoring.nvim",
-      -- "danielfalk/smart-open.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
@@ -71,14 +70,6 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
   },
-  -- {
-  --   "danielfalk/smart-open.nvim",
-  --   lazy = true,
-  --   branch = "0.2.x",
-  --   dependencies = {
-  --     "kkharji/sqlite.lua",
-  --   },
-  -- },
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
