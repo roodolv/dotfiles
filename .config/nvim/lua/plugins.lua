@@ -160,6 +160,21 @@ return {
       vim.api.nvim_set_keymap('n', '<Leader>tf', ':<C-u>TodoQuickFix<CR>', { noremap = true })
     end,
   },
+  {
+    "mvllow/modes.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    tag = "v0.2.1",
+    config = function()
+      require("config/modes")
+    end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("colorizer").setup()
+    end,
+  },
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
