@@ -41,7 +41,6 @@ return {
       require("config/undotree")
     end,
   },
-  -- TODO: add here nvim-rooter
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
@@ -146,8 +145,10 @@ return {
     end,
   },
   {
-    "Yggdroot/indentLine",
+    "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    main = "ibl",
+    opts = {},
   },
   {
     "folke/todo-comments.nvim",
@@ -276,12 +277,18 @@ return {
     "tpope/vim-repeat",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "tpope/vim-surround",
       "tpope/vim-commentary",
       { "glts/vim-radical",
         dependencies = { "glts/vim-magnum" },
       },
     },
+  },
+  {
+    "kylechui/nvim-surround",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("nvim-surround").setup()
+    end
   },
   {
     "tommcdo/vim-exchange",
