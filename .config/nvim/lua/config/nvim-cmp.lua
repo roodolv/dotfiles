@@ -93,7 +93,7 @@ local servers = {
   'rust_analyzer',
   'tsserver',
   'lua_ls',
-  'biome',
+  -- 'biome',
 }
 
 for _, lsp in ipairs(servers) do

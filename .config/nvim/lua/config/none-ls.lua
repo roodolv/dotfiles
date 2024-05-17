@@ -9,26 +9,45 @@ local biome_support_filetypes = {
   "jsonc",
 }
 
+-- install packages for null-ls with mason.nvim
+require("mason-null-ls").setup({
+  ensure_installed = {
+    "astro-language-server",
+    "bash-language-server",
+    "biome",
+    "css-lsp",
+    "docker-compose-language-service",
+    "dockerfile-language-server",
+    "emmet-ls",
+    -- "gopls", -- NOTE: failed to install
+    "graphql-language-service-cli",
+    "html-lsp",
+    "json-lsp",
+    "lua-language-server",
+    "prettierd",
+    "tailwindcss-language-server",
+    "typescript-language-server",
+  },
+  automatic_installation = true,
+  handlers = {},
+})
+
+-- ts-node-action keymap
+vim.keymap.set("n", "<F10>", require("ts-node-action").node_action, { desc = "Trigger TreeSitter Node Action" })
+
 null_ls.setup({
   sources = {
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.code_actions.ts_node_action,
     null_ls.builtins.formatting.biome.with({
       only_local = "node_modules/.bin",
-      condition = function(utils)
-        -- use biome if biome does support filetype
-        if not vim.tbl_contains(biome_support_filetypes, vim.bo.filetype) then
-          return false
-        end
-        -- use biome if biome.json does not exist
-        return utils.root_has_file({ "biome.json" })
-      end,
     }),
-    null_ls.builtins.formatting.prettier.with({
+    null_ls.builtins.formatting.prettierd.with({
       condition = function(utils)
-        -- use prettier if biome does not support filetype
+        -- if biome doesn't support buf-filetype & root has prettier settings
         if not vim.tbl_contains(biome_support_filetypes, vim.bo.filetype) then
           return true
         end
-        -- use prettier if biome.json does not exist
         return not utils.root_has_file({ "biome.json" })
       end,
     }),
@@ -42,10 +61,11 @@ null_ls.setup({
         callback = function()
           vim.lsp.buf.format({
             async = false,
-            filter = function(c)
-              local disabled_format_clients = { "lua_ls", "tsserver" }
-              return not vim.tbl_contains(disabled_format_clients, c.name)
-            end,
+            -- prevent double-formatting
+            -- filter = function(c)
+            --   local disabled_format_clients = { "lua_ls", "tsserver" }
+            --   return not vim.tbl_contains(disabled_format_clients, c.name)
+            -- end,
           })
         end,
       })
