@@ -11,4 +11,5 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.keymap.set("n", "<Leader>L", ":<C-u>Lazy<CR>", { silent = true, desc = "Lazy show" })
 require("lazy").setup("plugins")

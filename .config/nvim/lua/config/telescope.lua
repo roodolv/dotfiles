@@ -16,7 +16,8 @@ telescope.setup({
     layout_strategy = "vertical",
     layout_config = {
       vertical = {
-        height = function (_, _, max_lines) return max_lines end,
+        -- height = function (_, _, max_lines) return max_lines end,
+        height = 0.8,
         preview_cutoff = 0,
         preview_height = 10,
         prompt_position = "top",
@@ -64,18 +65,7 @@ vim.keymap.set("n", "<Leader>fk", ":<C-u>Telescope keymaps<CR>", { silent = true
 vim.keymap.set("n", "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end, { silent = true, desc = "List prioritized by frecency" })
 vim.keymap.set("n", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, { silent = true, desc = "List refactoring methods" })
 vim.keymap.set("x", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end, { silent = true, desc = "List refactoring methods" })
--- vim.keymap.set("n", "<Leader>fs", function() require("telescope").extensions.smart_open.smart_open() end, { silent = true, desc = "List smart-open" })
-
--- setup sqlite3 path for smart-open.nvim
--- local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
--- if is_windows then
---   local home = os.getenv("USERPROFILE")
---   vim.g.sqlite_clib_path = home .. "\\lib\\sqlite3.dll"
--- else
---   vim.g.sqlite_clib_path = "/usr/lib/x86_64-linux-gnu/libsqlite3.so"
--- end
 
 -- load extensions
 telescope.load_extension("frecency")
 telescope.load_extension("refactoring")
--- telescope.load_extension("smart_open")

@@ -33,12 +33,11 @@ require("mason-null-ls").setup({
 })
 
 -- ts-node-action keymap
-vim.keymap.set("n", "ga", require("ts-node-action").node_action, { desc = "Trigger TreeSitter Node Action" })
+vim.keymap.set("n", "<F10>", require("ts-node-action").node_action, { desc = "Trigger TreeSitter Node Action" })
 
 null_ls.setup({
   sources = {
-    -- REVIEW: check this
-    -- null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.code_actions.gitsigns,
     null_ls.builtins.code_actions.ts_node_action,
     null_ls.builtins.formatting.biome.with({
       only_local = "node_modules/.bin",

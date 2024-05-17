@@ -38,16 +38,7 @@ vim.keymap.set({"n", "x", "o"}, "<Leader>s", function()
   })
 end, {silent = true, desc = "Flash.jump(diagnostics)"})
 
--- Flash.jump(jump to a line)
-vim.keymap.set({"n", "x", "o"}, "<Leader>l", function()
-  require("flash").jump({
-    search = { mode = "search", max_length = 0 },
-    label = { after = { 0, 0 } },
-    pattern = "^"
-  })
-end, {silent = true, desc = "Flash.jump(line)"})
-
-vim.keymap.set({"n", "x", "o"}, "S", function() Flash.treesitter() end, {silent = true, desc = "Flash.treesitter"})
-vim.keymap.set({"o"}, "r", function() Flash.remote() end, {silent = true, desc = "Flash.remote"})
-vim.keymap.set({"o", "x"}, "R", function() Flash.treesitter_search() end, {silent = true, desc = "Flash.treesitter_search"})
+-- vim.keymap.set({"n", "x", "o"}, "S", function() Flash.treesitter() end, {silent = true, desc = "Flash.treesitter"})
+-- vim.keymap.set({"o"}, "r", function() Flash.remote() end, {silent = true, desc = "Flash.remote"})
+-- vim.keymap.set({"o", "x"}, "R", function() Flash.treesitter_search() end, {silent = true, desc = "Flash.treesitter_search"})
 vim.keymap.set({"c"}, "<C-s>", function() Flash.toggle() end, {silent = true, desc = "Flash.toggle"})
