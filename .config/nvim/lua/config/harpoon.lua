@@ -21,8 +21,8 @@ end
 
 -- keymaps
 vim.keymap.set("n", "<Leader>hx", function() harpoon:list():add() end, {desc = "Harpoon add"})
-vim.keymap.set("n", "<Leader>hn", function() harpoon:list():next() end, {desc = "Harpoon next"})
-vim.keymap.set("n", "<Leader>hp", function() harpoon:list():prev() end, {desc = "Harpoon prev"})
+vim.keymap.set("n", "<C-Down>", function() harpoon:list():next() end, {desc = "Harpoon next"})
+vim.keymap.set("n", "<C-Up>", function() harpoon:list():prev() end, {desc = "Harpoon prev"})
 vim.keymap.set("n", "<Leader>h1", function() harpoon:list():select(1) end, {desc = "Harpoon select(1)"})
 vim.keymap.set("n", "<Leader>h2", function() harpoon:list():select(2) end, {desc = "Harpoon select(2)"})
 vim.keymap.set("n", "<Leader>h3", function() harpoon:list():select(3) end, {desc = "Harpoon select(3)"})

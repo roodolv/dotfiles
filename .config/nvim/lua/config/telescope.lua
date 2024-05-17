@@ -16,7 +16,8 @@ telescope.setup({
     layout_strategy = "vertical",
     layout_config = {
       vertical = {
-        height = function (_, _, max_lines) return max_lines end,
+        -- height = function (_, _, max_lines) return max_lines end,
+        height = 0.8,
         preview_cutoff = 0,
         preview_height = 10,
         prompt_position = "top",

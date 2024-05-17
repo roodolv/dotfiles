@@ -41,6 +41,7 @@ return {
       require("config/undotree")
     end,
   },
+  -- TODO: add here nvim-rooter
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
@@ -86,7 +87,8 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      "<Leader>ht", "<Leader>hx",
+      "<Leader>ht", "<Leader>hx", "<C-Up>", "<C-Down>",
+      "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
     config = function ()
       require("config/harpoon")
@@ -225,7 +227,6 @@ return {
     config = function ()
       require("luasnip.loaders.from_vscode").lazy_load()
       local ls = require("luasnip")
-      -- TODO: fix here
       vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
       vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
     end
@@ -265,7 +266,13 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      { "<Leader>do", ":<C-u>DiffviewOpen<CR>", mode = "n", silent = true, desc = "DiffviewOpen" },
+      { "<Leader>dc", ":<C-u>DiffviewClose<CR>", mode = "n", silent = true, desc = "DiffviewClose" },
+      { "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", mode = "n", silent = true, desc = "DiffviewRefresh" },
+    },
     config = function()
       -- require("config/diffview")
       require("diffview").setup()
