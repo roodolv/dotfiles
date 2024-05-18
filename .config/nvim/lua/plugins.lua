@@ -2,13 +2,22 @@ return {
   -----------------------------------------------------------------
   -- theme
   -----------------------------------------------------------------
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme("tokyonight")
+  --   end
+  -- },
   {
-    "folke/tokyonight.nvim",
+    "sainnhe/everforest",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight]])
-    end
+      vim.g.everforest_enable_italic = true
+      vim.cmd.colorscheme("everforest")
+    end,
   },
   -----------------------------------------------------------------
   -- startup
