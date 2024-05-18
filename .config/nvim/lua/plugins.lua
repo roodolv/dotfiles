@@ -93,6 +93,18 @@ return {
       require("config/flash")
     end
   },
+  {
+    "chentoast/marks.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function ()
+      require("marks").setup({
+        mappings = {
+          next = "]m",
+          prev = "[m",
+        },
+      })
+    end,
+  },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------

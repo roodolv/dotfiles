@@ -109,7 +109,12 @@ vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F12>', ':<C-u>silent ! start %:h<CR>', { noremap = true, silent = true })
+
+-- file/dir path
+vim.api.nvim_set_keymap('n', '<F12>', ':<C-u>silent ! start %:h<CR>', { noremap = true, silent = true, desc = 'Open buffer flle in explorer' })
+vim.api.nvim_set_keymap('n', 'gyp', ':<C-u>let @* = expand("%:p")<CR>', { noremap = true, silent = true, desc = "Copy buffer file's file path" })
+vim.api.nvim_set_keymap('n', 'gyP', ':<C-u>let @* = expand("%:h")<CR>', { noremap = true, silent = true, desc = "Copy buffer file's parent dir" })
+vim.api.nvim_set_keymap('n', 'gyn', ':<C-u>let @* = expand("%:t")<CR>', { noremap = true, silent = true, desc = "Copy buffer file's filename" })
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true })
