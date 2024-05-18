@@ -66,7 +66,7 @@ return {
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
       "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>fp", "<Leader>rr"
     },
-    config = function ()
+    config = function()
       require("config/telescope")
     end,
   },
@@ -89,7 +89,7 @@ return {
       "<Leader>ht", "<Leader>hx", "<C-Up>", "<C-Down>",
       "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
-    config = function ()
+    config = function()
       require("config/harpoon")
     end
   },
@@ -98,14 +98,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     ---@type Flash.Config
     opts = {},
-    config = function ()
+    config = function()
       require("config/flash")
     end
   },
   {
     "chentoast/marks.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function ()
+    config = function()
       require("marks").setup({
         mappings = {
           next = "]m",
@@ -151,7 +151,8 @@ return {
       "RRethy/nvim-treesitter-endwise",
       "windwp/nvim-ts-autotag",
       "JoosepAlviste/nvim-ts-context-commentstring",
-      { "andymass/vim-matchup",
+      {
+        "andymass/vim-matchup",
         keys = { "%" },
       },
     },
@@ -175,7 +176,7 @@ return {
     "folke/todo-comments.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function ()
+    config = function()
       require("config/todo-comments")
       vim.api.nvim_set_keymap('n', '<Leader>tt', ':<C-u>TodoTelescope<CR>', { noremap = true })
       vim.api.nvim_set_keymap('n', '<Leader>tf', ':<C-u>TodoQuickFix<CR>', { noremap = true })
@@ -214,7 +215,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     lazy = true,
-    config = function ()
+    config = function()
       require("config/lspconfig")
     end,
   },
@@ -224,7 +225,7 @@ return {
     opts = {}
   },
   -----------------------------------------------------------------
-  -- format/snippets/completion
+  -- completion/snippets/format
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
@@ -248,28 +249,26 @@ return {
       require("config/nvim-cmp")
     end
   },
-  { "L3MON4D3/LuaSnip",
+  {
+    "L3MON4D3/LuaSnip",
     lazy = true,
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "make install_jsregexp",
-    config = function ()
+    config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
       local ls = require("luasnip")
-      vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
-      vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
+      vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
     end
   },
   {
-    "nvimtools/none-ls.nvim",
+    'stevearc/conform.nvim',
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "jay-babu/mason-null-ls.nvim",
-      { "CKolkey/ts-node-action", dependencies = "nvim-treesitter" },
-    },
+    opts = {},
     config = function()
-      require("config/none-ls")
-    end
+      require("config/conform")
+    end,
   },
   -- {
   --   "Exafunction/codeium.nvim",
@@ -297,8 +296,8 @@ return {
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<Leader>do", ":<C-u>DiffviewOpen<CR>", mode = "n", silent = true, desc = "DiffviewOpen" },
-      { "<Leader>dc", ":<C-u>DiffviewClose<CR>", mode = "n", silent = true, desc = "DiffviewClose" },
+      { "<Leader>do", ":<C-u>DiffviewOpen<CR>",    mode = "n", silent = true, desc = "DiffviewOpen" },
+      { "<Leader>dc", ":<C-u>DiffviewClose<CR>",   mode = "n", silent = true, desc = "DiffviewClose" },
       { "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", mode = "n", silent = true, desc = "DiffviewRefresh" },
     },
     config = function()
@@ -314,7 +313,8 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "tpope/vim-commentary",
-      { "glts/vim-radical",
+      {
+        "glts/vim-radical",
         dependencies = { "glts/vim-magnum" },
       },
     },
@@ -339,10 +339,11 @@ return {
       { "'", "<Plug>(operator-replace)", silent = true },
     },
   },
-  { "haya14busa/vim-asterisk",
+  {
+    "haya14busa/vim-asterisk",
     keys = {
-      { "*", "<Plug>(asterisk-z*)<Plug>(is-nohl-1)" },
-      { "#", "<Plug>(asterisk-z#)<Plug>(is-nohl-1)" },
+      { "*",  "<Plug>(asterisk-z*)<Plug>(is-nohl-1)" },
+      { "#",  "<Plug>(asterisk-z#)<Plug>(is-nohl-1)" },
       { "g*", "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)" },
       { "g#", "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)" },
     },
@@ -354,7 +355,7 @@ return {
   {
     "bronson/vim-trailing-whitespace",
     keys = {
-      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode= "n", silent = true, desc = "FixWhitespace" },
+      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
     },
   },
 }
