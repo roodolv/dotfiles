@@ -21,8 +21,8 @@ vim.g.startify_lists = {
 
 -- Bookmark setting
 vim.g.startify_bookmarks = {
-  "~/.config/nvim/init.lua",
-  "~/.config/nvim/lua/plugins.lua",
+  -- "~/.config/nvim/init.lua",
+  -- "~/.config/nvim/lua/plugins.lua",
 }
 
 -- Welcome page's message

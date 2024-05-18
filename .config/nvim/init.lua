@@ -133,26 +133,9 @@ vim.api.nvim_set_keymap('x', 'zh', '10h', { noremap = true })
 vim.api.nvim_set_keymap('x', 'zl', '10l', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<CR>', 'o<Esc>', { noremap = true }) -- comment out for quickfix-list jump
--- vim.api.nvim_set_keymap('n', '<Space>', 'i<Space><Esc>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', 'yib', 'yi(', { noremap = true })
-vim.api.nvim_set_keymap('n', 'cib', 'ci(', { noremap = true })
-vim.api.nvim_set_keymap('n', 'dib', 'di(', { noremap = true })
-vim.api.nvim_set_keymap('n', 'yab', 'ya(', { noremap = true })
-vim.api.nvim_set_keymap('n', 'cab', 'ca(', { noremap = true })
-vim.api.nvim_set_keymap('n', 'dab', 'da(', { noremap = true })
-vim.api.nvim_set_keymap('n', 'yiB', 'yi{', { noremap = true })
-vim.api.nvim_set_keymap('n', 'ciB', 'ci{', { noremap = true })
-vim.api.nvim_set_keymap('n', 'diB', 'di{', { noremap = true })
-vim.api.nvim_set_keymap('n', 'yaB', 'ya{', { noremap = true })
-vim.api.nvim_set_keymap('n', 'caB', 'ca{', { noremap = true })
-vim.api.nvim_set_keymap('n', 'daB', 'da{', { noremap = true })
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
-
-vim.api.nvim_set_keymap('v', 'y', 'y`]', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'p', 'p`]', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'p', 'p`]', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v',  '*', '"zy:let @/ = @z<CR>n', { noremap = true })
+vim.api.nvim_set_keymap('v', '*', '"zy:let @/ = @z<CR>n', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
