@@ -10,8 +10,8 @@ conform.setup({
     -- Use a sub-list { { "formatter-a", "formatter-b" } } to run only the first available formatter
     lua = { "stylua" },
     rust = { "rustfmt" },
-    typescript = { { "biome", "prettierd" } },
     javascript = { { "biome", "prettierd" } },
+    typescript = { { "biome", "prettierd" } },
     javascriptreact = { { "biome", "prettierd" } },
     typescriptreact = { { "biome", "prettierd" } },
     json = { { "biome", "prettierd" } },
