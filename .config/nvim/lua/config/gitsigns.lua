@@ -77,7 +77,7 @@ gitsigns.setup {
     vim.keymap.set('n', '<leader>ghS', gitsigns.stage_buffer, { desc = "gitsigns stage_buffer" })
     vim.keymap.set('n', '<leader>ghu', gitsigns.undo_stage_hunk, { desc = "gitsigns undo_stage_hunk" })
     vim.keymap.set('n', '<leader>ghR', gitsigns.reset_buffer, { desc = "gitsigns reset_buffer" })
-    vim.keymap.set('n', '<leader>gp', gitsigns.preview_hunk, { desc = "gitsigns preview_hunk" })
+    vim.keymap.set('n', '<leader>ghp', gitsigns.preview_hunk, { desc = "gitsigns preview_hunk" })
     vim.keymap.set('n', '<leader>gb', function() gitsigns.blame_line{full=true} end, { desc = "gitsigns blame_line" })
     vim.keymap.set('n', '<leader>gB', gitsigns.toggle_current_line_blame, { desc = "gitsigns toggle_current_line_blame" })
     vim.keymap.set('n', '<leader>gd', gitsigns.diffthis, { desc = "gitsigns diffthis" })

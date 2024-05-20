@@ -1,13 +1,15 @@
 require("modes").setup({
   colors = {
-    copy   = "#f5c359",
-    delete = "#c75c6a",
+    copy   = "#ffc300",
+    -- delete = "#c75c6a",
+    delete = "#ff0000",
     insert = "#78ccc5",
-    visual = "#9745be",
+    -- visual = "#9745be",
+    visual = "#efefef",
   },
   line_opacity = 0.2,
   set_cursor = true,
   set_cursorline = true,
-  set_number = true,
+  set_number = false,
   ignore_filetypes = { "NvimTree", "TelescopePrompt" }
 })

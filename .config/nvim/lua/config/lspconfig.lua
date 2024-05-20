@@ -15,7 +15,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = opts.buffer, desc = "LSP rename" })
     vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { buffer = opts.buffer, desc = "LSP code_action" })
     vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, { buffer = opts.buffer, desc = "LSP signature_help" })
-    vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, { buffer = opts.buffer, desc = "LSP goto_next" })
-    vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, { buffer = opts.buffer, desc = "LSP goto_prev" })
+    vim.keymap.set('n', 'gQ', vim.diagnostic.setqflist, { buffer = opts.buffer, desc = "LSP send diag to QuickFix" })
+    vim.keymap.set('n', 'gL', vim.diagnostic.setloclist, { buffer = opts.buffer, desc = "LSP send diag to loclist" })
+    vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, { buffer = opts.buffer, desc = "LSP goto_next diag" })
+    vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, { buffer = opts.buffer, desc = "LSP goto_prev diag" })
   end,
 })
