@@ -44,10 +44,14 @@ opts.desc = "Lspsaga Show hover docs"
 keymap.set("n", "gK", ":<C-u>Lspsaga hover_doc<CR>", opts)
 opts.desc = "Lspsaga Show code actions"
 keymap.set("n", "gA", ":<C-u>Lspsaga code_action<CR>", opts)
-opts.desc = "Lspsaga Show definitions"
+opts.desc = "Lspsaga Peek definitions"
 keymap.set("n", "gd", ":<C-u>Lspsaga peek_definition<CR>", opts)
-opts.desc = "Lspsaga Show type definitions"
+opts.desc = "Lspsaga Peek type definitions"
 keymap.set("n", "gD", ":<C-u>Lspsaga peek_type_definition<CR>", opts)
+opts.desc = "Lspsaga Go to definitions"
+keymap.set("n", "<Leader>gd", ":<C-u>Lspsaga goto_definition<CR>", opts)
+opts.desc = "Lspsaga Go to type definitions"
+keymap.set("n", "<Leader>gD", ":<C-u>Lspsaga goto_type_definition<CR>", opts)
 opts.desc = "Lspsaga Rename"
 keymap.set("n", "<F2>", ":<C-u>Lspsaga rename<CR>", opts)
 opts.desc = "Lspsaga Go to next diagnostic information"

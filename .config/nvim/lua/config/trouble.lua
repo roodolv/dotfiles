@@ -41,11 +41,7 @@ trouble.setup({
   -- },
 })
 
--- NOTE: fix here
--- vim.keymap.set("n", "<Leader>xd", ":<C-u>Trouble lsp_definitions toggle focus=false win.position=right<CR>", { desc = "LSP Definitions (Trouble)", })
--- vim.keymap.set("n", "<Leader>xD", ":<C-u>Trouble lsp_type_definitions toggle focus=false<CR>", { desc = "LSP Type Definitions (Trouble)", })
 vim.keymap.set("n", "<Leader>xr", ":<C-u>Trouble lsp_references toggle focus=false<CR>", { desc = "LSP References (Trouble)", })
-vim.keymap.set("n", "<Leader>xi", ":<C-u>Trouble lsp_implementations toggle focus=false<CR>", { desc = "LSP Implementations (Trouble)", })
 vim.keymap.set("n", "<Leader>xx", ":<C-u>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)", })
 vim.keymap.set("n", "<Leader>xX", ":<C-u>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer Diagnostics (Trouble)", })
 
