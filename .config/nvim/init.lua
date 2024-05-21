@@ -69,7 +69,7 @@ vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
 -- vim.o.shellslash = true -- make it false for Git status
-vim.opt.clipboard:append{'unnamed', 'unnamedplus'}
+vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
 vim.o.laststatus = 2
@@ -77,6 +77,7 @@ vim.o.ttimeout = true
 vim.o.ttimeoutlen = 50
 vim.o.visualbell = true
 vim.o.mouse = 'a'
+vim.o.termguicolors = true
 
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
@@ -97,7 +98,7 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silen
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = true, silent = true })
 
--- grep/vimgrep/quickfix
+-- grep/vimgrep/quickfix/loclist
 vim.api.nvim_set_keymap('n', '<Leader>G', ':<C-u>grep<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
@@ -107,14 +108,22 @@ vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-o>', ':<C-u>lw<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-c>', ':<C-u>lcl<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-t><C-t>', ':<C-u>tabe<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-w><C-w>', ':<C-u>tabc<CR>', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
 -- file/dir path
-vim.api.nvim_set_keymap('n', '<F12>', ':<C-u>silent ! start %:h<CR>', { noremap = true, silent = true, desc = 'Open buffer flle in explorer' })
-vim.api.nvim_set_keymap('n', 'gyp', ':<C-u>let @* = expand("%:p")<CR>', { noremap = true, silent = true, desc = "Copy buffer file's file path" })
-vim.api.nvim_set_keymap('n', 'gyP', ':<C-u>let @* = expand("%:h")<CR>', { noremap = true, silent = true, desc = "Copy buffer file's parent dir" })
-vim.api.nvim_set_keymap('n', 'gyn', ':<C-u>let @* = expand("%:t")<CR>', { noremap = true, silent = true, desc = "Copy buffer file's filename" })
+vim.api.nvim_set_keymap('n', '<F12>', ':<C-u>silent ! start %:h<CR>',
+  { noremap = true, silent = true, desc = 'Open buffer flle in explorer' })
+vim.api.nvim_set_keymap('n', 'gyp', ':<C-u>let @* = expand("%:p")<CR>',
+  { noremap = true, silent = true, desc = "Copy buffer file's file path" })
+vim.api.nvim_set_keymap('n', 'gyP', ':<C-u>let @* = expand("%:h")<CR>',
+  { noremap = true, silent = true, desc = "Copy buffer file's parent dir" })
+vim.api.nvim_set_keymap('n', 'gyn', ':<C-u>let @* = expand("%:t")<CR>',
+  { noremap = true, silent = true, desc = "Copy buffer file's filename" })
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true })
@@ -124,7 +133,7 @@ vim.api.nvim_set_keymap('n', 'gj', 'j', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gk', 'k', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohl<CR><Esc>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-c><C-c>', ':nohl<CR><Esc>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-c><C-c>', ':nohl<CR><Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true })
 
@@ -168,7 +177,7 @@ vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
 -----------------------------------------------------------------
 -- C/C++/Java
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  pattern = {"*.c", "*.cpp", "*.java"},
+  pattern = { "*.c", "*.cpp", "*.java" },
   -- jumping between ';' and '='
   command = "set matchpairs+==:;",
 })
@@ -177,14 +186,16 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 vim.g.rustfmt_autosave = 1
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "rust",
-  command = "setl cinwords=for,if,else,while,loop,impl,mod,unsafe,trait,struct,enum,fn,extern,macro expandtab tabstop=4 shiftwidth=4 softtabstop=4",
+  command =
+  "setl cinwords=for,if,else,while,loop,impl,mod,unsafe,trait,struct,enum,fn,extern,macro expandtab tabstop=4 shiftwidth=4 softtabstop=4",
 })
 
 -- Python
 vim.g.python3_host_prog = vim.fn.expand("PYTHON")
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "python",
-  command = "setl cinwords=if,elif,else,for,while,try,except,finally,def,class expandtab tabstop=4 shiftwidth=4 softtabstop=4",
+  command =
+  "setl cinwords=if,elif,else,for,while,try,except,finally,def,class expandtab tabstop=4 shiftwidth=4 softtabstop=4",
 })
 
 -- JSON
