@@ -44,6 +44,16 @@ telescope.setup({
       git_command = { "git", "ls-files", "--exclude-standard", "--cached", "--others" },
     },
   },
+  extensions = {
+    aerial = {
+      -- Display symbols as <root>.<parent>.<symbol>
+      show_nesting = {
+        ["_"] = false, -- This key will be the default
+        json = true,
+        yaml = true,
+      },
+    },
+  },
 })
 
 vim.keymap.set("n", "<Leader>ff", ":<C-u>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git<CR>",
@@ -83,7 +93,10 @@ vim.keymap.set("n", "<Leader>rr", function() require("telescope").extensions.ref
   { silent = true, desc = "List refactoring methods" })
 vim.keymap.set("x", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end,
   { silent = true, desc = "List refactoring methods" })
+vim.keymap.set("n", "<Leader>fs", function() require("telescope").extensions.aerial.aerial() end,
+  { silent = true, desc = "List of symbols by aerial" })
 
 -- load extensions
 telescope.load_extension("frecency")
 telescope.load_extension("refactoring")
+telescope.load_extension("aerial")

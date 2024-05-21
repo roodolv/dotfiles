@@ -60,13 +60,12 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
       "ThePrimeagen/refactoring.nvim",
-      "folke/trouble.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>hh",
-      "<Leader>fp", "<Leader>rr",
+      "<Leader>fp", "<Leader>rr", "<Leader>fs",
     },
     config = function()
       require("config/telescope")
