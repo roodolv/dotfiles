@@ -80,8 +80,8 @@ gitsigns.setup {
     vim.keymap.set('n', '<leader>ghp', gitsigns.preview_hunk, { desc = "gitsigns preview_hunk" })
     vim.keymap.set('n', '<leader>gb', function() gitsigns.blame_line{full=true} end, { desc = "gitsigns blame_line" })
     vim.keymap.set('n', '<leader>gB', gitsigns.toggle_current_line_blame, { desc = "gitsigns toggle_current_line_blame" })
-    vim.keymap.set('n', '<leader>gd', gitsigns.diffthis, { desc = "gitsigns diffthis" })
-    vim.keymap.set('n', '<leader>gD', function() gitsigns.diffthis('~') end, { desc = "gitsigns diffthis to HEAD~" })
+    -- vim.keymap.set('n', '<leader>gd', gitsigns.diffthis, { desc = "gitsigns diffthis" })
+    -- vim.keymap.set('n', '<leader>gD', function() gitsigns.diffthis('~') end, { desc = "gitsigns diffthis to HEAD~" })
     vim.keymap.set('n', '<leader>g-', gitsigns.toggle_deleted, { desc = "gitsigns toggle_deleted" })
 
     -- Text object

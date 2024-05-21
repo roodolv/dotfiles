@@ -110,6 +110,8 @@ vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-o>', ':<C-u>lw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-c>', ':<C-u>lcl<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-t><C-t>', ':<C-u>tabe<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-w><C-w>', ':<C-u>tabc<CR>', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 

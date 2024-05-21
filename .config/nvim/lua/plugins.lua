@@ -60,23 +60,17 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
       "ThePrimeagen/refactoring.nvim",
+      "folke/trouble.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
-      "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>fp", "<Leader>rr"
+      "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>hh",
+      "<Leader>fp", "<Leader>rr",
     },
     config = function()
       require("config/telescope")
     end,
-  },
-  {
-    "ThePrimeagen/refactoring.nvim",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
   },
   {
     "ThePrimeagen/harpoon",
@@ -179,7 +173,7 @@ return {
     config = function()
       require("config/todo-comments")
       vim.api.nvim_set_keymap('n', '<Leader>tt', ':<C-u>TodoTelescope<CR>', { noremap = true })
-      vim.api.nvim_set_keymap('n', '<Leader>tf', ':<C-u>TodoQuickFix<CR>', { noremap = true })
+      vim.api.nvim_set_keymap('n', '<Leader>tQ', ':<C-u>TodoQuickFix<CR>', { noremap = true })
     end,
   },
   {
@@ -195,6 +189,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("colorizer").setup()
+    end,
+  },
+  {
+    "RRethy/vim-illuminate",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/illuminate")
     end,
   },
   -----------------------------------------------------------------
@@ -218,6 +219,52 @@ return {
     config = function()
       require("config/lspconfig")
     end,
+  },
+  {
+    "folke/trouble.nvim",
+    lazy = true,
+    branch = "dev", -- Trouble v3
+    dependencies = "nvim-tree/nvim-web-devicons",
+    cmd = { "Trouble" },
+    config = function()
+      require("config/trouble")
+    end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("config/lspsaga")
+    end,
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    lazy = true,
+    event = "LspAttach",
+    config = function()
+      require("config/actions-preview")
+    end,
+  },
+  {
+    "CKolkey/ts-node-action",
+    lazy = true,
+    event = "LspAttach",
+    dependencies = "nvim-treesitter",
+    config = function()
+      vim.keymap.set("n", "<F10>", require("ts-node-action").node_action, { desc = "TreeSitter node-action" })
+    end,
+  },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    lazy = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
   {
     "j-hui/fidget.nvim",
@@ -305,6 +352,10 @@ return {
       require("diffview").setup()
     end,
   },
+  {
+    "tpope/vim-fugitive",
+    event = { "BufReadPre", "BufNewFile" },
+  },
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
@@ -318,6 +369,18 @@ return {
         dependencies = { "glts/vim-magnum" },
       },
     },
+  },
+  {
+    "tpope/vim-abolish",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "tpope/vim-eunuch",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "tpope/vim-sleuth",
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "kylechui/nvim-surround",
