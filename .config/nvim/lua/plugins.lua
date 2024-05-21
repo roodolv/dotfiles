@@ -231,6 +231,19 @@ return {
     end,
   },
   {
+    "stevearc/aerial.nvim",
+    lazy = true,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    keys = "<Leader>A",
+    opts = {},
+    config = function()
+      require("config/aerial")
+    end,
+  },
+  {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
     dependencies = {
