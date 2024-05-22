@@ -51,6 +51,7 @@ cmp.setup({
     { name = 'path' },
     { name = 'cmdline' },
     { name = 'nvim_lua' },
+    { name = 'crates' },
   })
 })
 

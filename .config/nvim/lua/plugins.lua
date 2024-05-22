@@ -344,6 +344,15 @@ return {
       require("config/rustacean")
     end,
   },
+  {
+    "saecki/crates.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    tag = "stable",
+    config = function()
+      require("config/crates")
+    end,
+  },
   -----------------------------------------------------------------
   -- Git
   -----------------------------------------------------------------

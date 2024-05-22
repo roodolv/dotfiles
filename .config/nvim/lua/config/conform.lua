@@ -14,8 +14,8 @@ conform.setup({
     typescript = { { "biome", "prettierd" } },
     javascriptreact = { { "biome", "prettierd" } },
     typescriptreact = { { "biome", "prettierd" } },
-    json = { { "biome", "prettierd" } },
-    jsonc = { { "biome", "prettierd" } },
+    json = { { "prettierd", "biome" } },
+    jsonc = { { "prettierd", "biome" } },
     -- python = { { "ruff_fix", "ruff_format" } },
   },
   format_on_save = {
