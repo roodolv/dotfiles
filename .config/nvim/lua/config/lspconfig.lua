@@ -33,7 +33,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- opts.desc = "NativeLSP goto_prev diag"
     -- keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 
+    -- local inlay = vim.lsp.inlay_hint
+    opts.desc = "NativeLSP toggle inlay hints"
+    keymap.set('n', 'gH', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled)
+    end, opts)
+
     -- lspconfig commands
+    opts.desc = "LspInfo"
+    keymap.set('n', '<Leader>li', ':<C-u>LspInfo<CR>', opts)
     opts.desc = "LspStart"
     keymap.set('n', '<Leader>lS', ':<C-u>LspStart<CR>', opts)
     opts.desc = "LspStop"

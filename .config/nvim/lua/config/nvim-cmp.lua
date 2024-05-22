@@ -89,9 +89,9 @@ require('neodev').setup()
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 local servers = {
-  'rust_analyzer',
-  'tsserver',
   'lua_ls',
+  -- 'rust_analyzer',
+  'tsserver',
   -- 'biome',
 }
 

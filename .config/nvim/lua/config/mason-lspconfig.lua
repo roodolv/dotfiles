@@ -14,7 +14,7 @@ local packages = {
   "html-lsp",
   "json-lsp",
   "lua-language-server",
-  "rust-analyzer",
+  -- "rust-analyzer", -- NOTE: now using local toolchain on rustacean
   "prettierd",
   -- "stylua",
   "tailwindcss-language-server",
