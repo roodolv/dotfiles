@@ -1,12 +1,11 @@
--- Set up nvim-cmp.
 local cmp = require("cmp")
-local ls = require("luasnip")
+local luasnip = require("luasnip")
 
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   window = {
@@ -29,15 +28,15 @@ cmp.setup({
     },
     -- LuaSnip keymaps
     ['<C-k><C-e>'] = cmp.mapping(function(fallback)
-      if ls.expand_or_jumpable() then
-        ls.expand_or_jump()
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
     end, { 'i', 's' }),
     ['<C-k><C-c>'] = cmp.mapping(function(fallback)
-      if ls.choice_active() then
-        ls.change_choice(1)
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
       else
         fallback()
       end

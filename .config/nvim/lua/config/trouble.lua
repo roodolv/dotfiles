@@ -41,12 +41,22 @@ trouble.setup({
   -- },
 })
 
-vim.keymap.set("n", "<Leader>xr", ":<C-u>Trouble lsp_references toggle focus=false<CR>", { desc = "LSP References (Trouble)", })
-vim.keymap.set("n", "<Leader>xx", ":<C-u>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)", })
-vim.keymap.set("n", "<Leader>xX", ":<C-u>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer Diagnostics (Trouble)", })
+local opts = {}
 
-vim.keymap.set("n", "<Leader>xs", ":<C-u>Trouble symbols toggle focus=false<CR>", { desc = "Symbols (Trouble)", })
-vim.keymap.set("n", "<Leader>xl", ":<C-u>Trouble lsp toggle focus=false win.position=right<CR>", { desc = "LSP Definitions / references / ... (Trouble)", })
+opts.desc = "LSP References (Trouble)"
+vim.keymap.set("n", "<Leader>xr", ":<C-u>Trouble lsp_references toggle focus=false<CR>", opts)
 
-vim.keymap.set("n", "<Leader>xQ", ":<C-u>Trouble qflist toggle<CR>", { desc = "Quickfix List (Trouble)", })
-vim.keymap.set("n", "<Leader>xL", ":<C-u>Trouble loclist toggle<CR>", { desc = "Location List (Trouble)", })
+opts.desc = "Diagnostics (Trouble)"
+vim.keymap.set("n", "<Leader>xx", ":<C-u>Trouble diagnostics toggle<CR>", opts)
+opts.desc = "Buffer Diagnostics (Trouble)"
+vim.keymap.set("n", "<Leader>xX", ":<C-u>Trouble diagnostics toggle filter.buf=0<CR>", opts)
+
+opts.desc = "Symbols (Trouble)"
+vim.keymap.set("n", "<Leader>xs", ":<C-u>Trouble symbols toggle focus=false<CR>", opts)
+opts.desc = "LSP Definitions / references / ... (Trouble)"
+vim.keymap.set("n", "<Leader>xl", ":<C-u>Trouble lsp toggle focus=false win.position=right<CR>", opts)
+
+opts.desc = "Quickfix List (Trouble)"
+vim.keymap.set("n", "<Leader>xQ", ":<C-u>Trouble qflist toggle<CR>", opts)
+opts.desc = "Location List (Trouble)"
+vim.keymap.set("n", "<Leader>xL", ":<C-u>Trouble loclist toggle<CR>", opts)

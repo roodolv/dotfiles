@@ -1,9 +1,10 @@
--- show files on gitignore
-require("oil-git-status").setup({
+local ogs = require("oil-git-status")
+ogs.setup({
+  -- show files on gitignore
   show_ignored = true
 })
 
--- for _, hl_group in pairs(require("oil-git-status").highlight_groups) do
+-- for _, hl_group in pairs(ogs.highlight_groups) do
 --   if hl_group.index then
 --     vim.api.nvim_set_hl(0, hl_group.hl_group, { fg = "#ff0000" })
 --   else

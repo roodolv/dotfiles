@@ -16,4 +16,4 @@ ap.setup({
   },
 })
 
-vim.keymap.set({ "v", "n" }, "ga", require("actions-preview").code_actions, { desc = "actions-preview code_actions" })
+vim.keymap.set({ "v", "n" }, "ga", ap.code_actions, { desc = "actions-preview code_actions" })

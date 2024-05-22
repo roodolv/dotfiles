@@ -1,24 +1,28 @@
-local Flash = require("flash")
-Flash.setup({
+local flash = require("flash")
+flash.setup({
   modes = {
     search = { enabled = true },
   }
 })
 
--- Flash.jump
-vim.keymap.set({"n", "x", "o"}, "s", function()
-  Flash.jump()
+local opts = { silent = true }
+
+-- flash.jump
+opts.desc = "flash.jump(normal)"
+vim.keymap.set({ "n", "x", "o" }, "s", function()
+  flash.jump()
   -- NOTE: match beginning of words only
-  -- Flash.jump({
+  -- flash.jump({
   --   search = { mode = function(str)
   --     return "\\<" .. str
   --   end, },
   -- })
-end, {silent = true, desc = "Flash.jump(normal)"})
+end, opts)
 
--- Flash.jump(diagnostics without changing cursor position)
-vim.keymap.set({"n", "x", "o"}, "<Leader>s", function()
-  Flash.jump({
+-- diagnostics without changing cursor position
+opts.desc = "flash.jump(diagnostics)"
+vim.keymap.set({ "n", "x", "o" }, "<Leader>s", function()
+  flash.jump({
     matcher = function(win)
       ---@param diag Diagnostic
       return vim.tbl_map(function(diag)
@@ -36,9 +40,13 @@ vim.keymap.set({"n", "x", "o"}, "<Leader>s", function()
       state:restore()
     end,
   })
-end, {silent = true, desc = "Flash.jump(diagnostics)"})
+end, opts)
 
--- vim.keymap.set({"n", "x", "o"}, "S", function() Flash.treesitter() end, {silent = true, desc = "Flash.treesitter"})
--- vim.keymap.set({"o"}, "r", function() Flash.remote() end, {silent = true, desc = "Flash.remote"})
--- vim.keymap.set({"o", "x"}, "R", function() Flash.treesitter_search() end, {silent = true, desc = "Flash.treesitter_search"})
-vim.keymap.set({"c"}, "<C-s>", function() Flash.toggle() end, {silent = true, desc = "Flash.toggle"})
+-- opts.desc = "flash.treesitter"
+-- vim.keymap.set({"n", "x", "o"}, "S", function() flash.treesitter() end, opts)
+-- opts.desc = "flash.remote"
+-- vim.keymap.set({"o"}, "r", function() flash.remote() end, opts)
+-- opts.desc = "flash.treesitter_search"
+-- vim.keymap.set({"o", "x"}, "R", function() flash.treesitter_search() end, opts)
+opts.desc = "flash.toggle"
+vim.keymap.set({ "c" }, "<C-s>", function() flash.toggle() end, opts)

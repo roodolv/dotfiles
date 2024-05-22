@@ -59,12 +59,11 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
-      "ThePrimeagen/refactoring.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
-      "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>hh",
+      "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs",
     },
     config = function()
@@ -79,7 +78,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      "<Leader>ht", "<Leader>hx", "<C-Up>", "<C-Down>",
+      "<Leader>hh", "<Leader>hx", "<C-Up>", "<C-Down>",
       "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
     config = function()
@@ -271,14 +270,6 @@ return {
     end,
   },
   {
-    "ThePrimeagen/refactoring.nvim",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
-  {
     "j-hui/fidget.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
@@ -298,6 +289,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
+      "petertriho/cmp-git",
       -- For LuaSnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
