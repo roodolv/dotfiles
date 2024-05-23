@@ -35,6 +35,9 @@ lspsaga.setup({
       toggle_or_jump = "<CR>",
     },
   },
+  symbol_in_winbar = {
+    enable = false,
+  },
 })
 
 local keymap = vim.keymap

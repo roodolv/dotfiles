@@ -14,7 +14,6 @@ local packages = {
   "html-lsp",
   "json-lsp",
   "lua-language-server",
-  -- "rust-analyzer", -- NOTE: now using local toolchain on rustacean
   "prettierd",
   -- "stylua",
   "tailwindcss-language-server",
@@ -32,8 +31,3 @@ end)
 -- END
 
 require("mason-lspconfig").setup()
--- require("mason-lspconfig").setup_handlers({
---   function(server_name)
---     require("lspconfig")[server_name].setup({})
---   end
--- })

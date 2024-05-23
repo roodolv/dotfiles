@@ -91,9 +91,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 local servers = {
   'lua_ls',
-  -- 'rust_analyzer',
   'tsserver',
-  -- 'biome',
+  'ruff_lsp',
 }
 
 for _, lsp in ipairs(servers) do

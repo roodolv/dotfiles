@@ -274,6 +274,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
   },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
+  },
   -----------------------------------------------------------------
   -- completion/snippets/format
   -----------------------------------------------------------------
@@ -341,7 +349,7 @@ return {
     version = "^4",
     lazy = false,
     config = function()
-      require("config/rustacean")
+      require("config/rustaceanvim")
     end,
   },
   {

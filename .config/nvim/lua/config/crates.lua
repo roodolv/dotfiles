@@ -58,20 +58,13 @@ crates.setup({
   -- },
 })
 
--- integration with NativeLSP
-local function show_documentation()
-  if vim.fn.expand("%:t") == "Cargo.toml" and crates.popup_available() then
-    crates.show_popup()
-  else
-    vim.lsp.buf.hover()
-  end
-end
-
 -- set autocmd
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
   pattern = "Cargo.toml",
   callback = function(args)
     local opts = { buffer = args.buf, silent = true }
+
+    vim.keymap.set("n", "K", crates.show_popup, opts)
 
     vim.keymap.set("n", "<Leader>ct", crates.toggle, opts)
     vim.keymap.set("n", "<Leader>cr", crates.reload, opts)
@@ -94,7 +87,5 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
     vim.keymap.set("n", "<Leader>cR", crates.open_repository, opts)
     vim.keymap.set("n", "<Leader>cD", crates.open_documentation, opts)
     vim.keymap.set("n", "<Leader>cC", crates.open_crates_io, opts)
-
-    vim.keymap.set("n", "K", show_documentation, opts)
   end,
 })
