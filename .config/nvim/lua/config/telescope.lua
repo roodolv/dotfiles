@@ -109,7 +109,16 @@ opts.desc = "Telescope ext frecency"
 keymap.set("n", "<Leader>fp", function() ext.frecency.frecency { workspace = "CWD", } end, opts)
 opts.desc = "Telescope ext aerial"
 keymap.set("n", "<Leader>fs", function() ext.aerial.aerial() end, opts)
+opts.desc = "Telescope ext dap-commands"
+keymap.set("n", "<Leader>dc", function() ext.dap.commands() end, opts)
+opts.desc = "Telescope ext dap-config"
+keymap.set("n", "<Leader>dC", function() ext.dap.configurations() end, opts)
+opts.desc = "Telescope ext dap-breakpoints"
+keymap.set("n", "<Leader>dB", function() ext.dap.list_breakpoints() end, opts)
+opts.desc = "Telescope ext dap-frames"
+keymap.set("n", "<Leader>df", function() ext.dap.frames() end, opts)
 
 -- load extensions
 telescope.load_extension("frecency")
 telescope.load_extension("aerial")
+telescope.load_extension("dap")

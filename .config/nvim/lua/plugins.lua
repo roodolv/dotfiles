@@ -59,12 +59,14 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
+      "nvim-telescope/telescope-dap.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
-      "<Leader>fp", "<Leader>rr", "<Leader>fs",
+      "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
+      "<Leader>dB", "<Leader>df",
     },
     config = function()
       require("config/telescope")
@@ -381,7 +383,7 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     keys = {
-      "<Leader>dt", "<Leader>db", "<Leader>dr", "<Leader>df",
+      "<Leader>dt", "<Leader>da", "<Leader>db",
       "<F9>", "<F10>", "<C-F10>", "<M-F10>",
     },
     dependencies = {

@@ -12,11 +12,10 @@ dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 -- keymaps for UI
 vim.keymap.set("n", "<Leader>dt", function() dapui.toggle({ reset = true }) end,
   { noremap = true, desc = "DAP UI Toggle" })
-vim.keymap.set("n", "<Leader>dr", function() dapui.open({ reset = true }) end, { noremap = true, desc = "DAP UI Open" })
 
 ---@param elem_name string
 ---@param args? dapui.FloatElementArgs
-vim.keymap.set("n", "<Leader>df", function() dapui.float_element(elem_name, args) end,
+vim.keymap.set("n", "<Leader>da", function() dapui.float_element(elem_name, args) end,
   { noremap = true, desc = "DAP UI Float" })
 
 -- keymaps for DAP
