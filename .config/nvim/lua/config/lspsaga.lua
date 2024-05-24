@@ -44,7 +44,7 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 opts.desc = "Lspsaga Show hover docs"
-keymap.set("n", "gK", ":<C-u>Lspsaga hover_doc<CR>", opts)
+keymap.set("n", "K", ":<C-u>Lspsaga hover_doc<CR>", opts)
 opts.desc = "Lspsaga Show code actions"
 keymap.set("n", "gA", ":<C-u>Lspsaga code_action<CR>", opts)
 opts.desc = "Lspsaga Peek definitions"

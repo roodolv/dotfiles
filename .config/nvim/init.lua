@@ -68,7 +68,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- vim.o.shellslash = true -- make it false for Git status
+-- vim.o.shellslash = true
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
@@ -180,6 +180,7 @@ vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'K', '<Nop>', { noremap = true }) -- disable NativeLSP hover
 
 
 -----------------------------------------------------------------

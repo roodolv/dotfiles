@@ -41,6 +41,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- lspconfig commands
     opts.desc = "LspInfo"
     keymap.set('n', '<Leader>li', ':<C-u>LspInfo<CR>', opts)
+    opts.desc = "LspLog"
+    keymap.set('n', '<Leader>lL', ':<C-u>LspLog<CR>', opts)
     opts.desc = "LspStart"
     keymap.set('n', '<Leader>lS', ':<C-u>LspStart<CR>', opts)
     opts.desc = "LspStop"

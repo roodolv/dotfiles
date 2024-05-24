@@ -42,11 +42,11 @@ vim.keymap.set({ "n", "x", "o" }, "<Leader>s", function()
   })
 end, opts)
 
--- opts.desc = "flash.treesitter"
--- vim.keymap.set({"n", "x", "o"}, "S", function() flash.treesitter() end, opts)
--- opts.desc = "flash.remote"
--- vim.keymap.set({"o"}, "r", function() flash.remote() end, opts)
--- opts.desc = "flash.treesitter_search"
--- vim.keymap.set({"o", "x"}, "R", function() flash.treesitter_search() end, opts)
+opts.desc = "flash.treesitter"
+vim.keymap.set({ "n" }, "S", function() flash.treesitter() end, opts)
+opts.desc = "flash.remote"
+vim.keymap.set({ "o" }, "r", function() flash.remote() end, opts)
+opts.desc = "flash.treesitter_search"
+vim.keymap.set({ "o", "x" }, "R", function() flash.treesitter_search() end, opts)
 opts.desc = "flash.toggle"
 vim.keymap.set({ "c" }, "<C-s>", function() flash.toggle() end, opts)

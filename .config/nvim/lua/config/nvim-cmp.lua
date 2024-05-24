@@ -87,16 +87,24 @@ cmp.setup.cmdline(':', {
 require('neodev').setup()
 
 -- Setup lspconfig
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
+local configs = require("lspconfig.configs")
 local servers = {
   'lua_ls',
   'tsserver',
   'ruff_lsp',
 }
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local on_attach = function(client, bufnr)
+  if client.name == 'ruff_lsp' then
+    -- Disable hover in favor of Other client
+    client.server_capabilities.hoverProvider = false
+  end
+end
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
+    on_attach = on_attach,
     capabilities = capabilities,
   }
 end
