@@ -261,15 +261,6 @@ return {
     end,
   },
   {
-    "CKolkey/ts-node-action",
-    lazy = true,
-    event = "LspAttach",
-    dependencies = "nvim-treesitter",
-    config = function()
-      vim.keymap.set("n", "<F10>", require("ts-node-action").node_action, { desc = "TreeSitter node-action" })
-    end,
-  },
-  {
     "j-hui/fidget.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
@@ -375,19 +366,34 @@ return {
     "sindrets/diffview.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
-    keys = {
-      { "<Leader>do", ":<C-u>DiffviewOpen<CR>",    mode = "n", silent = true, desc = "DiffviewOpen" },
-      { "<Leader>dc", ":<C-u>DiffviewClose<CR>",   mode = "n", silent = true, desc = "DiffviewClose" },
-      { "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", mode = "n", silent = true, desc = "DiffviewRefresh" },
-    },
+    keys = "<Leader>D",
     config = function()
-      -- require("config/diffview")
-      require("diffview").setup()
+      require("config/diffview")
     end,
   },
   {
     "tpope/vim-fugitive",
     event = { "BufReadPre", "BufNewFile" },
+  },
+  -----------------------------------------------------------------
+  -- debug/test
+  -----------------------------------------------------------------
+  {
+    "rcarriga/nvim-dap-ui",
+    keys = {
+      "<Leader>dt", "<Leader>db", "<Leader>dr", "<Leader>df",
+      "<F9>", "<F10>", "<C-F10>", "<M-F10>",
+    },
+    dependencies = {
+      {
+        "mfussenegger/nvim-dap",
+        lazy = true,
+      },
+      "nvim-neotest/nvim-nio"
+    },
+    config = function()
+      require("config/nvim-dap")
+    end,
   },
   -----------------------------------------------------------------
   -- editing

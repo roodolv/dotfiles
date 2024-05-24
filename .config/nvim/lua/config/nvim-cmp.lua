@@ -84,7 +84,10 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup neodev before lspconfig
-require('neodev').setup()
+require('neodev').setup({
+  -- enable type-checking for nvim-dap-ui
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
 
 -- Setup lspconfig
 local lspconfig = require('lspconfig')
