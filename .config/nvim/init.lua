@@ -68,7 +68,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- vim.o.shellslash = true -- make it false for Git status
+-- vim.o.shellslash = true
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
@@ -98,18 +98,28 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silen
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = true, silent = true })
 
--- grep/vimgrep/quickfix/loclist
+-- grep/vimgrep
 vim.api.nvim_set_keymap('n', '<Leader>G', ':<C-u>grep<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
+
+-- QuickFix
 vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
+
+-- loclist
+vim.api.nvim_set_keymap('n', '<C-M-Down>', ':<C-u>lnext<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Up>', ':<C-u>lprev<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Right>', ':<C-u>lnew<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Left>', ':<C-u>lol<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-o>', ':<C-u>lw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-c>', ':<C-u>lcl<CR>', { noremap = true })
+
+-- tabs
 vim.api.nvim_set_keymap('n', '<C-t><C-t>', ':<C-u>tabe<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-w><C-w>', ':<C-u>tabc<CR>', { noremap = true })
 
@@ -170,6 +180,7 @@ vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'K', '<Nop>', { noremap = true }) -- disable NativeLSP hover
 
 
 -----------------------------------------------------------------

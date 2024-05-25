@@ -59,13 +59,14 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
-      "ThePrimeagen/refactoring.nvim",
+      "nvim-telescope/telescope-dap.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
-      "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>hh",
-      "<Leader>fp", "<Leader>rr", "<Leader>fs",
+      "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
+      "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
+      "<Leader>dB", "<Leader>df",
     },
     config = function()
       require("config/telescope")
@@ -79,7 +80,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      "<Leader>ht", "<Leader>hx", "<C-Up>", "<C-Down>",
+      "<Leader>hh", "<Leader>hx", "<C-Up>", "<C-Down>",
       "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
     config = function()
@@ -262,26 +263,17 @@ return {
     end,
   },
   {
-    "CKolkey/ts-node-action",
-    lazy = true,
-    event = "LspAttach",
-    dependencies = "nvim-treesitter",
-    config = function()
-      vim.keymap.set("n", "<F10>", require("ts-node-action").node_action, { desc = "TreeSitter node-action" })
-    end,
-  },
-  {
-    "ThePrimeagen/refactoring.nvim",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
-  {
     "j-hui/fidget.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
   },
   -----------------------------------------------------------------
   -- completion/snippets/format
@@ -298,6 +290,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
+      "petertriho/cmp-git",
       -- For LuaSnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
@@ -341,6 +334,27 @@ return {
   --   end
   -- },
   -----------------------------------------------------------------
+  -- language-specific
+  -----------------------------------------------------------------
+  ----- Rust
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    lazy = false,
+    config = function()
+      require("config/rustaceanvim")
+    end,
+  },
+  {
+    "saecki/crates.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    tag = "stable",
+    config = function()
+      require("config/crates")
+    end,
+  },
+  -----------------------------------------------------------------
   -- Git
   -----------------------------------------------------------------
   {
@@ -354,19 +368,36 @@ return {
     "sindrets/diffview.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
-    keys = {
-      { "<Leader>do", ":<C-u>DiffviewOpen<CR>",    mode = "n", silent = true, desc = "DiffviewOpen" },
-      { "<Leader>dc", ":<C-u>DiffviewClose<CR>",   mode = "n", silent = true, desc = "DiffviewClose" },
-      { "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", mode = "n", silent = true, desc = "DiffviewRefresh" },
-    },
+    keys = "<Leader>D",
     config = function()
-      -- require("config/diffview")
-      require("diffview").setup()
+      require("config/diffview")
     end,
   },
   {
     "tpope/vim-fugitive",
     event = { "BufReadPre", "BufNewFile" },
+  },
+  -----------------------------------------------------------------
+  -- debug/test
+  -----------------------------------------------------------------
+  {
+    "rcarriga/nvim-dap-ui",
+    keys = {
+      "<Leader>dt", "<Leader>de", "<Leader>db",
+      "<F9>", "<F10>", "<C-F10>", "<M-F10>",
+      "<Leader>dpm", "<Leader>dpc", "<Leader>dps", -- dap-python
+    },
+    dependencies = {
+      {
+        "mfussenegger/nvim-dap",
+        lazy = true,
+      },
+      "nvim-neotest/nvim-nio",
+      "mfussenegger/nvim-dap-python",
+    },
+    config = function()
+      require("config/nvim-dap")
+    end,
   },
   -----------------------------------------------------------------
   -- editing

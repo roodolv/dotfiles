@@ -1,12 +1,11 @@
--- Set up nvim-cmp.
 local cmp = require("cmp")
-local ls = require("luasnip")
+local luasnip = require("luasnip")
 
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   window = {
@@ -29,15 +28,15 @@ cmp.setup({
     },
     -- LuaSnip keymaps
     ['<C-k><C-e>'] = cmp.mapping(function(fallback)
-      if ls.expand_or_jumpable() then
-        ls.expand_or_jump()
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
     end, { 'i', 's' }),
     ['<C-k><C-c>'] = cmp.mapping(function(fallback)
-      if ls.choice_active() then
-        ls.change_choice(1)
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
       else
         fallback()
       end
@@ -52,6 +51,7 @@ cmp.setup({
     { name = 'path' },
     { name = 'cmdline' },
     { name = 'nvim_lua' },
+    { name = 'crates' },
   })
 })
 
@@ -84,20 +84,30 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup neodev before lspconfig
-require('neodev').setup()
+require('neodev').setup({
+  -- enable type-checking for nvim-dap-ui
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
 
 -- Setup lspconfig
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
+local configs = require("lspconfig.configs")
 local servers = {
-  'rust_analyzer',
-  'tsserver',
   'lua_ls',
-  -- 'biome',
+  'tsserver',
+  'ruff_lsp',
 }
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local on_attach = function(client, bufnr)
+  if client.name == 'ruff_lsp' then
+    -- Disable hover in favor of Other client
+    client.server_capabilities.hoverProvider = false
+  end
+end
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
+    on_attach = on_attach,
     capabilities = capabilities,
   }
 end

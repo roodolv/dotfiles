@@ -1,6 +1,7 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
+local ext = telescope.extensions
 
 local open_with_trouble = require("trouble.sources.telescope").open
 local add_to_trouble = require("trouble.sources.telescope").add
@@ -56,13 +57,20 @@ telescope.setup({
   },
 })
 
-vim.keymap.set("n", "<Leader>ff", ":<C-u>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git<CR>",
-  { silent = true, desc = "List project files" })
-vim.keymap.set("n", "<Leader>fg", ":<C-u>Telescope live_grep<CR>", { silent = true, desc = "Live Grep" })
-vim.keymap.set("n", "<Leader>fG", ":<C-u>Telescope git_files<CR>", { silent = true, desc = "List git_files" })
-vim.keymap.set("n", "<Leader>fl", ":<C-u>Telescope current_buffer_fuzzy_find<CR>",
-  { silent = true, desc = "Current buffer fuzzy find" })
-vim.keymap.set("n", "<Leader>fj", function()
+-- keymaps
+local keymap = vim.keymap
+local opts = { silent = true }
+
+opts.desc = "Telescope find_files"
+keymap.set("n", "<Leader>ff", ":<C-u>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git<CR>", opts)
+opts.desc = "Telescope live_grep"
+keymap.set("n", "<Leader>fg", ":<C-u>Telescope live_grep<CR>", opts)
+opts.desc = "Telescope git_files"
+keymap.set("n", "<Leader>fG", ":<C-u>Telescope git_files<CR>", opts)
+opts.desc = "Telescope current buffer"
+keymap.set("n", "<Leader>fl", ":<C-u>Telescope current_buffer_fuzzy_find<CR>", opts)
+opts.desc = "Telescope jumplist"
+keymap.set("n", "<Leader>fj", function()
   local jumplist = vim.fn.getjumplist()
   builtin.jumplist({
     on_complete = {
@@ -75,28 +83,42 @@ vim.keymap.set("n", "<Leader>fj", function()
       end,
     },
   })
-end, { silent = true, desc = "List jumplist" }
+end, opts
 )
-vim.keymap.set("n", "<Leader>fb", ":<C-u>Telescope buffers<CR>", { silent = true, desc = "List buffers" })
-vim.keymap.set("n", "<Leader>fr", ":<C-u>Telescope oldfiles<CR>", { silent = true, desc = "List recent files" })
-vim.keymap.set("n", "<Leader>fh", ":<C-u>Telescope help_tags<CR>", { silent = true, desc = "List help-tags" })
-vim.keymap.set("n", "<Leader>fc", ":<C-u>Telescope commands<CR>", { silent = true, desc = "List commands" })
-vim.keymap.set("n", "<Leader>f:", ":<C-u>Telescope command_history<CR>", { silent = true, desc = "List command history" })
-vim.keymap.set("n", "<Leader>fd", ":<C-u>Telescope diagnostics<CR>", { silent = true, desc = "List diagnostics" })
-vim.keymap.set("n", "<Leader>fq", ":<C-u>Telescope quickfix<CR>", { silent = true, desc = "List QuickFix" })
-vim.keymap.set("n", "<Leader>fm", ":<C-u>Telescope marks<CR>", { silent = true, desc = "List Marks" })
-vim.keymap.set("n", "<Leader>fk", ":<C-u>Telescope keymaps<CR>", { silent = true, desc = "List keymaps" })
-vim.keymap.set("n", "<Leader>hh", ":<C-u>Telescope harpoon marks<CR>", { silent = true, desc = "List harpoon-marks" })
-vim.keymap.set("n", "<Leader>fp", function() require("telescope").extensions.frecency.frecency { workspace = "CWD", } end,
-  { silent = true, desc = "List prioritized by frecency" })
-vim.keymap.set("n", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end,
-  { silent = true, desc = "List refactoring methods" })
-vim.keymap.set("x", "<Leader>rr", function() require("telescope").extensions.refactoring.refactors() end,
-  { silent = true, desc = "List refactoring methods" })
-vim.keymap.set("n", "<Leader>fs", function() require("telescope").extensions.aerial.aerial() end,
-  { silent = true, desc = "List of symbols by aerial" })
+opts.desc = "Telescope buffers"
+keymap.set("n", "<Leader>fb", ":<C-u>Telescope buffers<CR>", opts)
+opts.desc = "Telescope oldfiles"
+keymap.set("n", "<Leader>fr", ":<C-u>Telescope oldfiles<CR>", opts)
+opts.desc = "Telescope help-tags"
+keymap.set("n", "<Leader>fh", ":<C-u>Telescope help_tags<CR>", opts)
+opts.desc = "Telescope commands"
+keymap.set("n", "<Leader>fc", ":<C-u>Telescope commands<CR>", opts)
+opts.desc = "Telescope command history"
+keymap.set("n", "<Leader>f:", ":<C-u>Telescope command_history<CR>", opts)
+opts.desc = "Telescope diagnostics"
+keymap.set("n", "<Leader>fd", ":<C-u>Telescope diagnostics<CR>", opts)
+opts.desc = "Telescope QuickFix"
+keymap.set("n", "<Leader>fq", ":<C-u>Telescope quickfix<CR>", opts)
+opts.desc = "Telescope marks"
+keymap.set("n", "<Leader>fm", ":<C-u>Telescope marks<CR>", opts)
+opts.desc = "Telescope keymaps"
+keymap.set("n", "<Leader>fk", ":<C-u>Telescope keymaps<CR>", opts)
+opts.desc = "Telescope harpoon-marks"
+keymap.set("n", "<Leader>ht", ":<C-u>Telescope harpoon marks<CR>", opts)
+opts.desc = "Telescope ext frecency"
+keymap.set("n", "<Leader>fp", function() ext.frecency.frecency { workspace = "CWD", } end, opts)
+opts.desc = "Telescope ext aerial"
+keymap.set("n", "<Leader>fs", function() ext.aerial.aerial() end, opts)
+opts.desc = "Telescope ext dap-commands"
+keymap.set("n", "<Leader>dc", function() ext.dap.commands() end, opts)
+opts.desc = "Telescope ext dap-config"
+keymap.set("n", "<Leader>dC", function() ext.dap.configurations() end, opts)
+opts.desc = "Telescope ext dap-breakpoints"
+keymap.set("n", "<Leader>dB", function() ext.dap.list_breakpoints() end, opts)
+opts.desc = "Telescope ext dap-frames"
+keymap.set("n", "<Leader>df", function() ext.dap.frames() end, opts)
 
 -- load extensions
 telescope.load_extension("frecency")
-telescope.load_extension("refactoring")
 telescope.load_extension("aerial")
+telescope.load_extension("dap")
