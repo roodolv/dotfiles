@@ -383,15 +383,17 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     keys = {
-      "<Leader>dt", "<Leader>da", "<Leader>db",
+      "<Leader>dt", "<Leader>de", "<Leader>db",
       "<F9>", "<F10>", "<C-F10>", "<M-F10>",
+      "<Leader>dpm", "<Leader>dpc", "<Leader>dps", -- dap-python
     },
     dependencies = {
       {
         "mfussenegger/nvim-dap",
         lazy = true,
       },
-      "nvim-neotest/nvim-nio"
+      "nvim-neotest/nvim-nio",
+      "mfussenegger/nvim-dap-python",
     },
     config = function()
       require("config/nvim-dap")
