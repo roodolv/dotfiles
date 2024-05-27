@@ -378,8 +378,28 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
   -----------------------------------------------------------------
-  -- debug/test
+  -- test/debug
   -----------------------------------------------------------------
+  {
+    "nvim-neotest/neotest",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- adapters
+      "nvim-neotest/neotest-jest",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-go",
+      "alfaix/neotest-gtest",
+      "rcasia/neotest-bash",
+    },
+    config = function()
+      require("config/neotest")
+    end,
+  },
   {
     "rcarriga/nvim-dap-ui",
     keys = {
@@ -388,10 +408,7 @@ return {
       "<Leader>dpm", "<Leader>dpc", "<Leader>dps", -- dap-python
     },
     dependencies = {
-      {
-        "mfussenegger/nvim-dap",
-        lazy = true,
-      },
+      "mfussenegger/nvim-dap",
       "nvim-neotest/nvim-nio",
       "mfussenegger/nvim-dap-python",
     },

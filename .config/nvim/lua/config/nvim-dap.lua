@@ -4,11 +4,11 @@ local dap_py = require("dap-python")
 -- setup DAP UI
 dapui.setup()
 
--- setup nvim-dap-python
+-- Python: setup nvim-dap-python
 dap_py.setup("~/.venvs/debugpy/Scripts/python")
 
--- NOTE: configure a different runner (e.g. pytest)
--- dap_py.test_runner = "pytest"
+-- Python: configure a different runner (e.g. pytest)
+dap_py.test_runner = "pytest"
 
 -- use nvim-dap events to trigger DAP UI automatically
 dap.listeners.before.attach.dapui_config = function() dapui.open() end
