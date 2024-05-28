@@ -134,6 +134,16 @@ return {
     end,
   },
   -----------------------------------------------------------------
+  -- visual(statusline/bufferline/etc)
+  -----------------------------------------------------------------
+  {
+    "tamton-aquib/staline.nvim",
+    lazy = false,
+    config = function()
+      require("config/staline")
+    end,
+  },
+  -----------------------------------------------------------------
   -- visual(syntax/indent/etc)
   -----------------------------------------------------------------
   {
@@ -172,8 +182,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("config/todo-comments")
-      vim.api.nvim_set_keymap('n', '<Leader>tt', ':<C-u>TodoTelescope<CR>', { noremap = true })
-      vim.api.nvim_set_keymap('n', '<Leader>tQ', ':<C-u>TodoQuickFix<CR>', { noremap = true })
+      vim.api.nvim_set_keymap("n", "<Leader>tt", ":<C-u>TodoTelescope<CR>", { noremap = true })
+      vim.api.nvim_set_keymap("n", "<Leader>tQ", ":<C-u>TodoQuickFix<CR>", { noremap = true })
     end,
   },
   {
@@ -226,6 +236,10 @@ return {
     branch = "dev", -- Trouble v3
     dependencies = "nvim-tree/nvim-web-devicons",
     cmd = { "Trouble" },
+    keys = {
+      "<Leader>xr", "<Leader>xx", "<Leader>xX", "<Leader>xs", "<Leader>xl",
+      "<Leader>xQ", "<Leader>xL",
+    },
     config = function()
       require("config/trouble")
     end,
@@ -241,6 +255,17 @@ return {
     opts = {},
     config = function()
       require("config/aerial")
+    end,
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    lazy = true,
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("config/navbuddy")
     end,
   },
   {
@@ -284,6 +309,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+      "SmiteshP/nvim-navbuddy",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -314,7 +340,7 @@ return {
     end
   },
   {
-    'stevearc/conform.nvim',
+    "stevearc/conform.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
@@ -395,6 +421,9 @@ return {
       "nvim-neotest/neotest-go",
       "alfaix/neotest-gtest",
       "rcasia/neotest-bash",
+      -- "adrigzr/neotest-mocha",
+      -- "jfpedroza/neotest-elixir",
+      -- "olimorris/neotest-phpunit",
     },
     config = function()
       require("config/neotest")
@@ -434,10 +463,10 @@ return {
     "tpope/vim-abolish",
     event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "tpope/vim-eunuch",
-    event = { "BufReadPre", "BufNewFile" },
-  },
+  -- {
+  --   "tpope/vim-eunuch",
+  --   event = { "BufReadPre", "BufNewFile" },
+  -- },
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },

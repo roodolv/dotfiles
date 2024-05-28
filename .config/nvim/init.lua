@@ -78,6 +78,7 @@ vim.o.ttimeoutlen = 50
 vim.o.visualbell = true
 vim.o.mouse = 'a'
 vim.o.termguicolors = true
+vim.o.showtabline = 2 -- for staline.nvim
 
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%

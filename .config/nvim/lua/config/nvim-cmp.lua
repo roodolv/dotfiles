@@ -99,7 +99,9 @@ local servers = {
   'bashls',
 }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local navbuddy = require('nvim-navbuddy')
 local on_attach = function(client, bufnr)
+  navbuddy.attach(client, bufnr)
   if client.name == 'ruff_lsp' then
     -- Disable hover in favor of Other client
     client.server_capabilities.hoverProvider = false
