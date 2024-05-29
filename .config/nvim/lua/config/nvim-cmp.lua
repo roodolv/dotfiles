@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -109,6 +110,12 @@ cmp.setup.cmdline(':', {
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
 })
+
+-- nvim-autopairs integration
+cmp.event:on(
+  "confirm_done",
+  cmp_autopairs.on_confirm_done()
+)
 
 -- Setup neodev before lspconfig
 require('neodev').setup({

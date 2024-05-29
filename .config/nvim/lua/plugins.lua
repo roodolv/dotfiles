@@ -338,6 +338,7 @@ return {
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "SmiteshP/nvim-navbuddy",
+      "windwp/nvim-autopairs",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -507,6 +508,15 @@ return {
     end
   },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+      })
+    end
+  },
+  {
     "tommcdo/vim-exchange",
     event = { "BufReadPre", "BufNewFile" },
   },
@@ -527,10 +537,6 @@ return {
       { "g*", "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)" },
       { "g#", "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)" },
     },
-  },
-  {
-    "jiangmiao/auto-pairs",
-    -- event = { "BufReadPre", "BufNewFile", "BufEnter" },
   },
   {
     "bronson/vim-trailing-whitespace",
