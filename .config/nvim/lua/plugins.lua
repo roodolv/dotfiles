@@ -201,6 +201,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     main = "ibl",
     opts = {},
+    config = function()
+      require("config/indent-blankline")
+    end,
   },
   {
     "folke/todo-comments.nvim",
@@ -321,9 +324,8 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "LspAttach",
-    opts = {},
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
+    config = function()
+      require("config/lsp_signature")
     end,
   },
   -----------------------------------------------------------------

@@ -46,13 +46,13 @@ staline.setup({
   sections = {
     left = {
       ----- normal
-      -- { "Staline",     git_info },
-      -- { "StalineFile", "file_name" },
+      { "Staline",     git_info },
+      { "StalineFile", "file_name" },
 
       ----- emphasize only branch
-      { "StalineFill", git_branch },
-      { "Staline",     git_diff },
-      { "StalineFile", "file_name" },
+      -- { "StalineFill", git_branch },
+      -- { "Staline",     git_diff },
+      -- { "StalineFile", "file_name" },
 
       " ", "lsp"
     },
@@ -73,10 +73,10 @@ staline.setup({
     -- v = "#fc802d",
 
     ----- for "everforest" colorscheme
-    i = "#d4be98",
-    n = "#aaccaa",
+    -- i = "#d4be98",
+    -- n = "#aaccaa",
     c = "#e9ffe9",
-    v = "#cc70bb",
+    -- v = "#cc70bb",
   },
   defaults = {
     true_colors = true,
