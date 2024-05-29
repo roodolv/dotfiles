@@ -2,23 +2,23 @@ return {
   -----------------------------------------------------------------
   -- theme
   -----------------------------------------------------------------
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme("tokyonight")
-  --   end
-  -- },
   {
-    "sainnhe/everforest",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.everforest_enable_italic = true
-      vim.cmd.colorscheme("everforest")
-    end,
+      vim.cmd.colorscheme("tokyonight")
+    end
   },
+  -- {
+  --   "sainnhe/everforest",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.g.everforest_enable_italic = true
+  --     vim.cmd.colorscheme("everforest")
+  --   end,
+  -- },
   -----------------------------------------------------------------
   -- startup
   -----------------------------------------------------------------
@@ -151,17 +151,24 @@ return {
   --   lazy = false,
   --   dependencies = {
   --     "nvim-tree/nvim-web-devicons",
-  --     -- {
-  --     --   "letieu/harpoon-lualine",
-  --     --   dependencies = {
-  --     --     "ThePrimeagen/harpoon",
-  --     --   },
-  --     -- },
+  --     {
+  --       "letieu/harpoon-lualine",
+  --       dependencies = { "ThePrimeagen/harpoon", },
+  --     },
   --   },
   --   config = function()
   --     require("config/lualine")
   --   end,
   -- },
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("config/bufferline")
+    end,
+  },
   -----------------------------------------------------------------
   -- visual(syntax/indent/etc)
   -----------------------------------------------------------------

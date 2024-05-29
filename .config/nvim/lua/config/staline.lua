@@ -1,6 +1,6 @@
 local staline = require("staline")
 
--- harpoon integration(set callback)
+-- harpoon integration
 -- local Harpoonline = require("harpoonline")
 -- Harpoonline.setup()
 
@@ -42,7 +42,7 @@ local git_diff = (gitsigns_check) and (function()
   end
 end)
 
-staline.setup {
+staline.setup({
   sections = {
     left = {
       ----- normal
@@ -83,6 +83,6 @@ staline.setup {
     -- line_column = " [%l/%L]:%c 󰩤%p%% ",
     line_column = "[%l/%L]:%c",
     branch_symbol = " ",
-  }
-}
+  },
+})
 vim.cmd [[hi StalineFile gui=underline guifg=#dddddd]] -- File name Highlight
