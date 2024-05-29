@@ -4,6 +4,10 @@ diffview.setup({
 })
 
 -- keymaps
-vim.keymap.set("n", "<Leader>D", ":<C-u>DiffviewOpen<CR>", { noremap = true, desc = "DiffviewOpen" })
--- vim.keymap.set("n", "<Leader>dc", ":<C-u>DiffviewClose<CR>", { noremap = true, desc = "DiffviewClose" })
-vim.keymap.set("n", "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", { noremap = true, desc = "DiffviewRefresh" })
+local opts = { silent = true, noremap = true }
+opts.desc = "DiffviewOpen"
+vim.keymap.set("n", "<Leader>D", ":<C-u>DiffviewOpen<CR>", opts)
+-- opts.desc = "DiffviewClose"
+-- vim.keymap.set("n", "<Leader>dc", ":<C-u>DiffviewClose<CR>", opts)
+opts.desc = "DiffviewRefresh"
+vim.keymap.set("n", "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", opts)

@@ -1,5 +1,17 @@
 local harpoon = require("harpoon")
-harpoon:setup({})
+
+-- config
+local config = {
+  settings = {
+    save_on_toggle = false,
+    sync_on_ui_close = false,
+    save_on_change = true,
+    key = function()
+      return vim.loop.cwd()
+    end,
+  },
+}
+harpoon:setup(config)
 
 -- keymaps
 local keymap = vim.keymap
