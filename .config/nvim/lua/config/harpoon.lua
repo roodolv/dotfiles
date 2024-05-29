@@ -1,5 +1,5 @@
 local harpoon = require("harpoon")
-harpoon:setup({})
+harpoon:setup()
 
 -- keymaps
 local keymap = vim.keymap

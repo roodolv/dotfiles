@@ -139,10 +139,29 @@ return {
   {
     "tamton-aquib/staline.nvim",
     lazy = false,
+    -- dependencies = {
+    --   "abeldekat/harpoonline",
+    -- },
     config = function()
       require("config/staline")
     end,
   },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-tree/nvim-web-devicons",
+  --     -- {
+  --     --   "letieu/harpoon-lualine",
+  --     --   dependencies = {
+  --     --     "ThePrimeagen/harpoon",
+  --     --   },
+  --     -- },
+  --   },
+  --   config = function()
+  --     require("config/lualine")
+  --   end,
+  -- },
   -----------------------------------------------------------------
   -- visual(syntax/indent/etc)
   -----------------------------------------------------------------
