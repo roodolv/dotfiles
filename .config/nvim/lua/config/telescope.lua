@@ -117,8 +117,11 @@ opts.desc = "Telescope ext dap-breakpoints"
 keymap.set("n", "<Leader>dB", function() ext.dap.list_breakpoints() end, opts)
 opts.desc = "Telescope ext dap-frames"
 keymap.set("n", "<Leader>df", function() ext.dap.frames() end, opts)
+opts.desc = "Telescope bookmarks"
+keymap.set("n", "<Leader>fB", ":<C-u>Telescope bookmarks<CR>", opts)
 
 -- load extensions
 telescope.load_extension("frecency")
 telescope.load_extension("aerial")
 telescope.load_extension("dap")
+telescope.load_extension("bookmarks")

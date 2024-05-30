@@ -66,7 +66,7 @@ return {
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
-      "<Leader>dB", "<Leader>df",
+      "<Leader>dB", "<Leader>df", "<Leader>fB",
     },
     config = function()
       require("config/telescope")
@@ -107,6 +107,24 @@ return {
         },
       })
     end,
+  },
+  {
+    "crusj/bookmarks.nvim",
+    lazy = true,
+    branch = "main",
+    dependencies = { "nvim-web-devicons" },
+    keys = { "<Tab><Tab>", "<Leader>bg", "<Leader>bl", "<Leader>bd", "<Leader>bs" },
+    config = function()
+      require("config/bookmarks")
+    end,
+  },
+  {
+    "otavioschwanck/arrow.nvim",
+    lazy = true,
+    keys = { "'", "\\", "<S-Down>", "<S-Up>" },
+    config = function()
+      require("config/arrow")
+    end
   },
   -----------------------------------------------------------------
   -- filer/browser
@@ -447,9 +465,9 @@ return {
       -- adapters
       "nvim-neotest/neotest-jest",
       "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-go",
-      "alfaix/neotest-gtest",
-      "rcasia/neotest-bash",
+      -- "nvim-neotest/neotest-go",
+      -- "alfaix/neotest-gtest",
+      -- "rcasia/neotest-bash",
       -- "adrigzr/neotest-mocha",
       -- "jfpedroza/neotest-elixir",
       -- "olimorris/neotest-phpunit",
@@ -526,7 +544,7 @@ return {
       "kana/vim-operator-user",
     },
     keys = {
-      { "'", "<Plug>(operator-replace)", silent = true },
+      { "<Leader>r", "<Plug>(operator-replace)", silent = true },
     },
   },
   {

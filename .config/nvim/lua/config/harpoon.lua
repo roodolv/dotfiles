@@ -4,7 +4,7 @@ local harpoon = require("harpoon")
 local config = {
   settings = {
     save_on_toggle = false,
-    sync_on_ui_close = false,
+    sync_on_ui_close = true,
     save_on_change = true,
     key = function()
       return vim.loop.cwd()
