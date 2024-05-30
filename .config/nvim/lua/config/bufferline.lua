@@ -45,8 +45,12 @@ bufferline.setup({
 
 -- keymaps
 local opts = { silent = true, noremap = true }
+
+----- for "buffers" mode
 -- vim.keymap.set("n", "<Leader>>>", ":<C-u>BufferLineMoveNext<CR>", opts)
 -- vim.keymap.set("n", "<Leader><<", ":<C-u>BufferLineMovePrev<CR>", opts)
+-- vim.keymap.set("n", "<Leader>bp", ":<C-u>BufferLineTogglePin<CR>", opts)
+
+----- for "tabs" mode
 vim.keymap.set("n", "<C-Right>", ":<C-u>BufferLineCycleNext<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":<C-u>BufferLineCyclePrev<CR>", opts)
-vim.keymap.set("n", "<Leader>bp", ":<C-u>BufferLineTogglePin<CR>", opts)

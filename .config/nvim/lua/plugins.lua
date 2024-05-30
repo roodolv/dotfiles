@@ -66,7 +66,7 @@ return {
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
-      "<Leader>dB", "<Leader>df",
+      "<Leader>dB", "<Leader>df", "<Leader>fB",
     },
     config = function()
       require("config/telescope")
@@ -107,6 +107,24 @@ return {
         },
       })
     end,
+  },
+  {
+    "crusj/bookmarks.nvim",
+    lazy = true,
+    branch = "main",
+    dependencies = { "nvim-web-devicons" },
+    keys = { "<Tab><Tab>", "<Leader>bg", "<Leader>bl", "<Leader>bd", "<Leader>bs" },
+    config = function()
+      require("config/bookmarks")
+    end,
+  },
+  {
+    "otavioschwanck/arrow.nvim",
+    lazy = true,
+    keys = { "'", "\\", "<S-Down>", "<S-Up>" },
+    config = function()
+      require("config/arrow")
+    end
   },
   -----------------------------------------------------------------
   -- filer/browser
@@ -201,6 +219,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     main = "ibl",
     opts = {},
+    config = function()
+      require("config/indent-blankline")
+    end,
   },
   {
     "folke/todo-comments.nvim",
@@ -321,9 +342,8 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "LspAttach",
-    opts = {},
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
+    config = function()
+      require("config/lsp_signature")
     end,
   },
   -----------------------------------------------------------------
@@ -336,6 +356,7 @@ return {
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "SmiteshP/nvim-navbuddy",
+      "windwp/nvim-autopairs",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -444,9 +465,9 @@ return {
       -- adapters
       "nvim-neotest/neotest-jest",
       "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-go",
-      "alfaix/neotest-gtest",
-      "rcasia/neotest-bash",
+      -- "nvim-neotest/neotest-go",
+      -- "alfaix/neotest-gtest",
+      -- "rcasia/neotest-bash",
       -- "adrigzr/neotest-mocha",
       -- "jfpedroza/neotest-elixir",
       -- "olimorris/neotest-phpunit",
@@ -505,6 +526,15 @@ return {
     end
   },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+      })
+    end
+  },
+  {
     "tommcdo/vim-exchange",
     event = { "BufReadPre", "BufNewFile" },
   },
@@ -514,7 +544,7 @@ return {
       "kana/vim-operator-user",
     },
     keys = {
-      { "'", "<Plug>(operator-replace)", silent = true },
+      { "<Leader>r", "<Plug>(operator-replace)", silent = true },
     },
   },
   {
@@ -525,10 +555,6 @@ return {
       { "g*", "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)" },
       { "g#", "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)" },
     },
-  },
-  {
-    "jiangmiao/auto-pairs",
-    -- event = { "BufReadPre", "BufNewFile", "BufEnter" },
   },
   {
     "bronson/vim-trailing-whitespace",
