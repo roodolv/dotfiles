@@ -57,7 +57,7 @@ vim.o.bufhidden = 'wipe'
 
 -- cmdline
 vim.o.showcmd = true
--- vim.o.cmdheight = 0
+vim.o.cmdheight = 0
 vim.o.inccommand = 'split'
 
 -- netrw off
@@ -68,7 +68,9 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- vim.o.shellslash = true
+-- if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+--   vim.o.shellslash = true
+-- end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true

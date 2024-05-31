@@ -30,13 +30,29 @@ telescope.setup({
     mappings = {
       i = {
         ["<Esc>"] = actions.close,
+        ----- trouble.nvim
         ["<M-t>"] = open_with_trouble,
         ["<M-S-t>"] = add_to_trouble,
+        ----- cder.nvim
+        default = function(directory)
+          vim.cmd.cd(directory)
+        end,
+        ["<C-t>"] = function(directory)
+          vim.cmd.tcd(directory)
+        end,
       },
       n = {
         ["q"] = actions.close,
+        ----- trouble.nvim
         ["<M-t>"] = open_with_trouble,
         ["<M-S-t>"] = add_to_trouble,
+        ----- cder.nvim
+        default = function(directory)
+          vim.cmd.cd(directory)
+        end,
+        ["<C-t>"] = function(directory)
+          vim.cmd.tcd(directory)
+        end,
       },
     },
   },
@@ -53,6 +69,51 @@ telescope.setup({
         json = true,
         yaml = true,
       },
+    },
+    frecency = {
+      db_safe_mode = false, -- NOTE: for noice.nvim
+    },
+    cder = {
+      command_executer = { "bash", "-c" },
+      -- dir_command = { "fd", "--type=d", ".", os.getenv("HOME") },
+      dir_command = {
+        "fd",
+        "-H",
+        "-L",
+        "-d=1",
+        "-t=d",
+        ".",
+        os.getenv("HOME") .. "/.config",
+        os.getenv("HOME") .. "/.venvs",
+        os.getenv("XDG_DATA_HOME") .. "/nvim-data/lazy",
+        os.getenv("DEV_PROJ"),
+        "-E=dict",
+        "-E=docs",
+      },
+      entry_maker = function(line)
+        return {
+          value = line,
+          display = function(entry)
+            return "" .. line:gsub(os.getenv("HOME") .. "/", ""), { { { 1, 3 }, "Directory" } }
+          end,
+          ordinal = line,
+        }
+      end,
+      pager_command = "bat --plain --paging=always --pager='less -RS'",
+      previewer_command =
+          "exa " ..
+          "-a " ..
+          "--color=always " ..
+          "-T " ..
+          "--level=3 " ..
+          "--icons " ..
+          "--git-ignore " ..
+          "--long " ..
+          "--no-permissions " ..
+          "--no-user " ..
+          "--no-filesize " ..
+          "--git " ..
+          "--ignore-glob=.git",
     },
   },
 })
@@ -119,9 +180,17 @@ opts.desc = "Telescope ext dap-frames"
 keymap.set("n", "<Leader>df", function() ext.dap.frames() end, opts)
 opts.desc = "Telescope bookmarks"
 keymap.set("n", "<Leader>fB", ":<C-u>Telescope bookmarks<CR>", opts)
+opts.desc = "Telescope noice"
+keymap.set("n", "<Leader>fn", ":<C-u>Telescope noice<CR>", opts)
+opts.desc = "Telescope cder"
+keymap.set("n", "<Leader>f\\", ":<C-u>Telescope cder<CR>", opts)
+opts.desc = "Telescope Todo"
+keymap.set("n", "<Leader>tt", ":<C-u>TodoTelescope<CR>", opts)
 
 -- load extensions
 telescope.load_extension("frecency")
 telescope.load_extension("aerial")
 telescope.load_extension("dap")
 telescope.load_extension("bookmarks")
+telescope.load_extension("noice")
+telescope.load_extension("cder")
