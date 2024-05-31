@@ -60,13 +60,15 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
       "nvim-telescope/telescope-dap.nvim",
+      "zane-/cder.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
-      "<Leader>dB", "<Leader>df", "<Leader>fB",
+      "<Leader>dB", "<Leader>df", "<Leader>fB", "<Leader>fn", "<Leader>f\\",
+      "<Leader>tt",
     },
     config = function()
       require("config/telescope")
@@ -132,6 +134,7 @@ return {
   {
     "stevearc/oil.nvim",
     cmd = "Oil",
+    keys = "-",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       -- {
@@ -144,15 +147,12 @@ return {
       --   end,
       -- },
     },
-    init = function()
-      vim.keymap.set("n", "-", ":<C-u>Oil .<CR>", { silent = true })
-    end,
     config = function()
       require("config/oil")
     end,
   },
   -----------------------------------------------------------------
-  -- visual(statusline/bufferline/etc)
+  -- visual(statusline/bufferline/cmdline/etc)
   -----------------------------------------------------------------
   {
     "tamton-aquib/staline.nvim",
@@ -185,6 +185,30 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require("config/bufferline")
+    end,
+  },
+  {
+    "folke/noice.nvim",
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require("config/noice")
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    lazy = true,
+    keys = { "WhichKey", "<Leader>K" },
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    config = function()
+      require("config/which-key")
     end,
   },
   -----------------------------------------------------------------
@@ -229,8 +253,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("config/todo-comments")
-      vim.api.nvim_set_keymap("n", "<Leader>tt", ":<C-u>TodoTelescope<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("n", "<Leader>tQ", ":<C-u>TodoQuickFix<CR>", { noremap = true })
     end,
   },
   {
@@ -253,6 +275,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/illuminate")
+    end,
+  },
+  {
+    "tamton-aquib/duck.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/duck")
     end,
   },
   -----------------------------------------------------------------
@@ -360,10 +389,12 @@ return {
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "petertriho/cmp-git",
+      "onsails/lspkind.nvim",
       -- For LuaSnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
@@ -381,9 +412,6 @@ return {
     build = "make install_jsregexp",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-      local ls = require("luasnip")
-      vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
     end
   },
   {

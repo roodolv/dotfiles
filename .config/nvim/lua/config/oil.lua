@@ -155,3 +155,5 @@ require("oil").setup({
     border = "rounded",
   },
 })
+
+vim.keymap.set("n", "-", ":<C-u>Oil .<CR>", { silent = true, noremap = true })

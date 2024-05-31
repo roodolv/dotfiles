@@ -24,9 +24,9 @@ bookmarks.setup({
     focus_bookmarks = "<C-k>",
     toogle_focus = "<S-Tab>",
   },
-  width = 0.8,         -- (0, 1]
-  height = 0.7,        -- (0, 1]
-  preview_ratio = 0.7, -- (0, 1]
+  width = 0.9,          -- (0, 1]
+  height = 0.65,        -- (0, 1]
+  preview_ratio = 0.35, -- (0, 1]
   tags_ratio = 0.1,
   fix_enable = true,
 

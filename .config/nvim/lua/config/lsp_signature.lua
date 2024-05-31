@@ -23,10 +23,22 @@ local cfg = {
 }
 signature.setup(cfg)
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    signature.on_attach({
+      bind = true,
+      floating_window = false,
+      hint_prefix = "",
+      hint_scheme = "Comment",
+    }, bufnr)
+  end,
+})
+
 vim.keymap.set({ "n" }, "<C-k>", function()
   require("lsp_signature").toggle_float_win()
 end, { silent = true, noremap = true, desc = "toggle signature" })
 
-vim.keymap.set({ "n" }, "<Leader>k", function()
+vim.keymap.set({ "n" }, "<C-S-k>", function()
   vim.lsp.buf.signature_help()
 end, { silent = true, noremap = true, desc = "toggle signature" })
