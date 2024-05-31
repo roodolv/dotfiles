@@ -128,10 +128,6 @@ return {
       require("config/arrow")
     end
   },
-  -- {
-  --   "zane-/cder.nvim",
-  --   lazy = true,
-  -- },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
@@ -279,6 +275,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("config/illuminate")
+    end,
+  },
+  {
+    "tamton-aquib/duck.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/duck")
     end,
   },
   -----------------------------------------------------------------
