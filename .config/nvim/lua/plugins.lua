@@ -50,6 +50,13 @@ return {
       require("config/undotree")
     end,
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    version = "*",
+    config = function()
+      require("config/no-neck-pain")
+    end,
+  },
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
