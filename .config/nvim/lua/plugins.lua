@@ -75,7 +75,9 @@ return {
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
       "<Leader>dB", "<Leader>df", "<Leader>fB", "<Leader>fn", "<Leader>f\\",
-      "<Leader>tt",
+      "<Leader>tt", "<Leader>ft", "<Leader>fC", "<Leader>fa",
+      "<Leader>fS", "<Leader>fR", "<Leader>fd", "<Leader>fD", "<Leader>fi",
+      "<Leader>fGc", "<Leader>fGC", "<Leader>fGb", "<Leader>fGs", "<Leader>fGS",
     },
     config = function()
       require("config/telescope")
@@ -383,7 +385,7 @@ return {
     end,
   },
   -----------------------------------------------------------------
-  -- completion/snippets/format
+  -- completion/snippets/format/lint
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
@@ -440,6 +442,14 @@ return {
   --   config = function()
   --     require("codeium").setup({})
   --   end
+  -- },
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function()
+  --     require("config/nvim-lint")
+  --   end,
   -- },
   -----------------------------------------------------------------
   -- language-specific

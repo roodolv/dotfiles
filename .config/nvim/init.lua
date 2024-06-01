@@ -107,16 +107,16 @@ vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true }
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
 
 -- QuickFix
-vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
 
 -- loclist
-vim.api.nvim_set_keymap('n', '<C-M-Down>', ':<C-u>lnext<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-M-Up>', ':<C-u>lprev<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Down>', ':<C-u>lnext<CR>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Up>', ':<C-u>lprev<CR>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-Right>', ':<C-u>lnew<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-Left>', ':<C-u>lol<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-o>', ':<C-u>lw<CR>', { noremap = true })

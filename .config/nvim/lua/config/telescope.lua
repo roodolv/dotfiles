@@ -1,6 +1,7 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
+local previewers = require("telescope.previewers")
 local ext = telescope.extensions
 
 local open_with_trouble = require("trouble.sources.telescope").open
@@ -126,8 +127,8 @@ opts.desc = "Telescope find_files"
 keymap.set("n", "<Leader>ff", ":<C-u>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git<CR>", opts)
 opts.desc = "Telescope live_grep"
 keymap.set("n", "<Leader>fg", ":<C-u>Telescope live_grep<CR>", opts)
-opts.desc = "Telescope git_files"
-keymap.set("n", "<Leader>fG", ":<C-u>Telescope git_files<CR>", opts)
+opts.desc = "Telescope Git files"
+keymap.set("n", "<Leader>fGf", ":<C-u>Telescope git_files<CR>", opts)
 opts.desc = "Telescope current buffer"
 keymap.set("n", "<Leader>fl", ":<C-u>Telescope current_buffer_fuzzy_find<CR>", opts)
 opts.desc = "Telescope jumplist"
@@ -186,6 +187,34 @@ opts.desc = "Telescope cder"
 keymap.set("n", "<Leader>f\\", ":<C-u>Telescope cder<CR>", opts)
 opts.desc = "Telescope Todo"
 keymap.set("n", "<Leader>tt", ":<C-u>TodoTelescope<CR>", opts)
+opts.desc = "Telescope Treesitter symbols"
+keymap.set("n", "<Leader>ft", ":<C-u>Telescope treesitter<CR>", opts)
+opts.desc = "Telescope colorscheme"
+keymap.set("n", "<Leader>fC", ":<C-u>Telescope colorscheme<CR>", opts)
+opts.desc = "Telescope autocommands"
+keymap.set("n", "<Leader>fa", ":<C-u>Telescope autocommands<CR>", opts)
+
+-- NativeLSP pickers
+opts.desc = "Telescope LSP dynamic workspace symbols"
+keymap.set("n", "<Leader>fS", function() builtin.lsp_dynamic_workspace_symbols() end, opts)
+opts.desc = "Telescope LSP references"
+keymap.set("n", "<Leader>fR", function() builtin.lsp_references() end, opts)
+opts.desc = "Telescope LSP definitions"
+keymap.set("n", "<Leader>fd", function() builtin.lsp_definitions() end, opts)
+opts.desc = "Telescope LSP type definitions"
+keymap.set("n", "<Leader>fD", function() builtin.lsp_type_definitions() end, opts)
+opts.desc = "Telescope LSP implementations"
+keymap.set("n", "<Leader>fi", function() builtin.lsp_implementations() end, opts)
+
+-- Git pickers
+opts.desc = "Telescope Git commits"
+keymap.set("n", "<Leader>fGc", function() builtin.git_commits() end, opts)
+opts.desc = "Telescope Git branches"
+keymap.set("n", "<Leader>fGb", function() builtin.git_branches() end, opts)
+opts.desc = "Telescope Git status"
+keymap.set("n", "<Leader>fGs", function() builtin.git_status() end, opts)
+opts.desc = "Telescope Git stash"
+keymap.set("n", "<Leader>fGS", function() builtin.git_stash() end, opts)
 
 -- load extensions
 telescope.load_extension("frecency")
