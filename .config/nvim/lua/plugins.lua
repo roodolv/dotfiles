@@ -52,6 +52,7 @@ return {
   },
   {
     "shortcuts/no-neck-pain.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     version = "*",
     config = function()
       require("config/no-neck-pain")
@@ -385,8 +386,25 @@ return {
     end,
   },
   -----------------------------------------------------------------
-  -- completion/snippets/format/lint
+  -- lint/format/completion/snippets
   -----------------------------------------------------------------
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function()
+  --     require("config/nvim-lint")
+  --   end,
+  -- },
+  {
+    "stevearc/conform.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+    config = function()
+      require("config/conform")
+    end,
+  },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
@@ -423,15 +441,6 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
     end
   },
-  {
-    "stevearc/conform.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-    config = function()
-      require("config/conform")
-    end,
-  },
   -- {
   --   "Exafunction/codeium.nvim",
   --   event = "VeryLazy",
@@ -442,14 +451,6 @@ return {
   --   config = function()
   --     require("codeium").setup({})
   --   end
-  -- },
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   lazy = true,
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   config = function()
-  --     require("config/nvim-lint")
-  --   end,
   -- },
   -----------------------------------------------------------------
   -- language-specific

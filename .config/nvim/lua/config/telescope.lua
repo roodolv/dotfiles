@@ -219,7 +219,7 @@ keymap.set("n", "<Leader>fS", function()
   builtin.lsp_dynamic_workspace_symbols()
 end, opts)
 opts.desc = "Telescope LSP references"
-keymap.set("n", "<Leader>fR", function()
+keymap.set("n", "<Leader>fr", function()
   builtin.lsp_references()
 end, opts)
 opts.desc = "Telescope LSP definitions"
