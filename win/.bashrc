@@ -1,4 +1,6 @@
 export LANG=ja_JP.UTF-8
+eval "$(gh completion -s bash)" # gh-cli
+
 # unix
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
