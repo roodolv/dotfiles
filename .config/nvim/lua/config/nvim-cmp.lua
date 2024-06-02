@@ -140,11 +140,16 @@ require('neodev').setup({
 -- Setup lspconfig
 local lspconfig = require('lspconfig')
 local configs = require("lspconfig.configs")
+-- NOTE: servers: "nvim-data/lazy/nvim-lspconfig/doc/server_configurations.md"
 local servers = {
   'lua_ls',
-  'tsserver',
-  'ruff_lsp',
   'bashls',
+  'jsonls',
+  'html',
+  'cssls',
+  'ruff_lsp',
+  'tsserver',
+  -- 'biome',
 }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local navbuddy = require('nvim-navbuddy')

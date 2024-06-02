@@ -51,3 +51,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap.set('n', '<Leader>lr', ':<C-u>LspRestart<CR>', opts)
   end,
 })
+
+-- NOTE: lspconfig's setup is on "cmp.lua"

@@ -296,18 +296,18 @@ return {
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("config/mason-lspconfig")
-    end,
-  },
+  -- {
+  --   "williamboman/mason-lspconfig.nvim",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   config = function()
+  --     require("config/mason-lspconfig")
+  --   end,
+  -- },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -392,9 +392,7 @@ return {
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      "SmiteshP/nvim-navbuddy",
-      "windwp/nvim-autopairs",
+      -- "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -403,11 +401,13 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "petertriho/cmp-git",
+      "SmiteshP/nvim-navbuddy",
+      "windwp/nvim-autopairs",
       "onsails/lspkind.nvim",
-      -- For LuaSnip
+      ----- For LuaSnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      -- For Neovim Lua API
+      ----- For Neovim Lua API
       "folke/neodev.nvim",
     },
     config = function()

@@ -5,13 +5,16 @@ conform.setup({
     -- Use a sub-list { { "formatter-a", "formatter-b" } } to run only the first available formatter
     -- lua = { "stylua" },
     rust = { { "rustfmt" } },
-    python = { { "ruff_fix", "ruff_format", "prettierd" } },
+    python = { { "ruff_fix", "ruff_format" } },
     javascript = { { "biome", "prettierd" } },
     typescript = { { "biome", "prettierd" } },
-    javascriptreact = { { "biome", "prettierd" } },
-    typescriptreact = { { "biome", "prettierd" } },
-    json = { { "prettierd", "biome" } },
-    jsonc = { { "prettierd", "biome" } },
+    javascriptreact = { { "biome" } },
+    typescriptreact = { { "biome" } },
+    json = { { "biome" } },
+    jsonc = { { "biome" } },
+    yaml = { { "prettierd", "biome" } },
+    html = { { "prettierd", "biome" } },
+    css = { { "prettierd", "biome" } },
   },
   format_on_save = {
     -- These options will be passed to conform.format()
