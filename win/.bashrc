@@ -1,5 +1,6 @@
 export LANG=ja_JP.UTF-8
 eval "$(gh completion -s bash)" # gh-cli
+eval "$(zoxide init bash)"
 
 # unix
 alias ls='ls --color=auto'

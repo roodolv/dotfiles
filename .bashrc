@@ -127,3 +127,4 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="~/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 eval "$(gh completion -s bash)" # gh-cli
+eval "$(zoxide init bash)"
