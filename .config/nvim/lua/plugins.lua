@@ -50,6 +50,14 @@ return {
       require("config/undotree")
     end,
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    version = "*",
+    config = function()
+      require("config/no-neck-pain")
+    end,
+  },
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
@@ -68,7 +76,9 @@ return {
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
       "<Leader>dB", "<Leader>df", "<Leader>fB", "<Leader>fn", "<Leader>f\\",
-      "<Leader>tt",
+      "<Leader>tt", "<Leader>ft", "<Leader>fC", "<Leader>fa",
+      "<Leader>fS", "<Leader>fR", "<Leader>fd", "<Leader>fD", "<Leader>fi",
+      "<Leader>fGc", "<Leader>fGC", "<Leader>fGb", "<Leader>fGs", "<Leader>fGS",
     },
     config = function()
       require("config/telescope")
@@ -287,18 +297,18 @@ return {
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("config/mason-lspconfig")
-    end,
-  },
+  -- {
+  --   "williamboman/mason-lspconfig.nvim",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   config = function()
+  --     require("config/mason-lspconfig")
+  --   end,
+  -- },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -376,16 +386,31 @@ return {
     end,
   },
   -----------------------------------------------------------------
-  -- completion/snippets/format
+  -- lint/format/completion/snippets
   -----------------------------------------------------------------
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function()
+  --     require("config/nvim-lint")
+  --   end,
+  -- },
+  {
+    "stevearc/conform.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+    config = function()
+      require("config/conform")
+    end,
+  },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      "SmiteshP/nvim-navbuddy",
-      "windwp/nvim-autopairs",
+      -- "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -394,11 +419,13 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "petertriho/cmp-git",
+      "SmiteshP/nvim-navbuddy",
+      "windwp/nvim-autopairs",
       "onsails/lspkind.nvim",
-      -- For LuaSnip
+      ----- For LuaSnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      -- For Neovim Lua API
+      ----- For Neovim Lua API
       "folke/neodev.nvim",
     },
     config = function()
@@ -413,15 +440,6 @@ return {
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end
-  },
-  {
-    "stevearc/conform.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-    config = function()
-      require("config/conform")
-    end,
   },
   -- {
   --   "Exafunction/codeium.nvim",
