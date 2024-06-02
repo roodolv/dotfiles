@@ -2,8 +2,8 @@ local conform = require("conform")
 
 conform.setup({
   formatters_by_ft = {
-    -- Use a sub-list { { "formatter-a", "formatter-b" } } to run only the first available formatter
-    -- lua = { "stylua" },
+    -- { { "A", "B" } } runs only the first available formatter
+    lua = { { "stylua" } },
     rust = { { "rustfmt" } },
     python = { { "ruff_fix", "ruff_format" } },
     javascript = { { "biome", "prettierd" } },
