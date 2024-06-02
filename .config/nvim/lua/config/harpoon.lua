@@ -10,6 +10,11 @@ local config = {
       return vim.loop.cwd()
     end,
   },
+  default = {
+    get_root_dir = function()
+      return vim.loop.cwd()
+    end,
+  },
 }
 harpoon:setup(config)
 

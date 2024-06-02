@@ -1,18 +1,14 @@
 local staline = require("staline")
 
--- harpoon integration
--- local harpoonline = require("harpoonline")
--- harpoonline.setup()
-
 -- arrow integration
-local arrow = require("arrow.statusline")
-local arrow_status = function()
-  if arrow.is_on_arrow_file() == nil then
-    return ""
-  else
-    return " " .. arrow.text_for_statusline_with_icons() .. " "
-  end
-end
+-- local arrow = require("arrow.statusline")
+-- local arrow_status = function()
+--   if arrow.is_on_arrow_file() == nil then
+--     return ""
+--   else
+--     return " " .. arrow.text_for_statusline_with_icons() .. " "
+--   end
+-- end
 
 -- gitsigns integration
 local gitsigns_check = vim.fn.has("nvim-0.7") == 1
@@ -29,12 +25,11 @@ staline.setup({
   sections = {
     left = {
       { "Staline",     git_branch },
-      { "Staline",     arrow_status },
+      -- { "Staline",     arrow_status },
       { "StalineFile", "file_name" },
       " ", "lsp"
     },
     mid = {
-      -- " ", { "Staline", function() return harpoonline.format() .. " " end },
     },
     right = {
       " ", { "Staline", function() return vim.bo[0].fileencoding .. " " end }, "",

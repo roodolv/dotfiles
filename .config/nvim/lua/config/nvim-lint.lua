@@ -12,7 +12,7 @@ lint.linters_by_ft = {
   -- typescript = { "biomejs" },
   -- javascriptreact = { "biomejs" },
   -- typescriptreact = { "biomejs" },
-  -- TODO: setup linters on local
+  -- -- setup linters on local
   -- lua = { "luacheck" },
   -- sh = { "shellcheck" },
   -- sql = { "sqlfluff" },

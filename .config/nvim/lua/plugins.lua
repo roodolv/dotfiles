@@ -10,15 +10,15 @@ return {
       vim.cmd.colorscheme("tokyonight")
     end
   },
-  -- {
-  --   "sainnhe/everforest",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.g.everforest_enable_italic = true
-  --     vim.cmd.colorscheme("everforest")
-  --   end,
-  -- },
+  {
+    "sainnhe/everforest",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.everforest_enable_italic = true
+      -- vim.cmd.colorscheme("everforest")
+    end,
+  },
   -----------------------------------------------------------------
   -- startup
   -----------------------------------------------------------------
@@ -167,9 +167,6 @@ return {
   {
     "tamton-aquib/staline.nvim",
     lazy = false,
-    -- dependencies = {
-    --   "abeldekat/harpoonline",
-    -- },
     config = function()
       require("config/staline")
     end,
@@ -179,10 +176,6 @@ return {
   --   lazy = false,
   --   dependencies = {
   --     "nvim-tree/nvim-web-devicons",
-  --     {
-  --       "letieu/harpoon-lualine",
-  --       dependencies = { "ThePrimeagen/harpoon", },
-  --     },
   --   },
   --   config = function()
   --     require("config/lualine")
@@ -297,6 +290,13 @@ return {
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    config = function()
+      require("config/lspconfig")
+    end,
+  },
   -- {
   --   "williamboman/mason-lspconfig.nvim",
   --   lazy = true,
@@ -310,10 +310,22 @@ return {
   --   end,
   -- },
   {
-    "neovim/nvim-lspconfig",
-    lazy = true,
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
-      require("config/lspconfig")
+      require("config/lspsaga")
+    end,
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    lazy = true,
+    event = "LspAttach",
+    config = function()
+      require("config/actions-preview")
     end,
   },
   {
@@ -355,56 +367,13 @@ return {
     end,
   },
   {
-    "nvimdev/lspsaga.nvim",
-    event = "LspAttach",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("config/lspsaga")
-    end,
-  },
-  {
-    "aznhe21/actions-preview.nvim",
-    lazy = true,
-    event = "LspAttach",
-    config = function()
-      require("config/actions-preview")
-    end,
-  },
-  {
     "j-hui/fidget.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
   },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "LspAttach",
-    config = function()
-      require("config/lsp_signature")
-    end,
-  },
   -----------------------------------------------------------------
-  -- lint/format/completion/snippets
+  -- completion/snippets/format/lint
   -----------------------------------------------------------------
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   lazy = true,
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   config = function()
-  --     require("config/nvim-lint")
-  --   end,
-  -- },
-  {
-    "stevearc/conform.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-    config = function()
-      require("config/conform")
-    end,
-  },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
@@ -433,6 +402,13 @@ return {
     end
   },
   {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    config = function()
+      require("config/lsp_signature")
+    end,
+  },
+  {
     "L3MON4D3/LuaSnip",
     lazy = true,
     dependencies = { "rafamadriz/friendly-snippets" },
@@ -440,6 +416,15 @@ return {
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end
+  },
+  {
+    "stevearc/conform.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+    config = function()
+      require("config/conform")
+    end,
   },
   -- {
   --   "Exafunction/codeium.nvim",
@@ -451,6 +436,14 @@ return {
   --   config = function()
   --     require("codeium").setup({})
   --   end
+  -- },
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function()
+  --     require("config/nvim-lint")
+  --   end,
   -- },
   -----------------------------------------------------------------
   -- language-specific
