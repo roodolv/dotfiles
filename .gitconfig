@@ -3,7 +3,8 @@
     email = 113752412+roodolv@users.noreply.github.com
 [core]
     editor = vim
-    pager = LESSCHARSET=utf-8 less
+    # pager = LESSCHARSET=utf-8 less
+    pager = delta
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [alias]
@@ -25,6 +26,15 @@
     ff = only
 [merge]
     ff = false
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true # press "n" or "N" to move to the next diff
+    side-by-side = true
+    line-numbers = true
 [filter "lfs"]
     required = true
     clean = git-lfs clean -- %f

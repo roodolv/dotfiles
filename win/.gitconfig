@@ -3,7 +3,8 @@
     email = 113752412+roodolv@users.noreply.github.com
 [core]
     editor = nvim
-    pager = LESSCHARSET=utf-8 less
+    # pager = LESSCHARSET=utf-8 less
+    pager = delta
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [alias]
@@ -29,9 +30,11 @@
     default = simple
 [diff]
     tool = vscode
+    colorMoved = default
 [merge]
     tool = winmerge
     ff = false
+    conflictstyle = diff3
 [difftool "vscode"]
     cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
 [mergetool "vscode"]
@@ -40,6 +43,12 @@
     cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" -f \"*.*\" -e -u -r \"$LOCAL\" \"$REMOTE\"
 [mergetool "winmerge"]
     cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" -e -u \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true # press "n" or "N" to move to the next diff
+    side-by-side = true
+    line-numbers = true
 [filter "lfs"]
     required = true
     clean = git-lfs clean -- %f
