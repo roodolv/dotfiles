@@ -21,6 +21,7 @@ cmp.setup({
       maxwidth = 50,
       ellipsis_char = "...",
       show_labelDetails = true,
+      symbol_map = { Codeium = "" },
 
       -- before = function (entry, vim_item)
       --   return vim_item
@@ -46,20 +47,20 @@ cmp.setup({
       select = true,
     }),
     -- LuaSnip keymaps
-    ["<C-k><C-e>"] = cmp.mapping(function(fallback)
-      if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<C-k><C-c>"] = cmp.mapping(function(fallback)
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    -- ["<C-k><C-e>"] = cmp.mapping(function(fallback)
+    --   if luasnip.expand_or_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s" }),
+    -- ["<C-k><C-c>"] = cmp.mapping(function(fallback)
+    --   if luasnip.choice_active() then
+    --     luasnip.change_choice(1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s" }),
     -- Tab setting: https://github.com/ray-x/lsp_signature.nvim/blob/master/tests/init_paq.lua
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -82,7 +83,7 @@ cmp.setup({
       end
     end, { "i", "s" }),
     ----- disable keymap
-    -- ['<C-e>'] = cmp.mapping.abort(),
+    -- ["<C-e>"] = cmp.mapping.abort(),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -93,6 +94,7 @@ cmp.setup({
     { name = "cmdline" },
     { name = "nvim_lua" },
     { name = "crates" },
+    { name = "codeium" },
   }),
 })
 

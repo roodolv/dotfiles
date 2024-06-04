@@ -426,17 +426,26 @@ return {
       require("config/conform")
     end,
   },
-  -- {
-  --   "Exafunction/codeium.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp",
-  --   },
-  --   config = function()
-  --     require("codeium").setup({})
-  --   end
-  -- },
+  {
+    "Exafunction/codeium.vim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    config = function ()
+      require("config/codeium-vim")
+    end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("config/codeium-nvim")
+    end
+  },
   -- {
   --   "mfussenegger/nvim-lint",
   --   lazy = true,
@@ -531,6 +540,32 @@ return {
       require("config/nvim-dap")
     end,
   },
+  -----------------------------------------------------------------
+  -- terminal/external
+  -----------------------------------------------------------------
+  ---TODO: add toggle-term here
+  -- {
+  --   "",
+  --   keys = {
+  --   },
+  --   dependencies = {
+  --     "",
+  --   },
+  --   config = function()
+  --     require("config/toggle-term")
+  --   end,
+  -- },
+  -- {
+  --   "",
+  --   keys = {
+  --   },
+  --   dependencies = {
+  --     "",
+  --   },
+  --   config = function()
+  --     require("config/toggle-term-manager")
+  --   end,
+  -- },
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
