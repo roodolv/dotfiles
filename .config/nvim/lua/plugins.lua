@@ -76,7 +76,7 @@ return {
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
       "<Leader>dB", "<Leader>df", "<Leader>fB", "<Leader>fn", "<Leader>f\\",
-      "<Leader>tt", "<Leader>ft", "<Leader>fC", "<Leader>fa",
+      "<Leader>ft", "<Leader>fC", "<Leader>fa",
       "<Leader>fS", "<Leader>fR", "<Leader>fd", "<Leader>fD", "<Leader>fi",
       "<Leader>fGc", "<Leader>fGC", "<Leader>fGb", "<Leader>fGs", "<Leader>fGS",
     },
@@ -208,7 +208,7 @@ return {
     keys = { "WhichKey", "<Leader>K" },
     init = function()
       vim.o.timeout = true
-      vim.o.timeoutlen = 300
+      vim.o.timeoutlen = 500
     end,
     config = function()
       require("config/which-key")
@@ -543,29 +543,15 @@ return {
   -----------------------------------------------------------------
   -- terminal/external
   -----------------------------------------------------------------
-  ---TODO: add toggle-term here
-  -- {
-  --   "",
-  --   keys = {
-  --   },
-  --   dependencies = {
-  --     "",
-  --   },
-  --   config = function()
-  --     require("config/toggle-term")
-  --   end,
-  -- },
-  -- {
-  --   "",
-  --   keys = {
-  --   },
-  --   dependencies = {
-  --     "",
-  --   },
-  --   config = function()
-  --     require("config/toggle-term-manager")
-  --   end,
-  -- },
+  {
+    "akinsho/toggleterm.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    version = "*",
+    config = function()
+      require("config/toggleterm")
+    end,
+  },
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
@@ -633,7 +619,7 @@ return {
   {
     "bronson/vim-trailing-whitespace",
     keys = {
-      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
+      { "zt", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
     },
   },
 }

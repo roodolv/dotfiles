@@ -21,15 +21,25 @@ local git_branch = (gitsigns_check) and (function()
   end
 end)
 
+-- toggleterm integration
+local term_number = function()
+  if vim.bo.filetype == "toggleterm" then
+    return "Term " .. vim.b.toggle_number
+  else
+    return ""
+  end
+end
+
 staline.setup({
   sections = {
     left = {
-      { "Staline",     git_branch },
+      { "Staline", git_branch },
       -- { "Staline",     arrow_status },
       { "StalineFile", "file_name" },
       " ", "lsp"
     },
     mid = {
+      { "Staline", term_number },
     },
     right = {
       " ", { "Staline", function() return vim.bo[0].fileencoding .. " " end }, "",

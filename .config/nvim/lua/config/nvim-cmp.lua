@@ -21,7 +21,7 @@ cmp.setup({
       maxwidth = 50,
       ellipsis_char = "...",
       show_labelDetails = true,
-      symbol_map = { Codeium = "" },
+      symbol_map = { Codeium = "󱙺" },
 
       -- before = function (entry, vim_item)
       --   return vim_item
