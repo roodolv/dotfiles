@@ -205,9 +205,9 @@ keymap.set("n", "<Leader>fn", ":<C-u>Telescope noice<CR>", opts)
 opts.desc = "Telescope cder"
 keymap.set("n", "<Leader>f\\", ":<C-u>Telescope cder<CR>", opts)
 opts.desc = "Telescope Todo"
-keymap.set("n", "<Leader>tt", ":<C-u>TodoTelescope<CR>", opts)
-opts.desc = "Telescope Treesitter symbols"
-keymap.set("n", "<Leader>ft", ":<C-u>Telescope treesitter<CR>", opts)
+keymap.set("n", "<Leader>ft", ":<C-u>TodoTelescope<CR>", opts)
+-- opts.desc = "Telescope Treesitter symbols"
+-- keymap.set("n", "<Leader>ft", ":<C-u>Telescope treesitter<CR>", opts)
 opts.desc = "Telescope colorscheme"
 keymap.set("n", "<Leader>fC", ":<C-u>Telescope colorscheme<CR>", opts)
 opts.desc = "Telescope autocommands"

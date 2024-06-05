@@ -113,7 +113,7 @@ neotest.setup({
 local opts = { silent = true }
 
 opts.desc = "neotest Run current file"
-vim.keymap.set("n", "<Leader>tf", function() neotest.run.run(vim.fn.expand("%")) end, opts)
+vim.keymap.set("n", "<F8>", function() neotest.run.run(vim.fn.expand("%")) end, opts)
 
 -- Jest: to run tests with watch mode
 -- opts.desc = "neotest Run jest --watch"

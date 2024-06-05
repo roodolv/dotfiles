@@ -10,15 +10,15 @@ return {
       vim.cmd.colorscheme("tokyonight")
     end
   },
-  -- {
-  --   "sainnhe/everforest",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.g.everforest_enable_italic = true
-  --     vim.cmd.colorscheme("everforest")
-  --   end,
-  -- },
+  {
+    "sainnhe/everforest",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.everforest_enable_italic = true
+      -- vim.cmd.colorscheme("everforest")
+    end,
+  },
   -----------------------------------------------------------------
   -- startup
   -----------------------------------------------------------------
@@ -76,7 +76,7 @@ return {
       "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
       "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
       "<Leader>dB", "<Leader>df", "<Leader>fB", "<Leader>fn", "<Leader>f\\",
-      "<Leader>tt", "<Leader>ft", "<Leader>fC", "<Leader>fa",
+      "<Leader>ft", "<Leader>fC", "<Leader>fa",
       "<Leader>fS", "<Leader>fR", "<Leader>fd", "<Leader>fD", "<Leader>fi",
       "<Leader>fGc", "<Leader>fGC", "<Leader>fGb", "<Leader>fGs", "<Leader>fGS",
     },
@@ -167,9 +167,6 @@ return {
   {
     "tamton-aquib/staline.nvim",
     lazy = false,
-    -- dependencies = {
-    --   "abeldekat/harpoonline",
-    -- },
     config = function()
       require("config/staline")
     end,
@@ -179,10 +176,6 @@ return {
   --   lazy = false,
   --   dependencies = {
   --     "nvim-tree/nvim-web-devicons",
-  --     {
-  --       "letieu/harpoon-lualine",
-  --       dependencies = { "ThePrimeagen/harpoon", },
-  --     },
   --   },
   --   config = function()
   --     require("config/lualine")
@@ -215,7 +208,7 @@ return {
     keys = { "WhichKey", "<Leader>K" },
     init = function()
       vim.o.timeout = true
-      vim.o.timeoutlen = 300
+      vim.o.timeoutlen = 500
     end,
     config = function()
       require("config/which-key")
@@ -297,6 +290,13 @@ return {
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    config = function()
+      require("config/lspconfig")
+    end,
+  },
   -- {
   --   "williamboman/mason-lspconfig.nvim",
   --   lazy = true,
@@ -310,10 +310,22 @@ return {
   --   end,
   -- },
   {
-    "neovim/nvim-lspconfig",
-    lazy = true,
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
-      require("config/lspconfig")
+      require("config/lspsaga")
+    end,
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    lazy = true,
+    event = "LspAttach",
+    config = function()
+      require("config/actions-preview")
     end,
   },
   {
@@ -355,56 +367,13 @@ return {
     end,
   },
   {
-    "nvimdev/lspsaga.nvim",
-    event = "LspAttach",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("config/lspsaga")
-    end,
-  },
-  {
-    "aznhe21/actions-preview.nvim",
-    lazy = true,
-    event = "LspAttach",
-    config = function()
-      require("config/actions-preview")
-    end,
-  },
-  {
     "j-hui/fidget.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
   },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "LspAttach",
-    config = function()
-      require("config/lsp_signature")
-    end,
-  },
   -----------------------------------------------------------------
-  -- lint/format/completion/snippets
+  -- completion/snippets/format/lint
   -----------------------------------------------------------------
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   lazy = true,
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   config = function()
-  --     require("config/nvim-lint")
-  --   end,
-  -- },
-  {
-    "stevearc/conform.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-    config = function()
-      require("config/conform")
-    end,
-  },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
@@ -433,6 +402,13 @@ return {
     end
   },
   {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    config = function()
+      require("config/lsp_signature")
+    end,
+  },
+  {
     "L3MON4D3/LuaSnip",
     lazy = true,
     dependencies = { "rafamadriz/friendly-snippets" },
@@ -441,16 +417,42 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
     end
   },
+  {
+    "stevearc/conform.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+    config = function()
+      require("config/conform")
+    end,
+  },
+  {
+    "Exafunction/codeium.vim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    config = function ()
+      require("config/codeium-vim")
+    end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("config/codeium-nvim")
+    end
+  },
   -- {
-  --   "Exafunction/codeium.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp",
-  --   },
+  --   "mfussenegger/nvim-lint",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
   --   config = function()
-  --     require("codeium").setup({})
-  --   end
+  --     require("config/nvim-lint")
+  --   end,
   -- },
   -----------------------------------------------------------------
   -- language-specific
@@ -539,6 +541,18 @@ return {
     end,
   },
   -----------------------------------------------------------------
+  -- terminal/external
+  -----------------------------------------------------------------
+  {
+    "akinsho/toggleterm.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    version = "*",
+    config = function()
+      require("config/toggleterm")
+    end,
+  },
+  -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
   {
@@ -605,7 +619,7 @@ return {
   {
     "bronson/vim-trailing-whitespace",
     keys = {
-      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
+      { "zt", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
     },
   },
 }
