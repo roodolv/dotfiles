@@ -1,4 +1,8 @@
 export LANG=ja_JP.UTF-8
+eval "$(gh completion -s bash)" # gh-cli
+eval "$(zoxide init bash)"
+eval "$(starship init bash)"
+
 # unix
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
@@ -44,3 +48,6 @@ alias gbl='git blame'
 alias grl='git reflog --date=local -n 15'
 alias grp='git rev-parse'
 alias gnr='git name-rev --all | head -n 15'
+
+# tools
+alias lg='lazygit'

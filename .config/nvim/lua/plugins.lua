@@ -2,21 +2,21 @@ return {
   -----------------------------------------------------------------
   -- theme
   -----------------------------------------------------------------
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme("tokyonight")
-  --   end
-  -- },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("tokyonight")
+    end
+  },
   {
     "sainnhe/everforest",
     lazy = false,
     priority = 1000,
     config = function()
       vim.g.everforest_enable_italic = true
-      vim.cmd.colorscheme("everforest")
+      -- vim.cmd.colorscheme("everforest")
     end,
   },
   -----------------------------------------------------------------
@@ -50,6 +50,14 @@ return {
       require("config/undotree")
     end,
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    version = "*",
+    config = function()
+      require("config/no-neck-pain")
+    end,
+  },
   -----------------------------------------------------------------
   -- search/navigation
   -----------------------------------------------------------------
@@ -59,24 +67,22 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-frecency.nvim",
-      "ThePrimeagen/refactoring.nvim",
+      "nvim-telescope/telescope-dap.nvim",
+      "zane-/cder.nvim",
     },
     keys = {
       "<Leader>ff", "<Leader>fg", "<Leader>fG", "<Leader>fl", "<Leader>fj",
       "<Leader>fb", "<Leader>fr", "<Leader>fh", "<Leader>fc", "<Leader>f:",
-      "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>fp", "<Leader>rr"
+      "<Leader>fd", "<Leader>fq", "<Leader>fm", "<Leader>fk", "<Leader>ht",
+      "<Leader>fp", "<Leader>rr", "<Leader>fs", "<Leader>dc", "<Leader>dC",
+      "<Leader>dB", "<Leader>df", "<Leader>fB", "<Leader>fn", "<Leader>f\\",
+      "<Leader>ft", "<Leader>fC", "<Leader>fa",
+      "<Leader>fS", "<Leader>fR", "<Leader>fd", "<Leader>fD", "<Leader>fi",
+      "<Leader>fGc", "<Leader>fGC", "<Leader>fGb", "<Leader>fGs", "<Leader>fGS",
     },
     config = function()
       require("config/telescope")
     end,
-  },
-  {
-    "ThePrimeagen/refactoring.nvim",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
   },
   {
     "ThePrimeagen/harpoon",
@@ -86,7 +92,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      "<Leader>ht", "<Leader>hx", "<C-Up>", "<C-Down>",
+      "<Leader>hh", "<Leader>hx", "<C-Up>", "<C-Down>",
       "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
     config = function()
@@ -114,12 +120,31 @@ return {
       })
     end,
   },
+  {
+    "crusj/bookmarks.nvim",
+    lazy = true,
+    branch = "main",
+    dependencies = { "nvim-web-devicons" },
+    keys = { "<Tab><Tab>", "<Leader>bg", "<Leader>bl", "<Leader>bd", "<Leader>bs" },
+    config = function()
+      require("config/bookmarks")
+    end,
+  },
+  {
+    "otavioschwanck/arrow.nvim",
+    lazy = true,
+    keys = { "'", "\\", "<S-Down>", "<S-Up>" },
+    config = function()
+      require("config/arrow")
+    end
+  },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
   {
     "stevearc/oil.nvim",
     cmd = "Oil",
+    keys = "-",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       {
@@ -132,11 +157,61 @@ return {
         end,
       },
     },
-    init = function()
-      vim.keymap.set("n", "-", ":<C-u>Oil .<CR>", { silent = true })
-    end,
     config = function()
       require("config/oil")
+    end,
+  },
+  -----------------------------------------------------------------
+  -- visual(statusline/bufferline/cmdline/etc)
+  -----------------------------------------------------------------
+  {
+    "tamton-aquib/staline.nvim",
+    lazy = false,
+    config = function()
+      require("config/staline")
+    end,
+  },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   config = function()
+  --     require("config/lualine")
+  --   end,
+  -- },
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("config/bufferline")
+    end,
+  },
+  {
+    "folke/noice.nvim",
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require("config/noice")
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    lazy = true,
+    keys = { "WhichKey", "<Leader>K" },
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 500
+    end,
+    config = function()
+      require("config/which-key")
     end,
   },
   -----------------------------------------------------------------
@@ -171,6 +246,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     main = "ibl",
     opts = {},
+    config = function()
+      require("config/indent-blankline")
+    end,
   },
   {
     "folke/todo-comments.nvim",
@@ -178,8 +256,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("config/todo-comments")
-      vim.api.nvim_set_keymap('n', '<Leader>tt', ':<C-u>TodoTelescope<CR>', { noremap = true })
-      vim.api.nvim_set_keymap('n', '<Leader>tf', ':<C-u>TodoQuickFix<CR>', { noremap = true })
     end,
   },
   {
@@ -197,26 +273,97 @@ return {
       require("colorizer").setup()
     end,
   },
+  {
+    "RRethy/vim-illuminate",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/illuminate")
+    end,
+  },
+  {
+    "tamton-aquib/duck.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config/duck")
+    end,
+  },
   -----------------------------------------------------------------
   -- LSP
   -----------------------------------------------------------------
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("config/mason-lspconfig")
-    end,
-  },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
     config = function()
       require("config/lspconfig")
+    end,
+  },
+  -- {
+  --   "williamboman/mason-lspconfig.nvim",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   config = function()
+  --     require("config/mason-lspconfig")
+  --   end,
+  -- },
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("config/lspsaga")
+    end,
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    lazy = true,
+    event = "LspAttach",
+    config = function()
+      require("config/actions-preview")
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    lazy = true,
+    branch = "dev", -- Trouble v3
+    dependencies = "nvim-tree/nvim-web-devicons",
+    cmd = { "Trouble" },
+    keys = {
+      "<Leader>xr", "<Leader>xx", "<Leader>xX", "<Leader>xs", "<Leader>xl",
+      "<Leader>xQ", "<Leader>xL",
+    },
+    config = function()
+      require("config/trouble")
+    end,
+  },
+  {
+    "stevearc/aerial.nvim",
+    lazy = true,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    keys = "<Leader>A",
+    opts = {},
+    config = function()
+      require("config/aerial")
+    end,
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    lazy = true,
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("config/navbuddy")
     end,
   },
   {
@@ -225,29 +372,41 @@ return {
     opts = {}
   },
   -----------------------------------------------------------------
-  -- completion/snippets/format
+  -- completion/snippets/format/lint
   -----------------------------------------------------------------
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      -- "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      -- For LuaSnip
+      "petertriho/cmp-git",
+      "SmiteshP/nvim-navbuddy",
+      "windwp/nvim-autopairs",
+      "onsails/lspkind.nvim",
+      ----- For LuaSnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      -- For Neovim Lua API
+      ----- For Neovim Lua API
       "folke/neodev.nvim",
     },
     config = function()
       require("config/nvim-cmp")
     end
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    config = function()
+      require("config/lsp_signature")
+    end,
   },
   {
     "L3MON4D3/LuaSnip",
@@ -256,13 +415,10 @@ return {
     build = "make install_jsregexp",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-      local ls = require("luasnip")
-      vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
     end
   },
   {
-    'stevearc/conform.nvim',
+    "stevearc/conform.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
@@ -270,17 +426,55 @@ return {
       require("config/conform")
     end,
   },
+  {
+    "Exafunction/codeium.vim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    config = function ()
+      require("config/codeium-vim")
+    end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("config/codeium-nvim")
+    end
+  },
   -- {
-  --   "Exafunction/codeium.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp",
-  --   },
+  --   "mfussenegger/nvim-lint",
+  --   lazy = true,
+  --   event = { "BufReadPre", "BufNewFile" },
   --   config = function()
-  --     require("codeium").setup({})
-  --   end
+  --     require("config/nvim-lint")
+  --   end,
   -- },
+  -----------------------------------------------------------------
+  -- language-specific
+  -----------------------------------------------------------------
+  ----- Rust
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    lazy = false,
+    config = function()
+      require("config/rustaceanvim")
+    end,
+  },
+  {
+    "saecki/crates.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    tag = "stable",
+    config = function()
+      require("config/crates")
+    end,
+  },
   -----------------------------------------------------------------
   -- Git
   -----------------------------------------------------------------
@@ -295,14 +489,67 @@ return {
     "sindrets/diffview.nvim",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
-    keys = {
-      { "<Leader>do", ":<C-u>DiffviewOpen<CR>",    mode = "n", silent = true, desc = "DiffviewOpen" },
-      { "<Leader>dc", ":<C-u>DiffviewClose<CR>",   mode = "n", silent = true, desc = "DiffviewClose" },
-      { "<Leader>dr", ":<C-u>DiffviewRefresh<CR>", mode = "n", silent = true, desc = "DiffviewRefresh" },
+    keys = "<Leader>D",
+    config = function()
+      require("config/diffview")
+    end,
+  },
+  {
+    "tpope/vim-fugitive",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  -----------------------------------------------------------------
+  -- test/debug
+  -----------------------------------------------------------------
+  {
+    "nvim-neotest/neotest",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- adapters
+      "nvim-neotest/neotest-jest",
+      "nvim-neotest/neotest-python",
+      -- "nvim-neotest/neotest-go",
+      -- "alfaix/neotest-gtest",
+      -- "rcasia/neotest-bash",
+      -- "adrigzr/neotest-mocha",
+      -- "jfpedroza/neotest-elixir",
+      -- "olimorris/neotest-phpunit",
     },
     config = function()
-      -- require("config/diffview")
-      require("diffview").setup()
+      require("config/neotest")
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    keys = {
+      "<Leader>dt", "<Leader>de", "<Leader>db",
+      "<F9>", "<F10>", "<C-F10>", "<M-F10>",
+      "<Leader>dpm", "<Leader>dpc", "<Leader>dps", -- dap-python
+    },
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+      "mfussenegger/nvim-dap-python",
+    },
+    config = function()
+      require("config/nvim-dap")
+    end,
+  },
+  -----------------------------------------------------------------
+  -- terminal/external
+  -----------------------------------------------------------------
+  {
+    "akinsho/toggleterm.nvim",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    version = "*",
+    config = function()
+      require("config/toggleterm")
     end,
   },
   -----------------------------------------------------------------
@@ -320,10 +567,31 @@ return {
     },
   },
   {
+    "tpope/vim-abolish",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  -- {
+  --   "tpope/vim-eunuch",
+  --   event = { "BufReadPre", "BufNewFile" },
+  -- },
+  {
+    "tpope/vim-sleuth",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
     "kylechui/nvim-surround",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("nvim-surround").setup()
+    end
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+      })
     end
   },
   {
@@ -336,7 +604,7 @@ return {
       "kana/vim-operator-user",
     },
     keys = {
-      { "'", "<Plug>(operator-replace)", silent = true },
+      { "<Leader>r", "<Plug>(operator-replace)", silent = true },
     },
   },
   {
@@ -349,13 +617,9 @@ return {
     },
   },
   {
-    "jiangmiao/auto-pairs",
-    -- event = { "BufReadPre", "BufNewFile", "BufEnter" },
-  },
-  {
     "bronson/vim-trailing-whitespace",
     keys = {
-      { "<Leader>T", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
+      { "zt", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
     },
   },
 }

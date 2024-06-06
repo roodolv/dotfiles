@@ -43,3 +43,6 @@ alias gbl='git blame'
 alias grl='git reflog --date=local -n 15'
 alias grp='git rev-parse'
 alias gnr='git name-rev --all | head -n 15'
+
+# tools
+alias lg='lazygit'

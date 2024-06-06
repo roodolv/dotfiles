@@ -7,7 +7,11 @@ require('nvim-treesitter.configs').setup({
     'css',
     'c_sharp',
     'dockerfile',
+    'doxygen',
+    'erlang',
     'gitignore',
+    'git_config',
+    'go',
     'graphql',
     'html',
     'javascript',
@@ -21,6 +25,7 @@ require('nvim-treesitter.configs').setup({
     'markdown_inline',
     'org',
     'perl',
+    'php',
     'python',
     'regex',
     'rust',
@@ -49,4 +54,3 @@ require('nvim-treesitter.configs').setup({
     },
   },
 })
-

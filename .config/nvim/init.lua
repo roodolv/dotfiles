@@ -57,7 +57,7 @@ vim.o.bufhidden = 'wipe'
 
 -- cmdline
 vim.o.showcmd = true
--- vim.o.cmdheight = 0
+vim.o.cmdheight = 0
 vim.o.inccommand = 'split'
 
 -- netrw off
@@ -68,7 +68,9 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- vim.o.shellslash = true -- make it false for Git status
+-- if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+--   vim.o.shellslash = true
+-- end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
@@ -78,6 +80,7 @@ vim.o.ttimeoutlen = 50
 vim.o.visualbell = true
 vim.o.mouse = 'a'
 vim.o.termguicolors = true
+vim.o.showtabline = 2 -- for staline.nvim
 
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
@@ -98,18 +101,30 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':<C-u>w<CR>', { noremap = true, silen
 vim.api.nvim_set_keymap('n', '<Leader>q', ':<C-u>q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader><Leader>q', ':<C-u>qa<CR>', { noremap = true, silent = true })
 
--- grep/vimgrep/quickfix/loclist
+-- grep/vimgrep
 vim.api.nvim_set_keymap('n', '<Leader>G', ':<C-u>grep<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>v', ':<C-u>vim<Space>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>V', ':<C-u>lv<Space>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>', { noremap = true })
+
+-- QuickFix
+vim.api.nvim_set_keymap('n', '<M-Down>', ':<C-u>cnext<CR>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<M-Up>', ':<C-u>cprev<CR>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Right>', ':<C-u>cnew<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-Left>', ':<C-u>cold<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-o>', ':<C-u>cw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-c>', ':<C-u>ccl<CR>', { noremap = true })
+
+-- loclist
+vim.api.nvim_set_keymap('n', '<C-M-Down>', ':<C-u>lnext<CR>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Up>', ':<C-u>lprev<CR>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Right>', ':<C-u>lnew<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-M-Left>', ':<C-u>lol<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-o>', ':<C-u>lw<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-M-c>', ':<C-u>lcl<CR>', { noremap = true })
+
+-- tabs
+vim.api.nvim_set_keymap('n', '<C-t><C-t>', ':<C-u>tabe<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-w><C-w>', ':<C-u>tabc<CR>', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
@@ -149,8 +164,8 @@ vim.api.nvim_set_keymap('x', 'zl', '10l', { noremap = true })
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
 vim.api.nvim_set_keymap('v', '*', '"zy:let @/ = @z<CR>n', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true })
@@ -168,6 +183,7 @@ vim.api.nvim_set_keymap('n', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('x', 's', '<Nop>', { noremap = true }) -- for flash.nvim
 vim.api.nvim_set_keymap('n', 'ZZ', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'ZQ', '<Nop>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'K', '<Nop>', { noremap = true }) -- disable NativeLSP hover
 
 
 -----------------------------------------------------------------
@@ -215,6 +231,26 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   command = "setl expandtab tabstop=4 shiftwidth=4 softtabstop=4",
 })
 
+
+-----------------------------------------------------------------
+-- utils
+-----------------------------------------------------------------
+-- use PowerShell
+local powershell_options = {
+  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+  shellquote = "",
+  shellxquote = "",
+}
+for option, value in pairs(powershell_options) do
+  vim.opt[option] = value
+end
+
+-- use GitBash
+-- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
+-- vim.cmd [[let &shellcmdflag = "-s"]]
 
 -- calling lazy_nvim
 require('lazy_nvim')
