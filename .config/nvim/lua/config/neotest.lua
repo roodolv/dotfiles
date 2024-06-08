@@ -36,7 +36,13 @@ neotest.setup({
       dap = { justMyCode = false },
       runner = "pytest",
       args = { "--log-level", "DEBUG" },
-      python = "~/.venvs/pytest/Scripts/python",
+      python = function()
+        if vim.fn.has("win32") then
+          return "~/.venvs/pytest/Scripts/python"
+        else
+          return ""
+        end
+      end,
       -- !!EXPERIMENTAL!! Enable shelling out to `pytest` to discover test
       -- instances for files containing a parametrize mark (default: false)
       pytest_discover_instances = false,
