@@ -7,7 +7,7 @@ bufferline.setup({
     separator_style = "slant",
     style_preset = {
       bufferline.style_preset.no_italic,
-      bufferline.style_preset.no_bold
+      bufferline.style_preset.no_bold,
     },
     themable = true,
     -- mouse operation
@@ -17,7 +17,7 @@ bufferline.setup({
     numbers = "ordinal",
     indicator = {
       icon = "▎",
-      style = "underline" -- "icon" | "underline" | "none",
+      style = "underline", -- "icon" | "underline" | "none",
     },
     show_buffer_close_icons = false,
     -- icon-type
@@ -32,7 +32,13 @@ bufferline.setup({
     max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
     truncate_names = true,
     -- diagnostics
-    diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
+    diagnostics = function()
+      if vim.fn.has("win32") then
+        return "nvim_lsp"
+      else
+        return false
+      end
+    end,
     diagnostics_update_in_insert = true,
     -- hover
     hover = {

@@ -7,6 +7,41 @@ local ext = telescope.extensions
 local open_with_trouble = require("trouble.sources.telescope").open
 local add_to_trouble = require("trouble.sources.telescope").add
 
+local cder_dir_command = function()
+  if vim.fn.has("win32") == 1 then
+    return {
+      "fd",
+      "-H",
+      "-L",
+      "-d=1",
+      "-t=d",
+      ".",
+      "-E=dict",
+      "-E=docs",
+      os.getenv("HOME"),
+      os.getenv("HOME") .. "/.config",
+      os.getenv("HOME") .. "/.venvs",
+      os.getenv("XDG_DATA_HOME") .. "/nvim-data/lazy",
+      os.getenv("DEV_PROJ"),
+    }
+  elseif vim.fn.has("linux") == 1 and vim.fn.has("wsl") == 1 then
+    return {
+      "fd",
+      "-H",
+      "-L",
+      "-d=2",
+      "-t=d",
+      ".",
+      os.getenv("HOME"),
+      os.getenv("HOME") .. "/.config",
+      os.getenv("HOME") .. "/.local/share/lazy",
+      os.getenv("HOME") .. "/proj",
+    }
+  else
+    return { "fd", "-H", "-L", "-d=1", "-t=d", ".", os.getenv("HOME") }
+  end
+end
+
 telescope.setup({
   defaults = {
     vimgrep_arguments = {
@@ -85,21 +120,7 @@ telescope.setup({
     },
     cder = {
       command_executer = { "bash", "-c" },
-      -- dir_command = { "fd", "--type=d", ".", os.getenv("HOME") },
-      dir_command = {
-        "fd",
-        "-H",
-        "-L",
-        "-d=1",
-        "-t=d",
-        ".",
-        os.getenv("HOME") .. "/.config",
-        os.getenv("HOME") .. "/.venvs",
-        os.getenv("XDG_DATA_HOME") .. "/nvim-data/lazy",
-        os.getenv("DEV_PROJ"),
-        "-E=dict",
-        "-E=docs",
-      },
+      dir_command = cder_dir_command(),
       entry_maker = function(line)
         return {
           value = line,

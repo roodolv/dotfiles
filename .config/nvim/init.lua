@@ -1,6 +1,8 @@
 -----------------------------------------------------------------
 -- options
 -----------------------------------------------------------------
+local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+
 -- encoding
 vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
@@ -235,17 +237,27 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -----------------------------------------------------------------
 -- utils
 -----------------------------------------------------------------
--- use PowerShell
-local powershell_options = {
-  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
-  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
-  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
-  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
-  shellquote = "",
-  shellxquote = "",
-}
-for option, value in pairs(powershell_options) do
-  vim.opt[option] = value
+-- set default shell
+if is_windows then
+  ----- use PowerShell
+  local powershell_options = {
+    shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+    shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+    shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+    shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+    shellquote = "",
+    shellxquote = "",
+  }
+  for option, value in pairs(powershell_options) do
+    vim.opt[option] = value
+  end
+
+  ----- use GitBash
+  -- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
+else
+  ----- use bash
+  vim.cmd [[let &shell = "bash"]]
+  vim.cmd [[let &shellcmdflag = "-s"]]
 end
 
 -- use GitBash
