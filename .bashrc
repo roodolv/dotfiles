@@ -111,6 +111,8 @@ fi
 export PYTHON=/usr/bin/python3
 export GOPATH=$HOME/go
 export NVIM_UNDODIR=~/.vim/undo
+export PATH="~/.local/bin:$PATH"
+export PATH="~/.rbenv/bin:$PATH"
 
 # enable Powerline
 function _update_ps1() {
@@ -124,8 +126,11 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="~/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-eval "$(gh completion -s bash)" # gh-cli
-eval "$(zoxide init bash)"
+
+# Initialize
 eval "$(starship init bash)"
+eval "$(zoxide init bash)"
+eval "$(gh completion -s bash)" # gh-cli
+eval "$(rbenv init -)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+. "$HOME/.cargo/env"
