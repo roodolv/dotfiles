@@ -1,35 +1,33 @@
 require("todo-comments").setup({
   keywords = {
-    FIX = {
-      icon = "",                                  -- icon used for the sign, and in search results
-      color = "error",                            -- can be a hex color, or a named color (see below)
-      alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-      -- signs = false, -- configure signs for some keywords individually
-    },
-    TODO = { icon = "", color = "info" },
-    HACK = { icon = "", color = "warning" },
-    WARN = { icon = "", color = "warning", alt = { "WARNING", "XXX" } },
-    PERF = { icon = "", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-    NOTE = { icon = "", color = "hint", alt = { "INFO", "MEMO" } },
+    TODO = { icon = "", color = "todo" },
+    FIXME = { icon = "", color = "fixme", alt = { "BUG", "ERROR", "FIX", "FIXIT", "ISSUE" } },
+    XXX = { icon = "", color = "xxx", alt = { "XXX" } },
+    WARN = { icon = "", color = "warn", alt = { "WARNING" } },
+    HACK = { icon = "", color = "hack", alt = { "HACKING", "REFACTORING", "REFACTOR", "REFACT", "RFCT" } },
+    OPTM = { icon = "", color = "optimize", alt = { "OPTIM", "OPTIMIZE", "PERF", "PERFORMANCE" } },
+    REVW = { icon = "", color = "review", alt = { "REVIEW" } },
+    NOTE = { icon = "", color = "note", alt = { "INFO", "MEMO", "NOTICE" } },
     TEST = { icon = "", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
-    REVW = { icon = "", color = "review", alt = { "REVIEW", "NOTICE" } },
   },
-  merge_keywords = true,             -- when true, custom keywords will be merged with the defaults
+  merge_keywords = false, -- when true, custom keywords will be merged with the defaults
   highlight = {
-    before = "",                     -- "fg" or "bg" or empty
-    keyword = "wide",                -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-    after = "fg",                    -- "fg" or "bg" or empty
-    pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
-    exclude = {},                    -- list of file types to exclude highlighting
+    before = "", -- "fg" | "bg" | empty
+    keyword = "wide_bg", -- "fg" | "bg" | "wide" | "wide_bg" | "wide_fg" | empty
+    after = "fg",
+    pattern = [[.*<(KEYWORDS)\s*:]],
+    exclude = { "oil" }, -- list of file types to exclude highlighting
   },
   colors = {
-    error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-    warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-    info = { "DiagnosticInfo", "#2563EB" },
-    hint = { "DiagnosticHint", "#10B981" },
-    default = { "Identifier", "#7C3AED" },
-    test = { "Identifier", "#FF00FF" },
-    review = { "Identifier", "#777788" }
+    todo = { "#55DD55" },
+    fixme = { "#CC1111" },
+    xxx = { "#FF8099" },
+    warn = { "#FFFF03" },
+    hack = { "#3377ff" },
+    optimize = { "#FFFFFF" },
+    review = { "#AAAAFF" },
+    note = { "#DDB0DD" },
+    test = { "#777799" },
   },
 })
 

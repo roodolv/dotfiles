@@ -1,4 +1,5 @@
 local bufferline = require("bufferline")
+local util = require("util")
 
 bufferline.setup({
   options = {
@@ -33,7 +34,7 @@ bufferline.setup({
     truncate_names = true,
     -- diagnostics
     diagnostics = function()
-      if vim.fn.has("win32") then
+      if util.is_windows() then
         return "nvim_lsp"
       else
         return false

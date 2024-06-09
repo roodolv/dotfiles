@@ -1,13 +1,13 @@
 local neotest = require("neotest")
 local lib = require("neotest.lib")
+local util = require("util")
 
 -- get neotest namespace (api call creates or returns namespace)
 local neotest_ns = vim.api.nvim_create_namespace("neotest")
 vim.diagnostic.config({
   virtual_text = {
     format = function(diagnostic)
-      local message =
-          diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+      local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
       return message
     end,
   },
@@ -37,7 +37,7 @@ neotest.setup({
       runner = "pytest",
       args = { "--log-level", "DEBUG" },
       python = function()
-        if vim.fn.has("win32") then
+        if util.is_windows then
           return "~/.venvs/pytest/Scripts/python"
         else
           return ""
@@ -113,7 +113,7 @@ neotest.setup({
     --   end,
     -- }),
     -- require("neotest-bash"),
-  }
+  },
 })
 
 local opts = { silent = true }
