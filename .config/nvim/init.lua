@@ -1,8 +1,8 @@
+local util = require("util")
+
 -----------------------------------------------------------------
 -- options
 -----------------------------------------------------------------
-local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
-
 -- encoding
 vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
@@ -70,7 +70,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+-- if util.is_windows() then
 --   vim.o.shellslash = true
 -- end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
@@ -235,10 +235,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 
 -----------------------------------------------------------------
--- utils
+-- etc
 -----------------------------------------------------------------
 -- set default shell
-if is_windows then
+if util.is_windows then
   ----- use PowerShell
   local powershell_options = {
     shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
@@ -254,15 +254,12 @@ if is_windows then
 
   ----- use GitBash
   -- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
+  -- vim.cmd [[let &shellcmdflag = "-s"]]
 else
   ----- use bash
   vim.cmd [[let &shell = "bash"]]
   vim.cmd [[let &shellcmdflag = "-s"]]
 end
-
--- use GitBash
--- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
--- vim.cmd [[let &shellcmdflag = "-s"]]
 
 -- calling lazy_nvim
 require('lazy_nvim')

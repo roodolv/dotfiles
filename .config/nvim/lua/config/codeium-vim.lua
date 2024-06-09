@@ -2,9 +2,9 @@
 -- vim.g.codeium_enabled = false
 
 -- disable Codeium for particular filetypes(optional)
--- vim.g.codeium_filetypes = {
---   bash = false,
--- }
+vim.g.codeium_filetypes = {
+  TelescopePrompt = false,
+}
 
 -- mappings
 vim.g.codeium_disable_bindings = 1 -- set user keymaps
