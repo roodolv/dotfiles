@@ -138,6 +138,10 @@ return {
       require("config/arrow")
     end
   },
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+  },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
@@ -550,6 +554,14 @@ return {
     version = "*",
     config = function()
       require("config/toggleterm")
+    end,
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    lazy = false,
+    priority = 1001,
+    config = function()
+      require("config/smart-splits")
     end,
   },
   -----------------------------------------------------------------

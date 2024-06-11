@@ -8,7 +8,7 @@ require("modes").setup({
     visual = "#efefef",
   },
   line_opacity = 0.2,
-  set_cursor = true,
+  set_cursor = false,
   set_cursorline = true,
   set_number = false,
   ignore_filetypes = { "NvimTree", "TelescopePrompt" }

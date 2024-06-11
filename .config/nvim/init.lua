@@ -169,10 +169,10 @@ vim.api.nvim_set_keymap('v', '*', '"zy:let @/ = @z<CR>n', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true }) -- turn off for smart-splits
 vim.api.nvim_set_keymap('n', '<M-t>', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-T>', 'gT', { noremap = true })
 
@@ -253,7 +253,7 @@ if util.is_windows then
   end
 
   ----- use GitBash
-  -- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
+  -- vim.cmd [[let &shell = '"bash"']]
   -- vim.cmd [[let &shellcmdflag = "-s"]]
 else
   ----- use bash

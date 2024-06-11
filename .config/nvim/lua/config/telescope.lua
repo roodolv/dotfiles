@@ -110,7 +110,7 @@ telescope.setup({
         return {
           value = line,
           display = function(entry)
-            return "" .. line:gsub(os.getenv("HOME") .. "/", ""), { { { 1, 3 }, "Directory" } }
+            return " " .. line:gsub(os.getenv("HOME") .. "/", ""), { { { 1, 3 }, "Directory" } }
           end,
           ordinal = line,
         }
