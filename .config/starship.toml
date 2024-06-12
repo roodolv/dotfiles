@@ -1,12 +1,9 @@
 scan_timeout = 10
 
 format = """
-[](bg:#769ff0 fg:#a3aed2)\
 $directory\
-[](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
-[](fg:#394260 bg:#212736)\
 $aws\
 $c\
 $rust\
@@ -20,31 +17,23 @@ $erlang\
 $elixir\
 $lua\
 $nim\
-[](fg:#212736 bg:#1d2230)\
-$time\
-[ ](fg:#1d2230)\
 \n$shell"""
-# \n$character"""
 
 [shell]
 cmd_indicator = ''
 powershell_indicator = '❯'
 bash_indicator = '[\$](bold blue)'
+zsh_indicator = '->'
 fish_indicator = '󰈺 '
 unknown_indicator = '(unknown)>'
 style = 'cyan bold'
 disabled = false
 
-[character]
-success_symbol = "[❯](bold blue)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
-
 [directory]
-style = "fg:#212736 bg:#769ff0"
-format = "[ $path ]($style)"
+style = "fg:#86aff5"
+format = "[$path]($style)"
 truncation_length = 3
-truncation_symbol = "…/"
+truncation_symbol = ""
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -53,13 +42,13 @@ truncation_symbol = "…/"
 "Pictures" = " "
 
 [git_branch]
-symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+symbol = ""
+style = "fg:#b0eddd"
+format = '[ on ](fg:#747474)[$symbol $branch]($style) '
 
 [git_status]
-style = "bg:#394260"
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+style = "fg:#a0a9cb"
+format = '[[$all_status$ahead_behind](fg:#55dd55)]($style)'
 
 [aws]
 format = 'on [$symbol($profile )(\($region\) )]($style)'
@@ -73,69 +62,69 @@ format = "via [🐋 $context](blue bold)"
 
 [c]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = "󱘗"
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [python]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol[$virtualenv] ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol[$virtualenv] ($version) ]($style)'
 
 [nodejs]
 symbol = "󰎙"
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [kotlin]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol[$virtualenv] ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [gradle]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol[$virtualenv] ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [php]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [erlang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [elixir]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [lua]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [nim]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
 
 [time]
-disabled = false
+disabled = true
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+format = '[[ $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [cmd_duration]
 format = "[$duration]($style) "
