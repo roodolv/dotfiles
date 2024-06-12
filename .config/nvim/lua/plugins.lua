@@ -416,9 +416,11 @@ return {
     lazy = true,
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "make install_jsregexp",
-    config = function()
+    config = function(_, opts)
+      require("luasnip").setup(opts)
+      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/luasnip" })
       require("luasnip.loaders.from_vscode").lazy_load()
-    end
+    end,
   },
   {
     "stevearc/conform.nvim",
@@ -472,7 +474,7 @@ return {
   {
     "saecki/crates.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    ft = { "rust", "toml" },
     tag = "stable",
     config = function()
       require("config/crates")

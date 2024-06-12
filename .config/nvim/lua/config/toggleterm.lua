@@ -7,7 +7,14 @@ local bottom_term_key = "<Leader>tb"
 local side_term_key = "<Leader>ts"
 
 toggleterm.setup({
-  persist_size = false,
+  size = function(term)
+    if term.direction == "horizontal" then
+      return 15
+    elseif term.direction == "vertical" then
+      return vim.o.columns * 0.4
+    end
+  end,
+  persist_size = true,
 })
 
 -- terminal keymaps
