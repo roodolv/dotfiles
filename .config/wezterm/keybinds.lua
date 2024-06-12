@@ -6,6 +6,7 @@ return {
     -- NOTE: added
     { key = "v", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "h", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "Space", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActive" }) },
 
     -- NOTE: default
     { key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
