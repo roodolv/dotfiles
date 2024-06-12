@@ -1,8 +1,8 @@
+local util = require("util")
+
 -----------------------------------------------------------------
 -- options
 -----------------------------------------------------------------
-local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
-
 -- encoding
 vim.o.enc = 'utf-8'
 vim.o.fencs = 'utf-8,sjis'
@@ -70,7 +70,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+-- if util.is_windows() then
 --   vim.o.shellslash = true
 -- end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
@@ -169,10 +169,10 @@ vim.api.nvim_set_keymap('v', '*', '"zy:let @/ = @z<CR>n', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true }) -- turn off for smart-splits
 vim.api.nvim_set_keymap('n', '<M-t>', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-T>', 'gT', { noremap = true })
 
@@ -235,10 +235,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 
 -----------------------------------------------------------------
--- utils
+-- etc
 -----------------------------------------------------------------
 -- set default shell
-if is_windows then
+if util.is_windows then
   ----- use PowerShell
   local powershell_options = {
     shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
@@ -253,16 +253,13 @@ if is_windows then
   end
 
   ----- use GitBash
-  -- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
+  -- vim.cmd [[let &shell = '"bash"']]
+  -- vim.cmd [[let &shellcmdflag = "-s"]]
 else
   ----- use bash
   vim.cmd [[let &shell = "bash"]]
   vim.cmd [[let &shellcmdflag = "-s"]]
 end
-
--- use GitBash
--- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
--- vim.cmd [[let &shellcmdflag = "-s"]]
 
 -- calling lazy_nvim
 require('lazy_nvim')

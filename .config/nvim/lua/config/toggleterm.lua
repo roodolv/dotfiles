@@ -113,6 +113,28 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
+local glances = Terminal:new({
+  cmd = "glances",
+  dir = "git_dir",
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+  -- function to run on opening the terminal
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    opts.buffer = term.bufnr
+    vim.keymap.set("n", "q", ":<C-u>close<CR>", opts)
+  end,
+  -- function to run on closing the terminal
+  on_close = function(term)
+    vim.cmd("startinsert!")
+  end,
+})
+function _glances_toggle()
+  glances:toggle()
+end
+
 -- keymaps
 opts = { silent = true, noremap = true }
 opts.desc = "ToggleTerm toggle"
@@ -147,4 +169,6 @@ opts.desc = "ToggleTerm side"
 vim.keymap.set("t", side_term_key, "<C-\\><C-n>:lua _side_term_toggle()<CR>", opts)
 
 opts.desc = "ToggleTerm LazyGit"
-vim.api.nvim_set_keymap("n", "<Leader>tg", ":<C-u>lua _lazygit_toggle()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>tl", ":<C-u>lua _lazygit_toggle()<CR>", opts)
+opts.desc = "ToggleTerm Glances"
+vim.api.nvim_set_keymap("n", "<Leader>tg", ":<C-u>lua _glances_toggle()<CR>", opts)
