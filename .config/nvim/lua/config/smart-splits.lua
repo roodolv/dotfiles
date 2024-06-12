@@ -16,11 +16,11 @@ smart_splits.setup({
 })
 
 ----- resizing splits
--- for example `10<C-h>` will `resize_left` by `(10 * config.default_amount)`
-vim.keymap.set("n", "<C-h>", require("smart-splits").resize_left)
-vim.keymap.set("n", "<C-j>", require("smart-splits").resize_down)
-vim.keymap.set("n", "<C-k>", require("smart-splits").resize_up)
-vim.keymap.set("n", "<C-l>", require("smart-splits").resize_right)
+-- for example `10<C-M-h>` will `resize_left` by `(10 * config.default_amount)`
+vim.keymap.set("n", "<C-M-h>", require("smart-splits").resize_left)
+vim.keymap.set("n", "<C-M-j>", require("smart-splits").resize_down)
+vim.keymap.set("n", "<C-M-k>", require("smart-splits").resize_up)
+vim.keymap.set("n", "<C-M-l>", require("smart-splits").resize_right)
 
 ----- moving between splits
 vim.keymap.set("n", "<M-h>", require("smart-splits").move_cursor_left)

@@ -33,21 +33,11 @@ return {
   -- pane/tab/window
   -----------------------------------------------------------------
   {
-    "simeji/winresizer",
-    keys = {
-      { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true, desc = "WinResizerStartResize" },
-    },
-    init = function()
-      require("config/winresizer")
-    end,
-  },
-  {
-    "mbbill/undotree",
-    keys = {
-      { "<Leader>U", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
-    },
+    "mrjones2014/smart-splits.nvim",
+    lazy = false,
+    priority = 1001,
     config = function()
-      require("config/undotree")
+      require("config/smart-splits")
     end,
   },
   {
@@ -138,10 +128,6 @@ return {
       require("config/arrow")
     end
   },
-  {
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-  },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
@@ -163,6 +149,15 @@ return {
     },
     config = function()
       require("config/oil")
+    end,
+  },
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<Leader>U", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
+    },
+    config = function()
+      require("config/undotree")
     end,
   },
   -----------------------------------------------------------------
@@ -217,6 +212,10 @@ return {
     config = function()
       require("config/which-key")
     end,
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
   },
   -----------------------------------------------------------------
   -- visual(syntax/indent/etc)
@@ -347,6 +346,17 @@ return {
     end,
   },
   {
+    "SmiteshP/nvim-navbuddy",
+    lazy = true,
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("config/navbuddy")
+    end,
+  },
+  {
     "stevearc/aerial.nvim",
     lazy = true,
     dependencies = {
@@ -357,17 +367,6 @@ return {
     opts = {},
     config = function()
       require("config/aerial")
-    end,
-  },
-  {
-    "SmiteshP/nvim-navbuddy",
-    lazy = true,
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require("config/navbuddy")
     end,
   },
   {
@@ -554,14 +553,6 @@ return {
     version = "*",
     config = function()
       require("config/toggleterm")
-    end,
-  },
-  {
-    "mrjones2014/smart-splits.nvim",
-    lazy = false,
-    priority = 1001,
-    config = function()
-      require("config/smart-splits")
     end,
   },
   -----------------------------------------------------------------
