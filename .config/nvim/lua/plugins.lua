@@ -416,11 +416,23 @@ return {
     lazy = true,
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "make install_jsregexp",
-    config = function(_, opts)
-      require("luasnip").setup(opts)
+    config = function()
+      require("luasnip").setup({
+        load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
+        ft_func = require("luasnip_snippets.common.snip_utils").ft_func,
+        enable_autosnippets = true,
+      })
       require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/luasnip" })
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
+  },
+  {
+    "mireq/luasnip-snippets",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "L3MON4D3/LuaSnip" },
+    config = function()
+      require("luasnip_snippets.common.snip_utils").setup()
+    end
   },
   {
     "stevearc/conform.nvim",

@@ -7,9 +7,9 @@ local i = ls.insert_node
 local c = ls.choice_node
 
 -- stylua: ignore
-return {
+ls.add_snippets("rust", {
   -- ::<TurboFish>
-  s({ trig = ":turbofish", dscr = "Turbofish\n `::<_>`" }, { t({ "::<" }), i(0), t({ ">" }) }),
+  s({ trig = ":tf", dscr = "Turbofish\n `::<_>`" }, { t({ "::<" }), i(0), t({ ">" }) }),
 
   -- Atributes:
   s("ddbg",           t("#[derive(Debug)]")),
@@ -376,4 +376,4 @@ return {
     t({ "}", "" }),
     t({ "}" }),
   }),
-}
+})
