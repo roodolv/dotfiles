@@ -570,6 +570,28 @@ return {
     end,
   },
   -----------------------------------------------------------------
+  -- documentation
+  -----------------------------------------------------------------
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    -- ft = "markdown",
+    event = {
+      "BufReadPre E:/Obsidian/main/**.md",
+      "BufNewFile E:/Obsidian/main/**.md",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+      "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("config/obsidian")
+    end,
+  },
+  -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
   {

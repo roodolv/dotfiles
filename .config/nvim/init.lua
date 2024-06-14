@@ -83,6 +83,7 @@ vim.o.visualbell = true
 vim.o.mouse = 'a'
 vim.o.termguicolors = true
 vim.o.showtabline = 2 -- for staline.nvim
+vim.o.conceallevel = 1 -- for obsidian.nvim
 
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
