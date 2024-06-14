@@ -591,6 +591,15 @@ return {
       require("config/obsidian")
     end,
   },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      require("config/markdown-preview")
+    end,
+  },
   -----------------------------------------------------------------
   -- editing
   -----------------------------------------------------------------
