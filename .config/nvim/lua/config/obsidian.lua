@@ -95,3 +95,60 @@ opts.desc = "Obsidian PasteImg"
 vim.keymap.set("n", "<Leader>oI", ":<C-u>ObsidianPasteImg<CR>", opts)
 -- opts.desc = "Obsidian ToggleCheckbox"
 -- vim.keymap.set({ "n", "i", "x" }, "<S-CR>", ":<C-u>ObsidianToggleCheckbox<CR>", opts)
+
+local function get_line_status()
+  local M = {}
+  M.current_line = vim.api.nvim_get_current_line()
+
+  local checkbox_pattern = "^(%s*)(-%s%[[ x]%])(.*)$"
+  M.before_check, M.checkbox, M.after_check = M.current_line:match(checkbox_pattern)
+
+  local list_pattern = "^(%s*)(-%s)(.*)$"
+  M.before_list, M.list, M.after_list = M.current_line:match(list_pattern)
+
+  local indent_pattern = "^(%s*)(.*)$"
+  M.indent, M.after_indent = M.current_line:match(indent_pattern)
+
+  M.has_checkbox = M.checkbox ~= nil
+  M.has_list = M.list ~= nil
+  M.has_indent = M.indent ~= nil
+  return M
+end
+
+local function toggle_checkbox()
+  local new_line
+  local status = get_line_status()
+
+  if status.has_checkbox then
+    local checked = status.checkbox == "- [x]"
+    new_line = status.before_check .. "- [" .. (checked and " " or "x") .. "]" .. status.after_check
+  elseif status.has_list then
+    new_line = status.before_list .. "- [ ] " .. status.after_list
+  elseif status.has_indent then
+    new_line = status.indent .. "- [ ] " .. status.after_indent
+  else
+    new_line = "- [ ] " .. status.current_line
+  end
+  vim.api.nvim_set_current_line(new_line)
+end
+
+local function toggle_list()
+  local new_line
+  local status = get_line_status()
+
+  if status.has_checkbox then
+    new_line = status.before_check .. "-" .. status.after_check
+  elseif status.has_list then
+    new_line = status.before_list .. status.after_list
+  elseif status.has_indent then
+    new_line = status.indent .. "- " .. status.after_indent
+  else
+    new_line = "- " .. status.current_line
+  end
+  vim.api.nvim_set_current_line(new_line)
+end
+
+opts.desc = "Obsidian ToggleCheckbox"
+vim.keymap.set("n", "<C-x>", toggle_checkbox, opts)
+opts.desc = "Obsidian ToggleList"
+vim.keymap.set("n", "<C-l>", toggle_list, opts)

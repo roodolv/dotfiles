@@ -70,9 +70,9 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg --vimgrep'
 
 -- etc
--- if util.is_windows() then
---   vim.o.shellslash = true
--- end
+if util.is_windows() then
+  vim.o.shellslash = true
+end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true

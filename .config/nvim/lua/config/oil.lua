@@ -78,9 +78,9 @@ require("oil").setup({
     -- You may want to set to false if you work with large directories.
     natural_order = true,
     sort = {
-      -- sort order can be "asc" or "desc"
-      { "type", "desc" },
-      { "name", "desc" },
+      { "type", "asc" },
+      -- { "name", "desc" },
+      { "mtime", "desc" },
     },
   },
   -- EXPERIMENTAL support for file operations with git
