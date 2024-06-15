@@ -148,7 +148,13 @@ local function toggle_list()
   vim.api.nvim_set_current_line(new_line)
 end
 
-opts.desc = "Obsidian ToggleCheckbox"
-vim.keymap.set("n", "<C-x>", toggle_checkbox, opts)
-opts.desc = "Obsidian ToggleList"
-vim.keymap.set("n", "<C-l>", toggle_list, opts)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    opts.buffer = true
+    opts.desc = "Obsidian ToggleCheckbox"
+    vim.keymap.set("n", "<C-x>", toggle_checkbox, opts)
+    opts.desc = "Obsidian ToggleList"
+    vim.keymap.set("n", "<C-l>", toggle_list, opts)
+  end,
+})

@@ -575,8 +575,7 @@ return {
   {
     "epwalsh/obsidian.nvim",
     version = "*",
-    lazy = true,
-    -- ft = "markdown",
+    ft = "markdown",
     event = {
       "BufReadPre E:/Obsidian/main/**.md",
       "BufNewFile E:/Obsidian/main/**.md",
@@ -593,7 +592,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    ft = { "markdown" },
+    ft = "markdown",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && yarn install",
     init = function()
