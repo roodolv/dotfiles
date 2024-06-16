@@ -23,7 +23,7 @@ local keymap = vim.keymap
 local opts = {}
 
 opts.desc = "Harpoon toggle"
-keymap.set("n", "<Leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts)
+keymap.set("n", "<Leader>H", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts)
 opts.desc = "Harpoon add"
 keymap.set("n", "<Leader>hx", function() harpoon:list():add() end, opts)
 opts.desc = "Harpoon next"

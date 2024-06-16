@@ -93,14 +93,27 @@ opts.desc = "Obsidian Template"
 vim.keymap.set("n", "<Leader>oT", ":<C-u>ObsidianTemplate<CR>", opts)
 opts.desc = "Obsidian PasteImg"
 vim.keymap.set("n", "<Leader>oI", ":<C-u>ObsidianPasteImg<CR>", opts)
--- opts.desc = "Obsidian ToggleCheckbox"
--- vim.keymap.set({ "n", "i", "x" }, "<S-CR>", ":<C-u>ObsidianToggleCheckbox<CR>", opts)
 
-local function get_line_status()
+local function get_hol_status(line)
   local M = {}
-  M.current_line = vim.api.nvim_get_current_line()
+  M.current_line = line
 
-  local checkbox_pattern = "^(%s*)(-%s%[[ x]%])(.*)$"
+  local quote_pattern = "^(%s*)(>%s)(.*)$"
+  M.before_quote, M.quote, M.after_quote = M.current_line:match(quote_pattern)
+
+  local indent_pattern = "^(%s*)(.*)$"
+  M.indent, M.after_indent = M.current_line:match(indent_pattern)
+
+  M.has_quote = M.quote ~= nil
+  M.has_indent = M.indent ~= nil
+  return M
+end
+
+local function get_target_status(line)
+  local M = {}
+  M.current_line = line
+
+  local checkbox_pattern = "^(%s*)(-%s%[[ x]%]%s)(.*)$"
   M.before_check, M.checkbox, M.after_check = M.current_line:match(checkbox_pattern)
 
   local list_pattern = "^(%s*)(-%s)(.*)$"
@@ -115,43 +128,87 @@ local function get_line_status()
   return M
 end
 
-local function toggle_checkbox()
+local function toggle_quote()
+  local current_line = vim.api.nvim_get_current_line()
   local new_line
-  local status = get_line_status()
+  local hol = get_hol_status(current_line)
 
-  if status.has_checkbox then
-    local checked = status.checkbox == "- [x]"
-    new_line = status.before_check .. "- [" .. (checked and " " or "x") .. "]" .. status.after_check
-  elseif status.has_list then
-    new_line = status.before_list .. "- [ ] " .. status.after_list
-  elseif status.has_indent then
-    new_line = status.indent .. "- [ ] " .. status.after_indent
+  if hol.has_quote then
+    new_line = hol.before_quote .. hol.after_quote
+  elseif hol.has_indent then
+    new_line = hol.indent .. "> " .. hol.after_indent
   else
-    new_line = "- [ ] " .. status.current_line
+    new_line = "> " .. current_line
   end
+
+  vim.api.nvim_set_current_line(new_line)
+end
+
+local function toggle_checkbox()
+  local current_line = vim.api.nvim_get_current_line()
+  local new_line
+  local hol = get_hol_status(current_line)
+  local target
+
+  if hol.has_quote then
+    target = get_target_status(hol.after_quote)
+  else
+    target = get_target_status(current_line)
+  end
+
+  if target.has_checkbox then
+    local updated_checkbox = (target.checkbox == "- [x] " and "- [ ] " or "- [x] ")
+    new_line = target.before_check .. updated_checkbox .. target.after_check
+  elseif target.has_list then
+    new_line = target.before_list .. "- [ ] " .. target.after_list
+  elseif target.has_indent then
+    new_line = target.indent .. "- [ ] " .. target.after_indent
+  else
+    new_line = "- [ ] " .. target.current_line
+  end
+
+  if hol.has_quote then
+    new_line = hol.before_quote .. hol.quote .. new_line
+  end
+
   vim.api.nvim_set_current_line(new_line)
 end
 
 local function toggle_list()
+  local current_line = vim.api.nvim_get_current_line()
   local new_line
-  local status = get_line_status()
+  local hol = get_hol_status(current_line)
+  local target
 
-  if status.has_checkbox then
-    new_line = status.before_check .. "-" .. status.after_check
-  elseif status.has_list then
-    new_line = status.before_list .. status.after_list
-  elseif status.has_indent then
-    new_line = status.indent .. "- " .. status.after_indent
+  if hol.has_quote then
+    target = get_target_status(hol.after_quote)
   else
-    new_line = "- " .. status.current_line
+    target = get_target_status(current_line)
   end
+
+  if target.has_checkbox then
+    new_line = target.before_check .. "- " .. target.after_check
+  elseif target.has_list then
+    new_line = target.before_list .. target.after_list
+  elseif target.has_indent then
+    new_line = target.indent .. "- " .. target.after_indent
+  else
+    new_line = "- " .. target.current_line
+  end
+
+  if hol.has_quote then
+    new_line = hol.before_quote .. hol.quote .. new_line
+  end
+
   vim.api.nvim_set_current_line(new_line)
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
+  pattern = { "markdown", "markdown.mdx" },
   callback = function()
     opts.buffer = true
+    opts.desc = "Obsidian ToggleQuote"
+    vim.keymap.set("n", "<C-q>", toggle_quote, opts)
     opts.desc = "Obsidian ToggleCheckbox"
     vim.keymap.set("n", "<C-x>", toggle_checkbox, opts)
     opts.desc = "Obsidian ToggleList"

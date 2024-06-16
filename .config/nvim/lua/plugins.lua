@@ -82,7 +82,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      "<Leader>hh", "<Leader>hx", "<C-Up>", "<C-Down>",
+      "<Leader>H", "<Leader>hx", "<C-Up>", "<C-Down>",
       "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
     config = function()
