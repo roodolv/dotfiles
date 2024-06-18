@@ -10,6 +10,8 @@ vim.g.codeium_filetypes = {
 vim.g.codeium_disable_bindings = 1 -- set user keymaps
 local opts = { expr = true, silent = true }
 
+-- opts.desc = "Codeium: Toggle"
+-- vim.keymap.set("n", "<Leader>C", ":<C-u>CodeiumToggle<CR>", opts)
 opts.desc = "Codeium: Manually trigger suggestion"
 vim.keymap.set("i", "<C-s>", function()
   return vim.fn["codeium#Complete"]()

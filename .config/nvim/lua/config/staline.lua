@@ -12,14 +12,14 @@ local staline = require("staline")
 
 -- gitsigns integration
 local gitsigns_check = vim.fn.has("nvim-0.7") == 1
-local git_branch = (gitsigns_check) and (function()
+local git_branch = gitsigns_check and function()
   local branch = vim.b.gitsigns_head
   if branch == nil or branch == "" then
     return ""
   else
     return string.format("  %s %s", branch, "")
   end
-end)
+end
 
 -- toggleterm integration
 local term_number = function()
@@ -36,16 +36,16 @@ staline.setup({
       { "Staline", git_branch },
       -- { "Staline",     arrow_status },
       { "StalineFile", "file_name" },
-      " ", "lsp"
+      " ", "lsp",
     },
     mid = {
       { "Staline", term_number },
     },
     right = {
-      " ", { "Staline", function() return vim.bo[0].fileencoding .. " " end }, "",
-      " ", { "Staline", function() return vim.bo[0].filetype .. " " end }, "",
-      "line_column"
-    }
+      " ", { "Staline", function() return vim.bo[0].fileencoding .. " " end, }, "",
+      " ", { "Staline", function() return vim.bo[0].filetype .. " " end, }, "",
+      "line_column",
+    },
   },
   mode_colors = {
     ----- default
@@ -66,5 +66,16 @@ staline.setup({
     line_column = "[%l/%L]:%c",
     branch_symbol = " ",
   },
+  special_table = {
+    NvimTree = { "NvimTree", " " },
+    packer = { "Packer", "󰇚 " },
+    dashboard = { "Dashboard", "  " },
+    help = { "Help", "󰗚 " },
+    qf = { "QuickFix", " " },
+    alpha = { "Alpha", "  " },
+    Jaq = { "Jaq", "  " },
+    Fm = { "Fm", "  " },
+    TelescopePrompt = { "Telescope", "  " },
+  },
 })
-vim.cmd [[hi StalineFile gui=underline guifg=#dddddd]] -- File name Highlight
+vim.cmd([[hi StalineFile gui=underline guifg=#dddddd]]) -- File name Highlight

@@ -67,12 +67,12 @@ vim.api.nvim_set_var('loaded_netrw', 1)
 vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 
 -- grep/vimgrep
-vim.o.grepprg = 'rg --vimgrep'
+vim.o.grepprg = 'rg -L --vimgrep'
 
 -- etc
--- if util.is_windows() then
---   vim.o.shellslash = true
--- end
+if util.is_windows() then
+  vim.o.shellslash = true
+end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
@@ -83,6 +83,7 @@ vim.o.visualbell = true
 vim.o.mouse = 'a'
 vim.o.termguicolors = true
 vim.o.showtabline = 2 -- for staline.nvim
+vim.o.conceallevel = 1 -- for obsidian.nvim
 
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
@@ -207,7 +208,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Python
-vim.g.python3_host_prog = vim.fn.expand("PYTHON")
+vim.g.python3_host_prog = os.getenv("PYTHON")
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "python",
   command =

@@ -17,7 +17,7 @@ cmp.setup({
   },
   formatting = {
     format = lspkind.cmp_format({
-      mode = "symbol",
+      mode = "symbol_text",
       maxwidth = 50,
       ellipsis_char = "...",
       show_labelDetails = true,
@@ -29,7 +29,7 @@ cmp.setup({
     }),
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
@@ -145,6 +145,7 @@ local servers = {
   "jsonls",
   "html",
   "cssls",
+  "marksman",
   "ruff_lsp",
   "tsserver",
   -- 'biome',
