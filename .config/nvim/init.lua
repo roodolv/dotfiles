@@ -67,7 +67,7 @@ vim.api.nvim_set_var('loaded_netrw', 1)
 vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 
 -- grep/vimgrep
-vim.o.grepprg = 'rg --vimgrep'
+vim.o.grepprg = 'rg -L --vimgrep'
 
 -- etc
 if util.is_windows() then
@@ -208,7 +208,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Python
-vim.g.python3_host_prog = vim.fn.expand("PYTHON")
+vim.g.python3_host_prog = os.getenv("PYTHON")
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "python",
   command =

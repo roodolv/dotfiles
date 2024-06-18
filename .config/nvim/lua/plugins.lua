@@ -29,6 +29,10 @@ return {
       require("config/startify")
     end
   },
+  -- {
+  --   "dstein64/vim-startuptime",
+  --   lazy = false,
+  -- },
   -----------------------------------------------------------------
   -- pane/tab/window
   -----------------------------------------------------------------
@@ -42,7 +46,7 @@ return {
   },
   {
     "shortcuts/no-neck-pain.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     version = "*",
     config = function()
       require("config/no-neck-pain")
@@ -91,9 +95,7 @@ return {
   },
   {
     "folke/flash.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    ---@type Flash.Config
-    opts = {},
+    keys = { "s", "S", "<Leader>s", "<C-s>", "R" },
     config = function()
       require("config/flash")
     end
@@ -255,7 +257,7 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("config/todo-comments")
@@ -263,15 +265,15 @@ return {
   },
   {
     "mvllow/modes.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     tag = "v0.2.1",
+    event = { "InsertEnter",  "CursorMoved" },
     config = function()
       require("config/modes")
     end,
   },
   {
     "norcalli/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("colorizer").setup()
     end,
@@ -285,7 +287,7 @@ return {
   },
   {
     "tamton-aquib/duck.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    keys = {  "<Leader>dk",  "<Leader>dd", "<Leader>da" },
     config = function()
       require("config/duck")
     end,
@@ -348,6 +350,7 @@ return {
   {
     "SmiteshP/nvim-navbuddy",
     lazy = true,
+    keys = { "<Leader>N" },
     dependencies = {
       "SmiteshP/nvim-navic",
       "MunifTanjim/nui.nvim",
@@ -371,7 +374,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "LspAttach" },
     opts = {}
   },
   -----------------------------------------------------------------
@@ -380,25 +383,25 @@ return {
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      -- "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "petertriho/cmp-git",
-      "SmiteshP/nvim-navbuddy",
-      "windwp/nvim-autopairs",
-      "onsails/lspkind.nvim",
+      -- { "williamboman/mason-lspconfig.nvim" },
+      { "neovim/nvim-lspconfig" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-cmdline" },
+      { "petertriho/cmp-git" },
+      { "SmiteshP/nvim-navbuddy" },
+      { "windwp/nvim-autopairs" },
+      { "onsails/lspkind.nvim" },
       ----- For LuaSnip
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
+      { "L3MON4D3/LuaSnip" },
+      { "saadparwaiz1/cmp_luasnip" },
       ----- For Neovim Lua API
-      "folke/neodev.nvim",
+      { "folke/neodev.nvim" },
     },
     config = function()
       require("config/nvim-cmp")
@@ -428,7 +431,7 @@ return {
   },
   {
     "mireq/luasnip-snippets",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "InsertEnter", },
     dependencies = { "L3MON4D3/LuaSnip" },
     config = function()
       require("luasnip_snippets.common.snip_utils").setup()
@@ -436,8 +439,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufWritePre", },
     opts = {},
     config = function()
       require("config/conform")
@@ -446,7 +448,7 @@ return {
   {
     "Exafunction/codeium.vim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "InsertEnter", },
     config = function ()
       require("config/codeium-vim")
     end,
@@ -454,7 +456,7 @@ return {
   {
     "Exafunction/codeium.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "InsertEnter", },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
@@ -497,7 +499,7 @@ return {
   -----------------------------------------------------------------
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("config/gitsigns")
     end,
@@ -505,7 +507,6 @@ return {
   {
     "sindrets/diffview.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
     keys = "<Leader>D",
     config = function()
       require("config/diffview")
@@ -521,7 +522,7 @@ return {
   {
     "nvim-neotest/neotest",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    keys = { "<F8>", },
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
@@ -563,7 +564,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    keys = { "<C-\\>", "<Leader>tt", "<Leader>tl", "<Leader>tg", "<Leader>tf", "<Leader>tb", "<Leader>ts" },
     version = "*",
     config = function()
       require("config/toggleterm")
