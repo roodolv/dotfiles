@@ -575,10 +575,11 @@ return {
   {
     "epwalsh/obsidian.nvim",
     version = "*",
-    ft = "markdown",
     event = {
-      "BufReadPre E:/Obsidian/main/**.md",
-      "BufNewFile E:/Obsidian/main/**.md",
+      "BufReadPre */Obsidian/main/**.md",
+      "BufNewFile */Obsidian/main/**.md",
+      "BufReadPre */Hugo/myblog/**.md",
+      "BufNewFile */Hugo/myblog/**.md",
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -617,10 +618,10 @@ return {
     "tpope/vim-abolish",
     event = { "BufReadPre", "BufNewFile" },
   },
-  -- {
-  --   "tpope/vim-eunuch",
-  --   event = { "BufReadPre", "BufNewFile" },
-  -- },
+  {
+    "tpope/vim-eunuch",
+    event = { "BufReadPre", "BufNewFile" },
+  },
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
