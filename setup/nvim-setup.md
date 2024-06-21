@@ -17,6 +17,7 @@ Execute these commands **at your own risk**.
     - npm v10.8.0
 - Chocolatey v2.2.2
 - Scoop
+- homebrew(linuxbrew) v4.3.5
 
 
 ## Python modules
@@ -38,14 +39,32 @@ python -m pip install -U pynvim neovim msgpack
 ### Windows
 
 #### Downloading patched files
-- HackGen_NF
-    - [Releases · yuru7/HackGen](https://github.com/yuru7/HackGen/releases)
+- [HackGen_NF](https://github.com/yuru7/HackGen/releases)
+```
+# Download fonts
+$env:HACKGEN_VERSION=$(curl -s "https://api.github.com/repos/yuru7/HackGen/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo HackGen_NF.zip "https://github.com/yuru7/HackGen/releases/download/v$env:HACKGEN_VERSION/HackGen_NF_v$env:HACKGEN_VERSION.zip"
+Expand-Archive -Path HackGen_NF.zip -DestinationPath .\HackGen_NF -Force
+
+# Install fonts(*.ttf, *.otf)
+$fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
+Get-ChildItem -Path .\HackGen_NF -Recurse -Include *.ttf, *.otf | ForEach-Object {
+    If (-not(Test-Path "C:\Windows\Fonts\$($_.Name)")) {
+        $fonts.CopyHere($_.FullName, 0x10)
+    }
+}
+
+# Remove temp files
+Remove-Item -Path HackGen_NF.zip
+Remove-Item -Path .\HackGen_NF -Recurse -Force
+```
+
 - etc
 
 #### Manually patching
 1. Execute these commands
     ```
-    choco install fontforge
+    choco install -y fontforge
     git clone https://github.com/ryanoasis/nerd-fonts.git
     cd nerd-fonts
     fontforge ./font-patcher <TARGET_FONT> --windows --complete
@@ -55,12 +74,13 @@ python -m pip install -U pynvim neovim msgpack
 ### WSL2
 - [HackGen](https://github.com/yuru7/HackGen)
 ```
-sudo apt install -y fontconfig
 cd ~
-wget https://github.com/yuru7/HackGen/releases/download/v2.9.0/HackGen_NF_v2.9.0.zip
-unzip HackGen_NF_v2.9.0.zip
+sudo apt install -y fontconfig
+HACKGEN_VERSION=$(curl -s "https://api.github.com/repos/yuru7/HackGen/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo HackGen_NF.zip "https://github.com/yuru7/HackGen/releases/download/v${HACKGEN_VERSION}/HackGen_NF_v${HACKGEN_VERSION}.zip"
+unzip HackGen_NF.zip
 mkdir -p ~/.fonts
-cp ./HackGen_NF_v2.9.0/*.ttf ~/.fonts
+cp HackGen_NF_v${HACKGEN_VERSION}/*.ttf ~/.fonts
 fc-cache -f -v
 ```
 
@@ -101,22 +121,35 @@ npm i -g yarn
 ```
 
 #### jq
-You should download the binary on [the official website](https://jqlang.github.io/jq/)
+Download the binary on [the official website](https://jqlang.github.io/jq/)
+
+or
+
+```PowerShell
+$env:CLI_PATH="C:\\CLI"
+mkdir -p $env:CLI_PATH
+cd $env:CLI_PATH
+$env:JQ_VERSION=$(curl -s "https://api.github.com/repos/jqlang/jq/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo jq.exe "https://github.com/jqlang/jq/releases/download/$env:JQ_VERSION/jq-win64.exe"
+```
 
 ### WSL2
 
 #### fzf
 ```
-$ wget -c "https://github.com/junegunn/fzf/releases/download/0.53.0/fzf-0.53.0-linux_amd64.tar.gz"
-$ tar xf ./fzf-0.53.0-linux_amd64.tar.gz ./fzf
-$ sudo install fzf /usr/bin
+cd ~
+FZF_VERSION=$(curl -s "https://api.github.com/repos/junegunn/fzf/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo fzf-linux_amd64.tar.gz "https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+tar xf fzf-linux_amd64.tar.gz fzf
+sudo install ./fzf /usr/bin
 ```
 
 #### ripgrep
 ```
 cd ~
-curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0_amd64.deb
-sudo dpkg -i ripgrep_14.1.0_amd64.deb
+RG_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo ripgrep_amd64.deb "https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep_${RG_VERSION}_amd64.deb"
+sudo dpkg -i ripgrep_amd64.deb
 ```
 
 #### fd
@@ -125,18 +158,22 @@ sudo apt install -y fd-find
 ```
 or
 ```
-curl -LO https://github.com/sharkdp/fd/releases/download/v10.1.0/fd_10.1.0_amd64.deb
-sudo dpkg -i fd_10.1.0_amd64.deb
+cd ~
+FD_VERSION=$(curl -s "https://api.github.com/repos/sharkdp/fd/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo fd_amd64.deb "https://github.com/sharkdp/fd/releases/download/v${FD_VERSION}/fd_${FD_VERSION}_amd64.deb"
+sudo dpkg -i fd_amd64.deb
 ```
 
 #### bat
 ```
-wget https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb
-sudo dpkg -i bat_0.24.0_amd64.deb
+cd ~
+BAT_VERSION=$(curl -s "https://api.github.com/repos/sharkdp/bat/releases/latest" | grep -Po '"tag_name": "v?\K[^"]*')
+curl -Lo bat_amd64.deb "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat_${BAT_VERSION}_amd64.deb"
+sudo dpkg -i bat_amd64.deb
 ```
 
 #### exa(eza)
-Follow [the official instrcutions](https://github.com/eza-community/eza/blob/main/INSTALL.md#debian-and-ubuntu):
+Follow [the official instructions](https://github.com/eza-community/eza/blob/main/INSTALL.md#debian-and-ubuntu):
 ```
 sudo apt update
 sudo apt install -y gpg
@@ -159,6 +196,12 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/bin
 ```
 
+#### yarn
+It's required for markdown-preview.nvim
+```
+npm i -g yarn
+```
+
 #### jq
 ```
 sudo apt install -y jq
@@ -168,9 +211,9 @@ sudo apt install -y jq
 ## Language-related tools
 - [rust-toolchain](https://www.rust-lang.org/ja/tools/install)
 - [ruff-lsp](https://github.com/astral-sh/ruff-lsp)
-- [lua-language-server](https://github.com/LuaLS/lua-language-server)
 - [biome](https://github.com/biomejs/biome)
 - [typescript-language-server](https://github.com/typescript-language-server/typescript-language-server)
+- [lua-language-server](https://github.com/LuaLS/lua-language-server)
 - [vscode-langservers-extracted](https://github.com/hrsh7th/vscode-langservers-extracted)
 - [bash-language-server](https://github.com/bash-lsp/bash-language-server)
 - [prettierd](https://github.com/fsouza/prettierd)
@@ -279,12 +322,12 @@ New-Item $env:XDG_CONFIG_HOME -ItemType Directory
 $env:XDG_DATA_HOME="$env:\LOCALAPPDATA"
 New-Item $env:XDG_DATA_HOME -ItemType Directory 
 
-$env:XDG_CACHE_HOME="$env:TEMP\neovim\"
+$env:XDG_CACHE_HOME="$env:TEMP\neovim"
 New-Item $env:XDG_CACHE_HOME -ItemType Directory
 
 #Set environment variables
 [Environment]::SetEnvironmentVariable("HOME",$Env:HOME,"User")
-[Environment]::SetEnvironmentVariable("DEV_PROJ",$Env:DEV_PROJ,"User")
+# [Environment]::SetEnvironmentVariable("DEV_PROJ",$Env:DEV_PROJ,"User")
 [Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME",$Env:XDG_CONFIG_HOME,"User")
 [Environment]::SetEnvironmentVariable("XDG_DATA_HOME",$Env:XDG_DATA_HOME,"User")
 [Environment]::SetEnvironmentVariable("XDG_CACHE_HOME",$Env:XDG_CACHE_HOME,"User")
@@ -310,10 +353,24 @@ or manually setup on GUI:
     - val: `C:\Users\USERNAME\AppData\Local\Temp\neovim`
 
 
-## Create a symlink to setup your dotfiles
+## Create symlinks
+
+### Windows
+```PowerShell
+cd ~
+git clone https://github.com/roodolv/dotfiles.git
+
+$env:HOME=$env:HOMEDRIVE + $env:HOMEPATH
+$env:DOTFILES="$env:HOME\dotfiles"
+
+cd $env:DOTFILES
+.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\.config\nvim -path $env:HOME\.config\nvim"
 ```
+
+### WSL2
+```bash
 cd ~
 git clone https://github.com/roodolv/dotfiles.git
 mkdir -p ~/.config
-sudo ln -si ~/dotfiles/.config/nvim ~/.config/nvim
+ln -si ~/dotfiles/.config/nvim ~/.config/nvim
 ```
