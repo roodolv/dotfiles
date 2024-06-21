@@ -1,6 +1,5 @@
 local neotest = require("neotest")
 local lib = require("neotest.lib")
-local util = require("util")
 
 -- get neotest namespace (api call creates or returns namespace)
 local neotest_ns = vim.api.nvim_create_namespace("neotest")
@@ -37,7 +36,7 @@ neotest.setup({
       runner = "pytest",
       args = { "--log-level", "DEBUG" },
       python = function()
-        if util.is_windows then
+        if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
           return "~/.venvs/pytest/Scripts/python"
         else
           return ""
@@ -119,7 +118,9 @@ neotest.setup({
 local opts = { silent = true }
 
 opts.desc = "neotest Run current file"
-vim.keymap.set("n", "<F8>", function() neotest.run.run(vim.fn.expand("%")) end, opts)
+vim.keymap.set("n", "<F8>", function()
+  neotest.run.run(vim.fn.expand("%"))
+end, opts)
 
 -- Jest: to run tests with watch mode
 -- opts.desc = "neotest Run jest --watch"

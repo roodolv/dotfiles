@@ -6,19 +6,17 @@ local ext = telescope.extensions
 local open_with_trouble = require("trouble.sources.telescope").open
 local add_to_trouble = require("trouble.sources.telescope").add
 
-local util = require("util")
-
 local cder_dir_command = function()
   local home_dir = os.getenv("HOME")
   local cmds = { "fd", "-H", "-L", "-d=2", "-t=d", ".", home_dir }
-  if util.is_windows() then
+  if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
     cmds = vim.list_extend(cmds, { home_dir .. "/.config" })
     cmds = vim.list_extend(cmds, { home_dir .. "/.venvs" })
     cmds = vim.list_extend(cmds, { os.getenv("XDG_DATA_HOME") .. "/nvim-data" })
     cmds = vim.list_extend(cmds, { os.getenv("DEV_PROJ") })
     cmds = vim.list_extend(cmds, { "E:/Obsidian/main" })
     return cmds
-  elseif util.is_wsl() then
+  elseif vim.fn.has("wsl") == 1 then
     cmds = vim.list_extend(cmds, { home_dir .. "/.config" })
     cmds = vim.list_extend(cmds, { home_dir .. "/.local/share" })
     cmds = vim.list_extend(cmds, { home_dir .. "/proj" })
