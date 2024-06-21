@@ -1,5 +1,4 @@
 local obsidian = require("obsidian")
-local util = require("util")
 
 obsidian.setup({
   workspaces = {
@@ -63,13 +62,13 @@ obsidian.setup({
     img_folder = "resource",
   },
   follow_url_func = function(url)
-    if util.is_windows() then
+    if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
       vim.fn.jobstart({ "explorer", url })
-    elseif util.is_mac() then
+    elseif vim.fn.has("mac") == 1 then
       vim.fn.jobstart({ "open", url })
-    elseif util.is_linux() then
+    elseif vim.fn.has("linux") == 1 then
       vim.fn.jobstart({ "xdg-open", url })
-    elseif util.is_wsl() then
+    elseif vim.fn.has("wsl") == 1 then
       vim.fn.jobstart({ "/mnt/c/Windows/System32/rundll32.exe", "url.dll,FileProtocolHandler", url })
     end
   end,

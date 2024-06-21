@@ -1,7 +1,8 @@
-local util = require("util")
 -- Prevent the error "'diff' is not executable" on Windows
-if util.is_windows then
-  vim.g.undotree_DiffCommand = "FC"
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+  vim.g.undotree_DiffCommand = vim.fn.executable("delta") == 1 and "delta" or "FC"
+else
+  vim.g.undotree_DiffCommand = vim.fn.executable("delta") == 1 and "delta" or "diff"
 end
 
 -- Callback function
