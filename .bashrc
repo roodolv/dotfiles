@@ -131,7 +131,7 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 eval "$(gh completion -s bash)" # gh-cli
-eval "$(gibo completion bash)"
+# eval "$(gibo completion bash)"
 eval "$(rbenv init -)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
