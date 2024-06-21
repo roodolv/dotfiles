@@ -45,20 +45,11 @@ staline.setup({
     },
     right = {
       " ",
-      {
-        "Staline",
-        function()
-          return vim.bo[0].fileencoding .. " "
-        end,
-      },
+      { "Staline", function() return vim.bo[0].fileencoding .. " " end, },
       "",
       " ",
-      {
-        "Staline",
-        function()
-          return vim.bo[0].filetype .. " "
-        end,
-      },
+      -- { "Staline", function() return vim.bo[0].filetype .. " " end, },
+      { "Staline", function() return vim.bo[0].fileformat .. " " end, },
       "",
       "line_column",
     },
@@ -78,7 +69,7 @@ staline.setup({
     ic = "#90f2f9",
     v = "#ef79bf",
     V = "#ef79bf",
-    [""] = "#dc75bb",
+    [""] = "#ef79bf",
     r = "#ffc790",
     R = "#ffc790",
   },
