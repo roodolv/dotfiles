@@ -73,7 +73,7 @@ format = '[ $symbol ($version) ]($style)'
 [python]
 symbol = ""
 style = "fg:#769ff0"
-format = '[ $symbol[$virtualenv] ($version) ]($style)'
+format = '[ $symbol $virtualenv ($version) ]($style)'
 
 [nodejs]
 symbol = "󰎙"

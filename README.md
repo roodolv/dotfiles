@@ -1,8 +1,5 @@
 # dotfiles
 
-## How to setup Neovim
-See [here](.config/nvim/nvim-setup.md).
-
 ## Requirements
 
 - Shells
@@ -25,3 +22,12 @@ See [here](.config/nvim/nvim-setup.md).
 
 - Vim
   - [jq](https://jqlang.github.io/jq/) v1.6+
+
+## Setup
+NOTICE: Execute scripts **at your own risk**.
+
+### Windows
+Execute `setup/setup.ps1`.
+
+### Linux(Ubuntu), WSL2
+Execute `setup/setup.sh`.
