@@ -1,5 +1,3 @@
-local util = require("util")
-
 -----------------------------------------------------------------
 -- options
 -----------------------------------------------------------------
@@ -70,7 +68,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 vim.o.grepprg = 'rg -L --vimgrep'
 
 -- etc
-if util.is_windows() then
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
   vim.o.shellslash = true
 end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
@@ -239,7 +237,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- etc
 -----------------------------------------------------------------
 -- set default shell
-if util.is_windows then
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
   ----- use PowerShell
   local powershell_options = {
     shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
