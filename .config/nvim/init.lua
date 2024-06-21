@@ -67,12 +67,12 @@ vim.api.nvim_set_var('loaded_netrw', 1)
 vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 
 -- grep/vimgrep
-vim.o.grepprg = 'rg --vimgrep'
+vim.o.grepprg = 'rg -L --vimgrep'
 
 -- etc
--- if util.is_windows() then
---   vim.o.shellslash = true
--- end
+if util.is_windows() then
+  vim.o.shellslash = true
+end
 vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
@@ -83,6 +83,7 @@ vim.o.visualbell = true
 vim.o.mouse = 'a'
 vim.o.termguicolors = true
 vim.o.showtabline = 2 -- for staline.nvim
+vim.o.conceallevel = 1 -- for obsidian.nvim
 
 vim.cmd([[
 set list listchars=extends:>,precedes:<,nbsp:%
@@ -169,10 +170,10 @@ vim.api.nvim_set_keymap('v', '*', '"zy:let @/ = @z<CR>n', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<C-j>', ':<C-u>split!<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>vsplit!<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true })
-vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { noremap = true }) -- turn off for smart-splits
+-- vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { noremap = true }) -- turn off for smart-splits
 vim.api.nvim_set_keymap('n', '<M-t>', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', '<M-T>', 'gT', { noremap = true })
 
@@ -207,7 +208,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Python
-vim.g.python3_host_prog = vim.fn.expand("PYTHON")
+vim.g.python3_host_prog = os.getenv("PYTHON")
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "python",
   command =
@@ -253,7 +254,7 @@ if util.is_windows then
   end
 
   ----- use GitBash
-  -- vim.cmd [[let &shell = '"C:\Program Files\Git\bin\bash.exe"']]
+  -- vim.cmd [[let &shell = '"bash"']]
   -- vim.cmd [[let &shellcmdflag = "-s"]]
 else
   ----- use bash

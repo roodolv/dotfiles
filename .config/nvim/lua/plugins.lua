@@ -29,30 +29,24 @@ return {
       require("config/startify")
     end
   },
+  -- {
+  --   "dstein64/vim-startuptime",
+  --   lazy = false,
+  -- },
   -----------------------------------------------------------------
   -- pane/tab/window
   -----------------------------------------------------------------
   {
-    "simeji/winresizer",
-    keys = {
-      { "<Leader>R", ":<C-u>WinResizerStartResize<CR>", mode = "n", silent = true, desc = "WinResizerStartResize" },
-    },
-    init = function()
-      require("config/winresizer")
-    end,
-  },
-  {
-    "mbbill/undotree",
-    keys = {
-      { "<Leader>U", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
-    },
+    "mrjones2014/smart-splits.nvim",
+    lazy = false,
+    priority = 1001,
     config = function()
-      require("config/undotree")
+      require("config/smart-splits")
     end,
   },
   {
     "shortcuts/no-neck-pain.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     version = "*",
     config = function()
       require("config/no-neck-pain")
@@ -92,7 +86,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      "<Leader>hh", "<Leader>hx", "<C-Up>", "<C-Down>",
+      "<Leader>H", "<Leader>hx", "<C-Up>", "<C-Down>",
       "<Leader>h1", "<Leader>h2", "<Leader>h3", "<Leader>h4",
     },
     config = function()
@@ -101,9 +95,7 @@ return {
   },
   {
     "folke/flash.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    ---@type Flash.Config
-    opts = {},
+    keys = { "s", "S", "<Leader>s", "<C-s>", "R" },
     config = function()
       require("config/flash")
     end
@@ -147,18 +139,27 @@ return {
     keys = "-",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      {
-        "refractalize/oil-git-status.nvim",
-        config = function()
-          require("oil").setup({
-            win_options = { signcolumn = "yes:2", }
-          })
-          require("config/oil-git-status")
-        end,
-      },
+      -- {
+      --   "refractalize/oil-git-status.nvim",
+      --   config = function()
+      --     require("oil").setup({
+      --       win_options = { signcolumn = "yes:2", }
+      --     })
+      --     require("config/oil-git-status")
+      --   end,
+      -- },
     },
     config = function()
       require("config/oil")
+    end,
+  },
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<Leader>U", ":<C-u>UndotreeToggle<CR>", mode = "n", silent = true, desc = "UndotreeToggle" },
+    },
+    config = function()
+      require("config/undotree")
     end,
   },
   -----------------------------------------------------------------
@@ -214,6 +215,10 @@ return {
       require("config/which-key")
     end,
   },
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+  },
   -----------------------------------------------------------------
   -- visual(syntax/indent/etc)
   -----------------------------------------------------------------
@@ -252,7 +257,7 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("config/todo-comments")
@@ -260,15 +265,15 @@ return {
   },
   {
     "mvllow/modes.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     tag = "v0.2.1",
+    event = { "InsertEnter",  "CursorMoved" },
     config = function()
       require("config/modes")
     end,
   },
   {
     "norcalli/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("colorizer").setup()
     end,
@@ -282,7 +287,7 @@ return {
   },
   {
     "tamton-aquib/duck.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    keys = {  "<Leader>dk",  "<Leader>dd", "<Leader>da" },
     config = function()
       require("config/duck")
     end,
@@ -343,6 +348,18 @@ return {
     end,
   },
   {
+    "SmiteshP/nvim-navbuddy",
+    lazy = true,
+    keys = { "<Leader>N" },
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("config/navbuddy")
+    end,
+  },
+  {
     "stevearc/aerial.nvim",
     lazy = true,
     dependencies = {
@@ -356,19 +373,8 @@ return {
     end,
   },
   {
-    "SmiteshP/nvim-navbuddy",
-    lazy = true,
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require("config/navbuddy")
-    end,
-  },
-  {
     "j-hui/fidget.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "LspAttach" },
     opts = {}
   },
   -----------------------------------------------------------------
@@ -377,25 +383,25 @@ return {
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      -- "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "petertriho/cmp-git",
-      "SmiteshP/nvim-navbuddy",
-      "windwp/nvim-autopairs",
-      "onsails/lspkind.nvim",
+      -- { "williamboman/mason-lspconfig.nvim" },
+      { "neovim/nvim-lspconfig" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-cmdline" },
+      { "petertriho/cmp-git" },
+      { "SmiteshP/nvim-navbuddy" },
+      { "windwp/nvim-autopairs" },
+      { "onsails/lspkind.nvim" },
       ----- For LuaSnip
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
+      { "L3MON4D3/LuaSnip" },
+      { "saadparwaiz1/cmp_luasnip" },
       ----- For Neovim Lua API
-      "folke/neodev.nvim",
+      { "folke/neodev.nvim" },
     },
     config = function()
       require("config/nvim-cmp")
@@ -414,13 +420,26 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "make install_jsregexp",
     config = function()
+      require("luasnip").setup({
+        load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
+        ft_func = require("luasnip_snippets.common.snip_utils").ft_func,
+        enable_autosnippets = true,
+      })
+      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/luasnip" })
       require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+  },
+  {
+    "mireq/luasnip-snippets",
+    event = { "InsertEnter", },
+    dependencies = { "L3MON4D3/LuaSnip" },
+    config = function()
+      require("luasnip_snippets.common.snip_utils").setup()
     end
   },
   {
     "stevearc/conform.nvim",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufWritePre", },
     opts = {},
     config = function()
       require("config/conform")
@@ -429,7 +448,7 @@ return {
   {
     "Exafunction/codeium.vim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "InsertEnter", },
     config = function ()
       require("config/codeium-vim")
     end,
@@ -437,7 +456,7 @@ return {
   {
     "Exafunction/codeium.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "InsertEnter", },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
@@ -469,7 +488,7 @@ return {
   {
     "saecki/crates.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    ft = { "rust", "toml" },
     tag = "stable",
     config = function()
       require("config/crates")
@@ -480,7 +499,7 @@ return {
   -----------------------------------------------------------------
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("config/gitsigns")
     end,
@@ -488,7 +507,6 @@ return {
   {
     "sindrets/diffview.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
     keys = "<Leader>D",
     config = function()
       require("config/diffview")
@@ -504,7 +522,7 @@ return {
   {
     "nvim-neotest/neotest",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    keys = { "<F8>", },
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
@@ -546,10 +564,41 @@ return {
   {
     "akinsho/toggleterm.nvim",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" },
+    keys = { "<C-\\>", "<Leader>tt", "<Leader>tl", "<Leader>tg", "<Leader>tf", "<Leader>tb", "<Leader>ts" },
     version = "*",
     config = function()
       require("config/toggleterm")
+    end,
+  },
+  -----------------------------------------------------------------
+  -- documentation
+  -----------------------------------------------------------------
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    event = {
+      "BufReadPre */Obsidian/main/**.md",
+      "BufNewFile */Obsidian/main/**.md",
+      "BufReadPre */Hugo/myblog/**.md",
+      "BufNewFile */Hugo/myblog/**.md",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+      "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("config/obsidian")
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      require("config/markdown-preview")
     end,
   },
   -----------------------------------------------------------------
@@ -570,10 +619,10 @@ return {
     "tpope/vim-abolish",
     event = { "BufReadPre", "BufNewFile" },
   },
-  -- {
-  --   "tpope/vim-eunuch",
-  --   event = { "BufReadPre", "BufNewFile" },
-  -- },
+  {
+    "tpope/vim-eunuch",
+    event = { "BufReadPre", "BufNewFile" },
+  },
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },

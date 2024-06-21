@@ -24,8 +24,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
     -- opts.desc = "NativeLSP code_action"
     -- keymap.set('n', 'ga', vim.lsp.buf.code_action, opts)
-    opts.desc = "NativeLSP signature_help"
-    keymap.set("n", "gh", vim.lsp.buf.signature_help, opts)
+    -- opts.desc = "NativeLSP signature_help"
+    -- keymap.set("n", "gh", vim.lsp.buf.signature_help, opts)
     opts.desc = "NativeLSP send diag to QuickFix"
     keymap.set("n", "gQ", vim.diagnostic.setqflist, opts)
     opts.desc = "NativeLSP send diag to loclist"

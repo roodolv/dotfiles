@@ -32,7 +32,7 @@ require("oil").setup({
   lsp_file_methods = {
     -- Time to wait for LSP file operations to complete before skipping
     timeout_ms = 1000,
-    autosave_changes = false,    -- true | false | "unmodified"
+    autosave_changes = false, -- true | false | "unmodified"
   },
   constrain_cursor = "editable", -- "editable" | "name" | true | false
   experimental_watch_for_changes = true,
@@ -78,9 +78,9 @@ require("oil").setup({
     -- You may want to set to false if you work with large directories.
     natural_order = true,
     sort = {
-      -- sort order can be "asc" or "desc"
       { "type", "asc" },
-      { "name", "asc" },
+      -- { "name", "desc" },
+      { "mtime", "desc" },
     },
   },
   -- EXPERIMENTAL support for file operations with git
