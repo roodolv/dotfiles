@@ -16,6 +16,7 @@ local cder_dir_command = function()
     cmds = vim.list_extend(cmds, { home_dir .. "/.venvs" })
     cmds = vim.list_extend(cmds, { os.getenv("XDG_DATA_HOME") .. "/nvim-data" })
     cmds = vim.list_extend(cmds, { os.getenv("DEV_PROJ") })
+    cmds = vim.list_extend(cmds, { "E:/Obsidian/main" })
     return cmds
   elseif util.is_wsl() then
     cmds = vim.list_extend(cmds, { home_dir .. "/.config" })
