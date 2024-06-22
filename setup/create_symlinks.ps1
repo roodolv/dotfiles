@@ -10,7 +10,7 @@ function isAdmin {
   return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-function makeSymLink {
+function createSymLink {
   param(
     [Parameter(Mandatory = $true)][string]$target,
     [Parameter(Mandatory = $true)][string]$path,
@@ -29,4 +29,4 @@ function makeSymLink {
   }
 }
 
-makeSymLink -target $target -path $path -name $name
+createSymLink -target $target -path $path -name $name

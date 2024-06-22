@@ -55,12 +55,12 @@ New-Item $env:XDG_CACHE_HOME -ItemType Directory
 ################# Create symlinks ################
 cd $env:DOTFILES
 
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\win\.bashrc -path $env:HOME\.bashrc"
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\win\.bash_aliases -path $env:HOME\.bash_aliases"
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\win\.gitconfig -path $env:HOME\.gitconfig"
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\win\.vimrc -path $env:HOME\.vimrc"
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\win\Microsoft.PowerShell_profile.ps1 -path $env:PS_PROFILE\Microsoft.PowerShell_profile.ps1"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\win\.bashrc -path $env:HOME\.bashrc"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\win\.bash_aliases -path $env:HOME\.bash_aliases"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\win\.gitconfig -path $env:HOME\.gitconfig"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\win\.vimrc -path $env:HOME\.vimrc"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\win\Microsoft.PowerShell_profile.ps1 -path $env:PS_PROFILE\Microsoft.PowerShell_profile.ps1"
 
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\.config\nvim -path $env:HOME\.config\nvim"
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\.config\wezterm -path $env:HOME\.config\wezterm"
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\.config\starship.toml -path $env:HOME\.config\starship.toml"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\.config\nvim -path $env:HOME\.config\nvim"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\.config\wezterm -path $env:HOME\.config\wezterm"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\.config\starship.toml -path $env:HOME\.config\starship.toml"
