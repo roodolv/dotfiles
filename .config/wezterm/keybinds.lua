@@ -1,12 +1,40 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
+-- stylua: ignore
 return {
   keys = {
     -- NOTE: added
     { key = "v", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "h", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { key = "Space", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+    {
+      key = "1", mods = "CTRL",
+      action = act.SpawnCommandInNewTab({ args = { "nvim" }, domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "2", mods = "CTRL",
+      action = act.SpawnCommandInNewTab({ args = { "pwsh" }, domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "3", mods = "CTRL",
+      action = act.SpawnCommandInNewTab({ args = { "bash" }, domain = "CurrentPaneDomain", }),
+    },
+    {
+      key = "4", mods = "CTRL",
+      action = act.SpawnCommandInNewTab({
+        args = { "wsl", "--distribution", "ubuntu", "--cd", "~" },
+        domain = "CurrentPaneDomain",
+      }),
+    },
+    {
+      key = "5", mods = "CTRL",
+      action = act.SpawnCommandInNewTab({ args = { "cmd.exe" }, domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "l", mods = "LEADER",
+      action = act.SpawnCommandInNewTab({ args = { "lazygit" }, domain = "CurrentPaneDomain" }),
+    },
 
     -- NOTE: default
     { key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
@@ -41,45 +69,14 @@ return {
     { key = "0", mods = "CTRL", action = act.ResetFontSize },
     { key = "0", mods = "SHIFT|CTRL", action = act.ResetFontSize },
     { key = "0", mods = "SUPER", action = act.ResetFontSize },
-    {
-      key = "1",
-      mods = "CTRL",
-      action = act.SpawnCommandInNewTab({ args = { "nvim" }, domain = "CurrentPaneDomain" }),
-    },
     { key = "1", mods = "SHIFT|CTRL", action = act.ActivateTab(0) },
     { key = "1", mods = "SUPER", action = act.ActivateTab(0) },
-    {
-      key = "2",
-      mods = "CTRL",
-      action = act.SpawnCommandInNewTab({ args = { "pwsh" }, domain = "CurrentPaneDomain" }),
-    },
     { key = "2", mods = "SHIFT|CTRL", action = act.ActivateTab(1) },
     { key = "2", mods = "SUPER", action = act.ActivateTab(1) },
-    {
-      key = "3",
-      mods = "CTRL",
-      action = act.SpawnCommandInNewTab({
-        args = { "bash" },
-        domain = "CurrentPaneDomain",
-      }),
-    },
     { key = "3", mods = "SHIFT|CTRL", action = act.ActivateTab(2) },
     { key = "3", mods = "SUPER", action = act.ActivateTab(2) },
-    {
-      key = "4",
-      mods = "CTRL",
-      action = act.SpawnCommandInNewTab({
-        args = { "wsl", "--distribution", "ubuntu", "--cd", "~" },
-        domain = "CurrentPaneDomain",
-      }),
-    },
     { key = "4", mods = "SHIFT|CTRL", action = act.ActivateTab(3) },
     { key = "4", mods = "SUPER", action = act.ActivateTab(3) },
-    {
-      key = "5",
-      mods = "CTRL",
-      action = act.SpawnCommandInNewTab({ args = { "cmd.exe" }, domain = "CurrentPaneDomain" }),
-    },
     { key = "5", mods = "SHIFT|CTRL", action = act.ActivateTab(4) },
     { key = "5", mods = "SHIFT|ALT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { key = "5", mods = "SUPER", action = act.ActivateTab(4) },
