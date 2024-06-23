@@ -34,4 +34,4 @@ cd $env:DOTFILES
 
 ################# Create symlinks ################
 cd $env:DOTFILES
-.\setup\create_dotfile_symlinks.ps1
+.\setup\call_as_admin.ps1 .\setup\create_dotfile_symlinks.ps1
