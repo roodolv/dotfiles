@@ -1,13 +1,12 @@
-# thanks to: https://qiita.com/BlueSilverCat/items/1a70492437411e932b34
 param(
   [Parameter(Mandatory = $true)][string]$target,
   [Parameter(Mandatory = $true)][string]$path,
   [Parameter()][string]$name
 )
 
-function isAdmin {
-  $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-  return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+function Test-Administrator {
+  $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+  (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
 function createSymLink {
@@ -16,17 +15,18 @@ function createSymLink {
     [Parameter(Mandatory = $true)][string]$path,
     [Parameter()][string]$name
   )
-  $value = isAdmin
-  if (!$value) {
-    Write-Host "管理者権限が必要"
-    return
-  }
+  
   if ($name -eq "") {
-    New-Item -ItemType SymbolicLink -Path $path  -Value $target
+    New-Item -ItemType SymbolicLink -Path $path -Value $target -Force
   }
   else {
-    New-Item -ItemType SymbolicLink -Path $path  -Name $name -Value $target
+    New-Item -ItemType SymbolicLink -Path $path -Name $name -Value $target -Force
   }
 }
 
-createSymLink -target $target -path $path -name $name
+if (-not (Test-Administrator)) {
+  Start-Process pwsh -Verb RunAs -ArgumentList "-NoProfile", "-Command", "Set-Location '$PWD'; & '$PSCommandPath' -target '$target' -path '$path' -name '$name'; Exit"
+}
+else {
+  createSymLink -target $target -path $path -name $name
+}
