@@ -129,6 +129,9 @@ vim.api.nvim_set_keymap('n', '<C-w><C-w>', ':<C-u>tabc<CR>', { noremap = true })
 
 -- vim.api.nvim_set_keymap('n', '<Leader>t', ':<C-u>terminal<CR>', { noremap = true, silent = true })
 
+-- Inspect(require Neovim v0.9.0+)
+vim.api.nvim_set_keymap('n', 'gI', ':<C-u>Inspect<CR>', { noremap = true })
+
 -- file/dir path
 vim.api.nvim_set_keymap('n', '<F12>', ':<C-u>silent ! start %:h<CR>',
   { noremap = true, silent = true, desc = 'Open buffer flle in explorer' })
