@@ -139,12 +139,19 @@ rm -rf HackGen_NF.zip HackGen_NF_v${HACKGEN_VERSION}
 
 
 ################# Create symlinks ################
-cd ~
-ln -si ~/dotfiles/.bashrc ~/.bashrc
-ln -si ~/dotfiles/.bash_aliases ~/.bash_aliases
-ln -si ~/dotfiles/.gitconfig ~/.gitconfig
-ln -si ~/dotfiles/.vimrc ~/.vimrc
+# method #1
+# ln -si ~/dotfiles/.bashrc ~/.bashrc
+# ln -si ~/dotfiles/.bash_aliases ~/.bash_aliases
+# ln -si ~/dotfiles/.gitconfig ~/.gitconfig
+# ln -si ~/dotfiles/.vimrc ~/.vimrc
 
-ln -si ~/dotfiles/.config/nvim ~/.config/nvim
-# ln -si ~/dotfiles/.config/wezterm ~/.config/wezterm
-ln -si ~/dotfiles/.config/starship.toml ~/.config/starship.toml
+# ln -si ~/dotfiles/.config/nvim ~/.config/nvim
+# # ln -si ~/dotfiles/.config/wezterm ~/.config/wezterm
+# ln -si ~/dotfiles/.config/starship.toml ~/.config/starship.toml
+
+# method #2
+source ~/dotfiles/setup/create_symlinks.sh
+
+# The option "i" may be omitted. If so, the command would be: `ln -s`.
+create_symlinks ~/dotfiles ~ "i"
+create_symlinks ~/dotfiles/.config ~/.config "i"

@@ -364,7 +364,7 @@ $env:HOME=$env:HOMEDRIVE + $env:HOMEPATH
 $env:DOTFILES="$env:HOME\dotfiles"
 
 cd $env:DOTFILES
-.\setup\call_as_admin.ps1 .\setup\make_symlink.ps1 "-target $env:DOTFILES\.config\nvim -path $env:HOME\.config\nvim"
+.\setup\call_as_admin.ps1 .\setup\create_symlinks.ps1 "-target $env:DOTFILES\.config\nvim -path $env:HOME\.config\nvim"
 ```
 
 ### WSL2
