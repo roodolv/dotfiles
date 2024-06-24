@@ -7,7 +7,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("tokyonight")
+      -- vim.cmd.colorscheme("tokyonight")
     end
   },
   {
@@ -17,6 +17,15 @@ return {
     config = function()
       vim.g.everforest_enable_italic = true
       -- vim.cmd.colorscheme("everforest")
+    end,
+  },
+  {
+    "marko-cerovac/material.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.material_style = "deep ocean"
+      vim.cmd.colorscheme("material")
     end,
   },
   -----------------------------------------------------------------
