@@ -307,6 +307,11 @@ return {
   {
     "neovim/nvim-lspconfig",
     lazy = true,
+    dependencies = {
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "SmiteshP/nvim-navbuddy" },
+      { "folke/neodev.nvim" }, -- For Neovim Lua API
+    },
     config = function()
       require("config/lspconfig")
     end,
@@ -394,23 +399,18 @@ return {
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      -- { "williamboman/mason-lspconfig.nvim" },
       { "neovim/nvim-lspconfig" },
-      { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lua" },
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-cmdline" },
       { "petertriho/cmp-git" },
-      { "SmiteshP/nvim-navbuddy" },
       { "windwp/nvim-autopairs" },
       { "onsails/lspkind.nvim" },
       ----- For LuaSnip
       { "L3MON4D3/LuaSnip" },
       { "saadparwaiz1/cmp_luasnip" },
-      ----- For Neovim Lua API
-      { "folke/neodev.nvim" },
     },
     config = function()
       require("config/nvim-cmp")
