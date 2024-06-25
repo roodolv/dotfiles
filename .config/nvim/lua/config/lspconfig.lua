@@ -1,3 +1,45 @@
+local lspconfig = require("lspconfig")
+local configs = require("lspconfig.configs")
+
+----- Setup lspconfig
+-- NOTE: servers: "nvim-data/lazy/nvim-lspconfig/doc/server_configurations.md"
+local servers = {
+  "lua_ls",
+  "bashls",
+  "jsonls",
+  "html",
+  "cssls",
+  "marksman",
+  "ruff_lsp",
+  "tsserver",
+  -- 'biome',
+}
+
+-- Setup neodev before lspconfig
+require("neodev").setup({
+  -- enable type-checking for nvim-dap-ui
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
+-- Setup language servers
+local navbuddy = require("nvim-navbuddy")
+local on_attach = function(client, bufnr)
+  navbuddy.attach(client, bufnr)
+  if client.name == "ruff_lsp" then
+    -- Disable hover in favor of Other client
+    client.server_capabilities.hoverProvider = false
+  end
+end
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+end
+
+----- Setup autocmd
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
@@ -53,5 +95,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap.set("n", "<Leader>lr", ":<C-u>LspRestart<CR>", opts)
   end,
 })
-
--- NOTE: lspconfig's setup is on "cmp.lua"
