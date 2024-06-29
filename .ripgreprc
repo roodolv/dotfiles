@@ -1,0 +1,8 @@
+--hidden
+--follow
+--sort=path
+--glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor}
+--glob=!*.{lock}
+--glob=!{package-lock.json}
+# --glob=!{\.vimrc,\.bashrc}
+# --max-columns=10000
