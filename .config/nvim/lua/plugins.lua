@@ -496,9 +496,8 @@ return {
   },
   {
     "saecki/crates.nvim",
-    lazy = true,
-    ft = { "rust", "toml" },
     tag = "stable",
+    event = { "BufRead Cargo.toml" },
     config = function()
       require("config/crates")
     end,
