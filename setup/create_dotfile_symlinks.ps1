@@ -10,6 +10,7 @@ cd $env:DOTFILES
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\.bash_aliases" -path "$env:HOME\.bash_aliases"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\.gitconfig" -path "$env:HOME\.gitconfig"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\.wslconfig" -path "$env:HOME\.wslconfig"
+.\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\.ripgreprc" -path "$env:HOME\.ripgreprc"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\.vimrc" -path "$env:HOME\.vimrc"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\.ideavimrc" -path "$env:HOME\.ideavimrc"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\win\Microsoft.PowerShell_profile.ps1" -path "$env:PS_PROFILE\Microsoft.PowerShell_profile.ps1"
