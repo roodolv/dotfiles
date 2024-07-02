@@ -679,4 +679,27 @@ return {
       { "zt", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
     },
   },
+  -----------------------------------------------------------------
+  -- dev
+  -----------------------------------------------------------------
+  {
+    "roodolv/markdown-toggle.nvim",
+    dev = true,
+    config = function()
+      local markdown_toggle = require("markdown-toggle")
+      local opts = { silent = true, noremap = true }
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "markdown", "markdown.mdx" },
+        callback = function()
+          opts.buffer = true
+          opts.desc = "Markdown ToggleQuote"
+          vim.keymap.set({ "n", "x" }, "<C-q>", function() markdown_toggle.toggle("quote") end, opts)
+          opts.desc = "Markdown ToggleCheckbox"
+          vim.keymap.set({ "n", "x" }, "<C-x>", function() markdown_toggle.toggle("checkbox") end, opts)
+          opts.desc = "Markdown ToggleList"
+          vim.keymap.set({ "n", "x" }, "<C-l>", function() markdown_toggle.toggle("list") end, opts)
+        end,
+      })
+    end,
+  },
 }
