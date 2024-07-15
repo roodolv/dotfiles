@@ -601,6 +601,13 @@ return {
     end,
   },
   {
+    "antonk52/markdowny.nvim",
+    ft = "markdown",
+    config = function()
+      require("markdowny").setup({ "markdown", "markdown.mdx", "txt" })
+    end,
+  },
+  {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -685,20 +692,12 @@ return {
   {
     "roodolv/markdown-toggle.nvim",
     dev = true,
+    ft = "markdown",
     config = function()
-      local markdown_toggle = require("markdown-toggle")
-      local opts = { silent = true, noremap = true }
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "markdown", "markdown.mdx" },
-        callback = function()
-          opts.buffer = true
-          opts.desc = "Markdown ToggleQuote"
-          vim.keymap.set({ "n", "x" }, "<C-q>", function() markdown_toggle.toggle("quote") end, opts)
-          opts.desc = "Markdown ToggleCheckbox"
-          vim.keymap.set({ "n", "x" }, "<C-x>", function() markdown_toggle.toggle("checkbox") end, opts)
-          opts.desc = "Markdown ToggleList"
-          vim.keymap.set({ "n", "x" }, "<C-l>", function() markdown_toggle.toggle("list") end, opts)
-        end,
+      require("markdown-toggle").setup({
+        use_default_keymaps = true,
+        -- mimic_obsidian_list = false,
+        box_table = { "x" },
       })
     end,
   },

@@ -22,13 +22,13 @@ lspsaga.setup({
     },
   },
   lightbulb = {
-    enable = true,
+    enable = false,
     sign = false,
   },
   rename = {
     keys = {
       quit = "<C-c>",
-    }
+    },
   },
   outline = {
     keys = {
