@@ -601,6 +601,13 @@ return {
     end,
   },
   {
+    "antonk52/markdowny.nvim",
+    ft = "markdown",
+    config = function()
+      require("markdowny").setup({ "markdown", "markdown.mdx", "txt" })
+    end,
+  },
+  {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -678,5 +685,20 @@ return {
     keys = {
       { "zt", ":<C-u>FixWhitespace<CR>", mode = "n", silent = true, desc = "FixWhitespace" },
     },
+  },
+  -----------------------------------------------------------------
+  -- dev
+  -----------------------------------------------------------------
+  {
+    "roodolv/markdown-toggle.nvim",
+    dev = true,
+    ft = "markdown",
+    config = function()
+      require("markdown-toggle").setup({
+        use_default_keymaps = true,
+        -- mimic_obsidian_list = false,
+        box_table = { "x" },
+      })
+    end,
   },
 }
