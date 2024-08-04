@@ -104,7 +104,7 @@ return {
   },
   {
     "folke/flash.nvim",
-    keys = { "s", "S", "<Leader>s", "<C-s>", "R" },
+    keys = { "f", "F", "t", "T", "s", "S", "<Leader>s", "<C-s>", "R" },
     config = function()
       require("config/flash")
     end
@@ -696,7 +696,7 @@ return {
     config = function()
       require("markdown-toggle").setup({
         use_default_keymaps = true,
-        -- mimic_obsidian_list = false,
+        mimic_obsidian_list = false,
         box_table = { "x" },
       })
     end,
