@@ -194,11 +194,11 @@ vim.api.nvim_set_keymap('n', 'K', '<Nop>', { noremap = true }) -- disable Native
 -- filetypes
 -----------------------------------------------------------------
 -- C/C++/Java
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  pattern = { "*.c", "*.cpp", "*.java" },
-  -- jumping between ';' and '='
-  command = "set matchpairs+==:;",
-})
+-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+--   pattern = { "*.c", "*.cpp", "*.hpp", "*.h", "*.dfm", "*.java" },
+--   -- jumping between ';' and '='
+--   command = "set matchpairs+==:;",
+-- })
 
 -- Rust
 vim.g.rustfmt_autosave = 1
