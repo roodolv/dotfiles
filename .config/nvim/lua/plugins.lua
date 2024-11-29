@@ -696,8 +696,7 @@ return {
     config = function()
       require("markdown-toggle").setup({
         use_default_keymaps = true,
-        mimic_obsidian_list = false,
-        box_table = { "x" },
+        box_table = { "x", "~" },
       })
     end,
   },
