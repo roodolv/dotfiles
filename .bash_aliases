@@ -40,6 +40,7 @@ alias gtl='git tag -l'
 
 # git log
 alias gl='git log --graph --decorate --pretty=oneline --abbrev-commit -n 15'
+alias gla='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias gll='git log --graph --pretty=format:"%C(cyan)%h %C(yellow)%s %C(magenta)%ae %C(blue)%cd" --date=format:"%Y-%m-%d %H:%M:%S" --abbrev-commit -n 15'
 alias gmyl='git log --author=$(git config --global user.name) --pretty=tformat: --numstat -n 15'
 alias gmyll='git log --author=$(git config --global user.name) -n 15'
