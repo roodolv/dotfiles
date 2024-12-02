@@ -5,17 +5,17 @@ $directory\
 $git_branch\
 $git_status\
 $aws\
-$c\
+$nodejs\
 $rust\
 $python\
-$nodejs\
 $kotlin\
 $gradle\
 $golang\
-$php\
+$lua\
 $erlang\
 $elixir\
-$lua\
+$php\
+$c\
 $nim\
 \n$shell"""
 
@@ -60,6 +60,11 @@ ap-northeast-1 = "jp"
 [docker_context]
 format = "via [🐋 $context](blue bold)"
 
+[nodejs]
+symbol = "󰎙"
+style = "fg:#769ff0"
+format = '[ $symbol ($version) ]($style)'
+
 [c]
 symbol = ""
 style = "fg:#769ff0"
@@ -74,11 +79,6 @@ format = '[ $symbol ($version) ]($style)'
 symbol = ""
 style = "fg:#769ff0"
 format = '[ $symbol $virtualenv ($version) ]($style)'
-
-[nodejs]
-symbol = "󰎙"
-style = "fg:#769ff0"
-format = '[ $symbol ($version) ]($style)'
 
 [kotlin]
 symbol = ""
