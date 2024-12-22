@@ -150,6 +150,7 @@ gpW() { # git push (-u) and gh run Watch
 ghpMP() { # gh pr Merge and git Pull
   # Automatically merge only when PR assignee matches Git user
   if is-same $(gh-pr-get-assignee) $(gitname); then
+    echo "Start merging.."
     gh-pr-merge && gh-pr-pull
   else
     echo "The assignee of the PR does not match Git user"
