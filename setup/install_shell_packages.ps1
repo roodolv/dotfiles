@@ -9,6 +9,9 @@
 #
 ##################################################
 
+# bash-completion
+curl.exe -o $HOME\.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
 # Chocolatey
 choco install -y starship
 choco install -y zoxide

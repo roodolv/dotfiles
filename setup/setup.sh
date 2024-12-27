@@ -17,6 +17,9 @@
 ########## Install shell-related tools ###########
 cd ~
 
+# bash-completion
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+
 # starship
 curl -sS https://starship.rs/install.sh | sh
 
