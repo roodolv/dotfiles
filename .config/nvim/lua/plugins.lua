@@ -455,7 +455,7 @@ return {
     end,
   },
   {
-    "Exafunction/codeium.vim",
+    "Exafunction/windsurf.vim",
     lazy = true,
     event = { "InsertEnter", },
     config = function ()
@@ -463,7 +463,7 @@ return {
     end,
   },
   {
-    "Exafunction/codeium.nvim",
+    "Exafunction/windsurf.nvim",
     lazy = true,
     event = { "InsertEnter", },
     dependencies = {
