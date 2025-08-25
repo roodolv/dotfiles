@@ -12,6 +12,8 @@ alias mv='mv -i'
 # git config
 alias gcng='git config --global -e'
 alias gcnl='git config --local -e'
+alias gitname='git config --global user.name'
+alias gitemail='git config --global user.email'
 
 # git
 alias ga='git add'
@@ -80,6 +82,15 @@ alias ghrell='gh release list'
 alias ghrelv='gh release view'
 alias ghrele='gh release edit'
 
+# general functions
+is-same() {
+  if [[ "$1" == "$2" ]]; then
+    return 0  # true
+  else
+    return 1  # false
+  fi
+}
+
 # git&gh functions
 git-branch-getcurrent() {
   git rev-parse --abbrev-ref HEAD
@@ -123,6 +134,10 @@ ghrlw() { # gh run list --workflow
   ghrl --workflow $1.yml
 }
 
+gh-pr-get-assignee() {
+  ghpvl | grep "assignees" | awk -F' ' '{ print $2 }'
+}
+
 gpW() { # git push (-u) and gh run Watch
   branch=$(git-branch-getcurrent)
 
@@ -133,7 +148,13 @@ gpW() { # git push (-u) and gh run Watch
   fi
 }
 ghpMP() { # gh pr Merge and git Pull
-  gh-pr-merge && gh-pr-pull
+  # Automatically merge only when PR assignee matches Git user
+  if is-same $(gh-pr-get-assignee) $(gitname); then
+    echo "Start merging.."
+    gh-pr-merge && gh-pr-pull
+  else
+    echo "The assignee of the PR does not match Git user"
+  fi
 }
 
 # tools

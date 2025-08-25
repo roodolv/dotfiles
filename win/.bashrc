@@ -13,6 +13,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Initialize
+source ~/.git-completion.bash
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 eval "$(gh completion -s bash)" # gh-cli
