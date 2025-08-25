@@ -78,70 +78,6 @@ alias ghr='gh run'
 alias ghrl='gh run list'
 alias ghrv='gh run view'
 alias ghrw='gh run watch'
-<<<<<<< HEAD
-alias ghrell='gh release list'
-alias ghrelv='gh release view'
-alias ghrele='gh release edit'
-
-# git&gh functions
-git-branch-getcurrent() {
-  git rev-parse --abbrev-ref HEAD
-}
-
-gh-pr-getnum() {
-  ghpl --limit 1 | awk '{print $1}' | cut -d' ' -f1
-}
-gh-pr-getanum() {
-  ghpla --limit 1 | awk '{print $1}' | cut -d' ' -f1
-}
-gh-run-getnum() {
-  ghrl --limit 1 | sed 's/^.*\s\([0-9]\{7,\}\)\s.*$/\1/g'
-}
-gh-run-getwnum() {
-  ghrl --workflow $1.yml --limit 1 | sed 's/^.*\s\([0-9]\{7,\}\)\s.*$/\1/g'
-}
-gh-pr-merge() {
-  ghpm $(gh-pr-getnum) -d && grpo
-}
-gh-pr-pull() {
-  ghrw -i2 && git pull
-}
-
-ghpvl() { # gh pr view latest
-  ghpv $(gh-pr-getanum)
-}
-ghrvl() { # gh run view latest
-  ghrv $(gh-run-getnum)
-}
-ghrvL() { # gh run view latest (--log-failed)
-  ghrv $(gh-run-getnum) --log-failed
-}
-ghrvlw() { # gh run view latest (of workflow)
-  ghrv $(gh-run-getwnum $1)
-}
-ghrvLw() { # gh run view latest (--log-failed) (of workflow)
-  ghrv $(gh-run-getwnum $1) --log-failed
-}
-ghrlw() { # gh run list --workflow
-  ghrl --workflow $1.yml
-}
-
-gpW() { # git push (-u) and gh run Watch
-  branch=$(git-branch-getcurrent)
-
-  if git ls-remote --exit-code --heads origin "$branch" &> /dev/null; then
-    git push && sleep 3 && ghrw -i2 && ghrvl
-  else
-    git push -u origin "$branch" && sleep 3 && ghrw -i2 && ghrvl
-  fi
-}
-ghpMP() { # gh pr Merge and git Pull
-  gh-pr-merge && gh-pr-pull
-}
-||||||| 147ef38
-alias ghrll='gh release list'
-alias ghrlv='gh release view'
-=======
 alias ghrell='gh release list'
 alias ghrelv='gh release view'
 alias ghrele='gh release edit'
@@ -220,7 +156,6 @@ ghpMP() { # gh pr Merge and git Pull
     echo "The assignee of the PR does not match Git user"
   fi
 }
->>>>>>> main
 
 # tools
 alias lg='lazygit'
