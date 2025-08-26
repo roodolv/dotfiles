@@ -83,13 +83,7 @@ alias ghrelv='gh release view'
 alias ghrele='gh release edit'
 
 # general functions
-is-same() {
-  if [[ "$1" == "$2" ]]; then
-    return 0  # true
-  else
-    return 1  # false
-  fi
-}
+is-same() { [[ "$1" == "$2" ]]; }
 
 # git&gh functions
 git-branch-getcurrent() {
@@ -109,9 +103,9 @@ gh-run-getwnum() {
   ghrl --workflow $1.yml --limit 1 | sed 's/^.*\s\([0-9]\{7,\}\)\s.*$/\1/g'
 }
 gh-pr-merge() {
-  ghpm $(gh-pr-getnum) -d && grpo
+  ghpm "$1" -d && grpo
 }
-gh-pr-pull() {
+gh-run-watch-pull() {
   ghrw -i2 && git pull
 }
 
@@ -135,7 +129,7 @@ ghrlw() { # gh run list --workflow
 }
 
 gh-pr-get-assignee() {
-  ghpvl | grep "assignees" | awk -F' ' '{ print $2 }'
+  ghpv "$1" | grep "assignees" | awk -F' ' '{ print $2 }'
 }
 
 gpW() { # git push (-u) and gh run Watch
@@ -148,10 +142,15 @@ gpW() { # git push (-u) and gh run Watch
   fi
 }
 ghpMP() { # gh pr Merge and git Pull
+  # Continue only if a PR number is passed
+  if [[ -z "$1" ]]; then
+    echo "Error: argument (a PR number) required" >&2
+    return 1
+  fi
   # Automatically merge only when PR assignee matches Git user
-  if is-same $(gh-pr-get-assignee) $(gitname); then
+  if is-same "$(gh-pr-get-assignee "$1")" "$(gitname)"; then
     echo "Start merging.."
-    gh-pr-merge && gh-pr-pull
+    gh-pr-merge "$1" && gh-run-watch-pull
   else
     echo "The assignee of the PR does not match Git user"
   fi
