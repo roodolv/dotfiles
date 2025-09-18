@@ -149,8 +149,12 @@ ghpMP() { # gh pr Merge and git Pull
   fi
   # Automatically merge only when PR assignee matches Git user
   if is-same "$(gh-pr-get-assignee "$1")" "$(gitname)"; then
+    echo "Git stash SAVE for local changes.."
+    git stash save local-latest-changes
     echo "Start merging.."
     gh-pr-merge "$1" && gh-run-watch-pull
+    # echo "Git stash POP for local changes.."
+    # git stash pop # It's dangerous if `stash save` failed
   else
     echo "The assignee of the PR does not match Git user"
   fi
