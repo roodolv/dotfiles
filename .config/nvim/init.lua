@@ -232,7 +232,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- Markdown
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "markdown",
-  command = "setl expandtab tabstop=4 shiftwidth=4 softtabstop=4",
+  command = "setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 noautoindent",
 })
 
 

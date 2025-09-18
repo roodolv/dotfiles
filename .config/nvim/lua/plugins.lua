@@ -131,14 +131,14 @@ return {
       require("config/bookmarks")
     end,
   },
-  {
-    "otavioschwanck/arrow.nvim",
-    lazy = true,
-    keys = { "'", "\\", "<S-Down>", "<S-Up>" },
-    config = function()
-      require("config/arrow")
-    end
-  },
+  -- {
+  --   "otavioschwanck/arrow.nvim",
+  --   lazy = true,
+  --   keys = { "'", "\\", "<S-Down>", "<S-Up>" },
+  --   config = function()
+  --     require("config/arrow")
+  --   end
+  -- },
   -----------------------------------------------------------------
   -- filer/browser
   -----------------------------------------------------------------
