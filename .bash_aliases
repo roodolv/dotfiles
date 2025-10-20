@@ -161,4 +161,5 @@ ghpMP() { # gh pr Merge and git Pull
 }
 
 # tools
+alias wezterm='flatpak run org.wezfurlong.wezterm'
 alias lg='lazygit'
