@@ -74,6 +74,8 @@ rustup component add rust-analyzer cargo-clippy rustfmt
 
 # Node.js packages
 npm i -g -y yarn
+npm i -g -y neovim
+npm i -g -y commitizen
 npm i -g -y @biomejs/biome typescript-language-server typescript vscode-langservers-extracted bash-language-server
 npm i -g -y @fsouza/prettierd @johnnymorganz/stylua-bin jest mocha
 
@@ -143,18 +145,18 @@ rm -rf HackGen_NF.zip HackGen_NF_v${HACKGEN_VERSION}
 
 ################# Create symlinks ################
 # method #1
-# ln -si ~/dotfiles/.bashrc ~/.bashrc
-# ln -si ~/dotfiles/.bash_aliases ~/.bash_aliases
-# ln -si ~/dotfiles/.gitconfig ~/.gitconfig
-# ln -si ~/dotfiles/.vimrc ~/.vimrc
+ln -si ~/dotfiles/.bashrc ~/.bashrc
+ln -si ~/dotfiles/.bash_aliases ~/.bash_aliases
+ln -si ~/dotfiles/.gitconfig ~/.gitconfig
+ln -si ~/dotfiles/.vimrc ~/.vimrc
 
-# ln -si ~/dotfiles/.config/nvim ~/.config/nvim
-# # ln -si ~/dotfiles/.config/wezterm ~/.config/wezterm
-# ln -si ~/dotfiles/.config/starship.toml ~/.config/starship.toml
+ln -si ~/dotfiles/.config/nvim ~/.config/nvim
+ln -si ~/dotfiles/.config/wezterm ~/.config/wezterm
+ln -si ~/dotfiles/.config/starship.toml ~/.config/starship.toml
 
 # method #2
-source ~/dotfiles/setup/create_symlinks.sh
+# source ~/dotfiles/setup/create_symlinks.sh
 
 # The option "i" may be omitted. If so, the command would be: `ln -s`.
-create_symlinks ~/dotfiles ~ "i"
-create_symlinks ~/dotfiles/.config ~/.config "i"
+# create_symlinks ~/dotfiles ~ "i"
+# create_symlinks ~/dotfiles/.config ~/.config "i"
