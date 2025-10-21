@@ -20,7 +20,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   local bg = hover and HOVER_COLOR or BG_COLOR
   local pane = tab.active_pane
   local zoomed = pane.is_zoomed and "🔎 " or " "
-  local title = basename(pane.foreground_process_name)
+  local name = basename(pane.foreground_process_name)
+  local title = (name ~= nil and name ~= "") and name or tostring((tab.tab_index or 0) + 1)
   return {
     { Foreground = { Color = SYMBOL_COLOR[idx] } },
     { Background = { Color = bg } },
