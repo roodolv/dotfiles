@@ -4,6 +4,65 @@ local config = wezterm.config_builder()
 require("format")
 require("status")
 
+local function get_os()
+  local target_triple = wezterm.target_triple
+  if target_triple:find("windows") then
+    return "windows"
+  elseif target_triple:find("darwin") then
+    return "macos"
+  elseif target_triple:find("linux") then
+    return "linux"
+  end
+  return "unknown"
+end
+
+local os_type = get_os()
+
+-- NOTE: OS config table
+local os_config = {
+  windows = {
+    default_prog = { "bash" },
+    -- default_prog = { "pwsh.exe", "-NoLogo" },
+    -- default_prog = { "wsl", "--distribution", "ubuntu", "--cd", "~" },
+    launch_menu = {
+      { label = "Neovim", args = { "nvim" } },
+      { label = "PowerShell 7", args = { "pwsh" } },
+      { label = "Bash", args = { "bash" } },
+      {
+        label = "WSL2",
+        args = { "wsl", "--distribution", "ubuntu", "--cd", "~" },
+      },
+      { label = "Command Prompt", args = { "cmd.exe" } },
+      { label = "LazyGit", args = { "lazygit" } },
+    },
+  },
+  linux = {
+    default_prog = { "/bin/bash" },
+    launch_menu = {
+      { label = "Neovim", args = { "nvim" } },
+      { label = "Bash", args = { "/bin/bash" } },
+      -- { label = "Zsh", args = { "/bin/zsh" } },
+      { label = "LazyGit", args = { "lazygit" } },
+    },
+  },
+  macos = {
+    default_prog = { "/bin/zsh" },
+    launch_menu = {
+      { label = "Neovim", args = { "nvim" } },
+      { label = "Zsh", args = { "/bin/zsh" } },
+      { label = "Bash", args = { "/bin/bash" } },
+      { label = "LazyGit", args = { "lazygit" } },
+    },
+  },
+}
+
+-- Set config based on OS
+if os_config[os_type] then
+  for key, value in pairs(os_config[os_type]) do
+    config[key] = value
+  end
+end
+
 config.color_scheme = "tokyonight"
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.95
@@ -25,22 +84,6 @@ config.window_frame = {
 config.text_background_opacity = 0.85
 config.font = wezterm.font("HackGen Console NF")
 config.font_size = 17
-
-config.default_prog = { "bash" }
--- config.default_prog = { "pwsh" }
--- config.default_prog = { "wsl", "--distribution", "ubuntu", "--cd", "~" }
-
-config.launch_menu = {
-  { label = "Neovim", args = { "nvim" } },
-  { label = "PowerShell 7", args = { "pwsh" } },
-  { label = "Bash", args = { "bash" } },
-  {
-    label = "WSL2",
-    args = { "wsl", "--distribution", "ubuntu", "--cd", "~" },
-  },
-  { label = "Command Prompt", args = { "cmd.exe" } },
-  { label = "LazyGit", args = { "lazygit" } },
-}
 
 -- NOTE: Set the gui-window position here
 local window_position = "left" -- "left" | "right" | "fullscreen"
