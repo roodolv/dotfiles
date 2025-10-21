@@ -33,7 +33,6 @@ local os_config = {
         args = { "wsl", "--distribution", "ubuntu", "--cd", "~" },
       },
       { label = "Command Prompt", args = { "cmd.exe" } },
-      { label = "LazyGit", args = { "lazygit" } },
     },
   },
   linux = {
@@ -42,7 +41,6 @@ local os_config = {
       { label = "Neovim", args = { "nvim" } },
       { label = "Bash", args = { "/bin/bash" } },
       -- { label = "Zsh", args = { "/bin/zsh" } },
-      { label = "LazyGit", args = { "lazygit" } },
     },
   },
   macos = {
@@ -51,7 +49,6 @@ local os_config = {
       { label = "Neovim", args = { "nvim" } },
       { label = "Zsh", args = { "/bin/zsh" } },
       { label = "Bash", args = { "/bin/bash" } },
-      { label = "LazyGit", args = { "lazygit" } },
     },
   },
 }
