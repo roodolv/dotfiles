@@ -18,3 +18,5 @@ cd $env:DOTFILES
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\.config\nvim" -path "$env:HOME\.config\nvim"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\.config\wezterm" -path "$env:HOME\.config\wezterm"
 .\setup\create_symlinks.ps1 -target "$env:DOTFILES\.config\starship.toml" -path "$env:HOME\.config\starship.toml"
+
+.\setup\create_symlinks.ps1 -target "$env:DOTFILES\.gitignores" -path "$env:HOME\.gitignore-boilerplates"
