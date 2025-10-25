@@ -132,6 +132,18 @@ gh-pr-get-assignee() {
   ghpv "$1" | grep "assignees" | awk -F' ' '{ print $2 }'
 }
 
+ghCR() { # gh Create Repository
+  # Continue only if a parameter is passed
+  if [[ -z "$1" ]]; then
+    echo "Error: argument (a repository name) required" >&2
+    return 1
+  fi
+  local repo_name="$1"
+  local github_user=$(gh api user --jq .login)
+  gh repo create "$repo_name" --private || return 1
+  ghq get "git@github.com:${github_user}/${repo_name}.git" || return 1
+  cd ~/ghq/github.com/${github_user}/${repo_name}
+}
 gpW() { # git push (-u) and gh run Watch
   branch=$(git-branch-getcurrent)
 
