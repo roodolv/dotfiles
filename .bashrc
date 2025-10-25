@@ -112,7 +112,7 @@ export PYTHON=/usr/bin/python3
 export GOPATH=$HOME/go
 export NVIM_UNDODIR=~/.vim/undo
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-export PATH="/usr/local/bin:~/.local/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:~/.local/bin:$PATH"
 # export PATH="~/.rbenv/bin:$PATH"
 
 # enable Powerline
