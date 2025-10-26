@@ -18,3 +18,5 @@ eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 eval "$(gh completion -s bash)" # gh-cli
 eval "$(gibo completion bash)"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"
