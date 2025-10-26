@@ -137,3 +137,5 @@ eval "$(gibo completion bash)"
 # eval "$(rbenv init -)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"
