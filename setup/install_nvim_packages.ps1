@@ -23,9 +23,9 @@ python -m pip install pynvim neovim msgpack ruff-lsp
 rustup component add rust-analyzer cargo-clippy rustfmt
 
 # Node.js packages
-npm i -g -y yarn
-npm i -g -y @biomejs/biome typescript-language-server typescript vscode-langservers-extracted bash-language-server
-npm i -g -y @fsouza/prettierd @johnnymorganz/stylua-bin jest mocha
+npm i -g -y yarn neovim commitizen
+npm i -g -y jest mocha
+npm i -g -y @biomejs/biome @fsouza/prettierd @johnnymorganz/stylua-bin typescript-language-server typescript vscode-langservers-extracted bash-language-server
 
 # Chocolatey
 choco install -y fzf
@@ -37,6 +37,7 @@ choco install -y bat
 scoop bucket add main
 scoop bucket add extras
 scoop install main/eza 
+scoop install ghq
 scoop install lazygit 
 scoop install lua-language-server
 
