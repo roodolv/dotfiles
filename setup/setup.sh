@@ -94,7 +94,7 @@ npm i -g -y jest mocha
 npm i -g -y @biomejs/biome @fsouza/prettierd @johnnymorganz/stylua-bin typescript-language-server typescript vscode-langservers-extracted bash-language-server
 
 # Homebrew packages
-brew install ghq gibo lua-language-server ruff
+brew install ghq gibo lua-language-server ruff marksman
 
 # Python modules
 if [ "$DISTRO" = "ubuntu" ] || [ "$DISTRO" = "debian" ]; then

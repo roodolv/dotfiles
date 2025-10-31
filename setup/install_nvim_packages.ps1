@@ -40,6 +40,7 @@ scoop install main/eza
 scoop install ghq
 scoop install lazygit 
 scoop install lua-language-server
+scoop install marksman
 
 # jq
 mkdir -p $env:CLI_PATH
