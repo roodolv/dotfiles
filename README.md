@@ -6,11 +6,14 @@
   - [starship](https://github.com/starship/starship) v1.19.0+
   - [zoxide](https://github.com/ajeetdsouza/zoxide) v0.9.2+
   - [gh](https://github.com/cli/cli) v2.50.0+
+  - [ghq](https://github.com/x-motemen/ghq) v1.6.2+
   - [gibo](https://github.com/simonwhitaker/gibo) v3.0.12+
   - [delta](https://github.com/delta-io/delta) v0.17.0+
 
 - Neovim
   - [Neovim](https://github.com/neovim/neovim) v0.10.0+
+  - [npm](https://github.com/npm/cli) v10.9.0+
+    - [neovim](https://www.npmjs.com/package/neovim) v5.1.0+
   - [fzf](https://github.com/junegunn/fzf) v0.50.0+
   - [ripgrep(rg)](https://github.com/BurntSushi/ripgrep) v14.1.0+
   - [fd](https://github.com/sharkdp/fd) v9.0.0+
@@ -29,5 +32,5 @@ NOTICE: Execute scripts **at your own risk**.
 ### Windows
 Execute `setup/setup.ps1`.
 
-### Linux(Ubuntu), WSL2
+### Linux(Ubuntu/Debian/Fedora), WSL2
 Execute `setup/setup.sh`.
