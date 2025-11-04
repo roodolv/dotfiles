@@ -71,7 +71,7 @@ vim.o.grepprg = 'rg -L --vimgrep'
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
   vim.o.shellslash = true
 end
-vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
+vim.opt.clipboard:append('unnamedplus')
 vim.o.wildmode = 'list:longest'
 vim.o.wildmenu = true
 vim.o.laststatus = 2
