@@ -30,6 +30,7 @@ alias gbmdd='git branch --merged | egrep -v "\*|master|main|develop" | xargs git
 alias glsf='git ls-files'
 alias glsfg='git ls-files | grep'
 alias glsr='git ls-remote'
+alias glsrt='git ls-remote --tags origin'
 alias grv='git remote -v'
 alias grpo='git remote prune origin'
 alias gup='git config --get-regexp branch'
