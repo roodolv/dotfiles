@@ -694,10 +694,7 @@ return {
     dev = true,
     ft = "markdown",
     config = function()
-      require("markdown-toggle").setup({
-        use_default_keymaps = true,
-        box_table = { "x", "~" },
-      })
+      require("config/markdown-toggle")
     end,
   },
 }
